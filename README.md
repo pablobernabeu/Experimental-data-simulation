@@ -1,1 +1,1 @@
-# Data simulation app
+# Experiment simulation app
