@@ -1,0 +1,1378 @@
+---
+title: 'Data simulator'
+author: '<a href = "#section-summary"><span style = "color: #E9D6D6; font-weight: bold; border-bottom: 1.9px dotted grey;">`r reactive( try( if(nrow(dataset_summary()) > 1) paste(nrow(dataset_summary()), "cells"), silent = TRUE ) %>% gsub("\\Error.*", "", .))`</span></a>'
+output:
+  flexdashboard::flex_dashboard:
+    theme: 'spacelab'
+    orientation: columns
+    vertical_layout: scroll
+runtime: shiny
+---
+
+```{r setup, include = FALSE}
+
+library(doBy)
+library(knitr)
+library(dplyr)
+library(tidyr)
+library(DT)
+library(stringr)
+library(purrr)
+library(schoolmath)
+library(ngram)
+
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, error = FALSE)
+
+```
+
+
+<!-- Enable icons -->
+
+<head>
+
+<style type="text/css">
+
+</style>
+
+<!-- Load Bootstrap libraries for icons -->
+<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+
+<!-- Javascript function to enable a hovering tooltip -->
+<script>
+$(document).ready(function(){
+$('[data-toggle="tooltip1"]').tooltip();
+});
+</script>
+
+////// Tooltip css styling
+$("#message").css({
+'font-size':'2px'
+});
+
+</head>
+
+
+
+<i class="fas fa-info-circle"></i> Start
+=======================================================================
+
+Column
+-----------------------------------------------------------------------
+
+### <span style='font-size:18px; color:#4D4F54;'>Generating pseudo-random data sets to simulate participant-based experiments</span>
+
+#### How to use
+
+Independent variables are categorical and include between-group factors (distributing participants into different groups) and within-subject factors (administering a condition to all participants). Dependent variables are continuous.
+
+#### Total sample size (*N*)
+
+Based on the total *N* entered below, participants will be evenly distributed into any groups. Likewise, repeated measures are created for any within-subject conditions by expanding the number of rows in the long-format data set ([last tab](#dataset)). The Total *N* is interlocked with the factorial structure of the data set (if any has been created).
+
+```{r}
+
+tags$style(type = "text/css",
+           "#Total_N.form-control.shiny-bound-input {padding-left:40px; padding-top:8px; padding-bottom:8px; font-size:150%; color:#1D510E; letter-spacing:4px;}")
+
+numericInput('Total_N', '', 1, min = 1)
+
+```
+
+##### Between-group
+
+The number of between-group levels ...
+
+##### Within-subject
+
+[in progress]
+
+##### Dependent
+
+[in progress]
+
+###### Continuous
+
+###### Categorical
+
+#### <span style='font-weight:bold; font-size:15px;'>Ensuring reproducibility</span>
+
+If you wish to ensure reproducibility, take the following steps. 
+
+##### 1. Note the seed number or set a new one
+
+A seed number is a code that allows the reproducibility of any data involving random generation. Please find your current seed number below, and feel free to note it down, or change it to any integer number within ± `r .Machine$integer.max`.
+
+```{r}
+
+tags$style(type = "text/css",
+           "#seed.form-control.shiny-bound-input {padding-left:40px; padding-top:8px; padding-bottom:8px; font-size:150%; color:#206B90; letter-spacing:6px;}")
+
+numericInput('seed', '', sample(1:99999, 1), min = 1, step = 1, max = .Machine$integer.max)
+
+# The seed from input$seed should now be set before 
+# any random sampling function, such as rnorm().
+
+```
+
+##### 2. Keep the information
+
+Reproducing a simulation requires three pieces of data: the seed number, the parameter list and the final data set. Therefore, after creating the variables wanted, make sure to download the parameter list and the final data set in the [last tab](#dataset). Importantly, the names of both these files will contain the seed number displayed above these lines.
+
+#### Referencing the app
+
+Bernabeu, P., & Lynott, D. (2020). Experiment simulation app [Web application]. Retrieved from https://github.com/pablobernabeu/Experiment-Simulation/.
+
+#### Code and contact
+
+Please submit any questions or feedback by [posting an issue](https://github.com/pablobernabeu/Experiment-Simulation/blob/master/README.md) (recommended option) or by emailing p.bernabeu@lancaster.ac.uk.
+
+
+
+Between-group
+=======================================================================
+
+Column
+-----------------------------------------------------------------------
+
+### <span style='font-weight:bold; font-size:15px; color:#0E6D00;'>Between-group 1</span>
+
+```{r}
+
+textInput('name_BetweenGroup1', '', placeholder = 'Variable name')
+
+textInput('BetweenGroup1_Group1', '', placeholder = 'Level 1')
+textInput('BetweenGroup1_Group2', '', placeholder = 'Level 2')
+textInput('BetweenGroup1_Group3', '', placeholder = 'Level 3')
+textInput('BetweenGroup1_Group4', '', placeholder = 'Level 4')
+textInput('BetweenGroup1_Group5', '', placeholder = 'Level 5')
+textInput('BetweenGroup1_Group6', '', placeholder = 'Level 6')
+textInput('BetweenGroup1_Group7', '', placeholder = 'Level 7')
+textInput('BetweenGroup1_Group8', '', placeholder = 'Level 8')
+textInput('BetweenGroup1_Group9', '', placeholder = 'Level 9')
+textInput('BetweenGroup1_Group10', '', placeholder = 'Level 10')
+
+```
+
+
+Column
+-----------------------------------------------------------------------
+
+### <span style='font-weight:bold; font-size:15px; color:#001AB3;'>Between-group 2</span>
+
+```{r}
+
+textInput('name_BetweenGroup2', '', placeholder = 'Variable name')
+
+textInput('BetweenGroup2_Group1', '', placeholder = 'Level 1')
+textInput('BetweenGroup2_Group2', '', placeholder = 'Level 2')
+textInput('BetweenGroup2_Group3', '', placeholder = 'Level 3')
+textInput('BetweenGroup2_Group4', '', placeholder = 'Level 4')
+textInput('BetweenGroup2_Group5', '', placeholder = 'Level 5')
+textInput('BetweenGroup2_Group6', '', placeholder = 'Level 6')
+textInput('BetweenGroup2_Group7', '', placeholder = 'Level 7')
+textInput('BetweenGroup2_Group8', '', placeholder = 'Level 8')
+textInput('BetweenGroup2_Group9', '', placeholder = 'Level 9')
+textInput('BetweenGroup2_Group10', '', placeholder = 'Level 10')
+
+```
+
+
+Column
+-----------------------------------------------------------------------
+
+### <span style='font-weight:bold; font-size:15px; color:#B32600;'>Between-group 3</span>
+
+```{r}
+
+textInput('name_BetweenGroup3', '', placeholder = 'Variable name')
+
+textInput('BetweenGroup3_Group1', '', placeholder = 'Level 1')
+textInput('BetweenGroup3_Group2', '', placeholder = 'Level 2')
+textInput('BetweenGroup3_Group3', '', placeholder = 'Level 3')
+textInput('BetweenGroup3_Group4', '', placeholder = 'Level 4')
+textInput('BetweenGroup3_Group5', '', placeholder = 'Level 5')
+textInput('BetweenGroup3_Group6', '', placeholder = 'Level 6')
+textInput('BetweenGroup3_Group7', '', placeholder = 'Level 7')
+textInput('BetweenGroup3_Group8', '', placeholder = 'Level 8')
+textInput('BetweenGroup3_Group9', '', placeholder = 'Level 9')
+textInput('BetweenGroup3_Group10', '', placeholder = 'Level 10')
+
+```
+
+
+
+Within-subject
+=======================================================================
+
+Column
+-----------------------------------------------------------------------
+
+### <span style='font-weight:bold; font-size:15px; color:#0E6D00;'>Within-subject 1</span>
+
+```{r}
+
+textInput('name_WithinSubject1', '', placeholder = 'Variable name')
+
+textInput('WithinSubject1_Condition1', '', placeholder = 'Level 1')
+textInput('WithinSubject1_Condition2', '', placeholder = 'Level 2')
+textInput('WithinSubject1_Condition3', '', placeholder = 'Level 3')
+textInput('WithinSubject1_Condition4', '', placeholder = 'Level 4')
+textInput('WithinSubject1_Condition5', '', placeholder = 'Level 5')
+textInput('WithinSubject1_Condition6', '', placeholder = 'Level 6')
+textInput('WithinSubject1_Condition7', '', placeholder = 'Level 7')
+textInput('WithinSubject1_Condition8', '', placeholder = 'Level 8')
+textInput('WithinSubject1_Condition9', '', placeholder = 'Level 9')
+textInput('WithinSubject1_Condition10', '', placeholder = 'Level 10')
+
+```
+
+
+Column
+-----------------------------------------------------------------------
+
+### <span style='font-weight:bold; font-size:15px; color:#001AB3;'>Within-subject 2</span>
+
+```{r}
+
+textInput('name_WithinSubject2', '', placeholder = 'Variable name')
+
+textInput('WithinSubject2_Condition1', '', placeholder = 'Level 1')
+textInput('WithinSubject2_Condition2', '', placeholder = 'Level 2')
+textInput('WithinSubject2_Condition3', '', placeholder = 'Level 3')
+textInput('WithinSubject2_Condition4', '', placeholder = 'Level 4')
+textInput('WithinSubject2_Condition5', '', placeholder = 'Level 5')
+textInput('WithinSubject2_Condition6', '', placeholder = 'Level 6')
+textInput('WithinSubject2_Condition7', '', placeholder = 'Level 7')
+textInput('WithinSubject2_Condition8', '', placeholder = 'Level 8')
+textInput('WithinSubject2_Condition9', '', placeholder = 'Level 9')
+textInput('WithinSubject2_Condition10', '', placeholder = 'Level 10')
+
+```
+
+
+Column
+-----------------------------------------------------------------------
+
+### <span style='font-weight:bold; font-size:15px; color:#B32600;'>Within-subject 3</span>
+
+```{r}
+
+textInput('name_WithinSubject3', '', placeholder = 'Variable name')
+
+textInput('WithinSubject3_Condition1', '', placeholder = 'Level 1')
+textInput('WithinSubject3_Condition2', '', placeholder = 'Level 2')
+textInput('WithinSubject3_Condition3', '', placeholder = 'Level 3')
+textInput('WithinSubject3_Condition4', '', placeholder = 'Level 4')
+textInput('WithinSubject3_Condition5', '', placeholder = 'Level 5')
+textInput('WithinSubject3_Condition6', '', placeholder = 'Level 6')
+textInput('WithinSubject3_Condition7', '', placeholder = 'Level 7')
+textInput('WithinSubject3_Condition8', '', placeholder = 'Level 8')
+textInput('WithinSubject3_Condition9', '', placeholder = 'Level 9')
+textInput('WithinSubject3_Condition10', '', placeholder = 'Level 10')
+
+```
+
+
+
+Dependent
+=======================================================================
+
+Column {data-width=2200px}
+-----------------------------------------------------------------------
+
+### <span style='font-weight:bold; font-size:15px; color:#0E6D00;'>Setting parameters</span>
+
+<div style='min-width: 400px; max-width: 600px;'>
+
+Where any factors exist (whether between, within, or categorical dependent), each row in the table below will represent a unique combination of the levels of factors, which is known as a *cell* in the factorial design. When entering the means and standard deviations for a dependent variable, multiple values can be entered in the same field, each corresponding to a cell. These values should be separated by commas. For instance, for a 2x2 design (four cells), the means of a dependent variable may be entered as $234, 543, 657, 123$. The standard deviations may be entered as $10, 20, 25, 5$. Alternatively, fewer values (any fraction of the number of cells) could be entered (e.g., one or two values instead of four), but that would effectively cancel the overall difference between some factor levels.
+
+Please note that the means and standard deviations entered here are used in a random simulation. Therefore, the final data will slightly differ, especially with smaller samples. Last, if you wish to ensure the reproducibility of the simulated data, please download the parameter list in the [last tab](#dataset), and the [final data set](#dataset), and keep the seed number (`r reactive(input$seed)`, also shown in the names of the downloaded files).
+
+</div>
+
+```{r}
+
+dataset_summary = reactive({
+  
+  # Create grouping cluster
+  summary_by_factors = dataset() %>%
+    group_by_at(vars(which(names(.) %in% c('BetweenGroup1', 'BetweenGroup2', 'BetweenGroup3',
+                                           'WithinSubject1', 'WithinSubject2', 'WithinSubject3',
+                                           'Categorical_Dependent1', 'Categorical_Dependent2',
+                                           'Categorical_Dependent3', 'Categorical_Dependent4'))))
+  
+  # Basic structure to be expanded below where necessary
+  summary = summary_by_factors %>% tally()
+  
+  if(!isTruthy(input$name_Continuous_Dependent1) & !isTruthy(input$name_Continuous_Dependent2) &
+     !isTruthy(input$name_Continuous_Dependent3) & !isTruthy(input$name_Continuous_Dependent4)) {
+    summary
+  }
+  
+  if(isTruthy(input$name_Continuous_Dependent1)) {
+    summary = summary_by_factors %>%
+      summarise(Dependent1_Mean = mean(Continuous_Dependent1) %>% round(digits = 3),
+                Dependent1_SD = sd(Continuous_Dependent1) %>% round(digits = 3),
+                n = n())
+  }
+  
+  if(isTruthy(input$name_Continuous_Dependent2)) {
+    summary = summary_by_factors %>%
+      summarise(Dependent1_Mean = mean(Continuous_Dependent1) %>% round(digits = 3),
+                Dependent1_SD = sd(Continuous_Dependent1) %>% round(digits = 3),
+                Dependent2_Mean = mean(Continuous_Dependent2) %>% round(digits = 3),
+                Dependent2_SD = sd(Continuous_Dependent2) %>% round(digits = 3),
+                n = n())
+  }
+  
+  if(isTruthy(input$name_Continuous_Dependent3)) {
+    summary = summary_by_factors %>%
+      summarise(Dependent1_Mean = mean(Continuous_Dependent1) %>% round(digits = 3),
+                Dependent1_SD = sd(Continuous_Dependent1) %>% round(digits = 3),
+                Dependent2_Mean = mean(Continuous_Dependent2) %>% round(digits = 3),
+                Dependent2_SD = sd(Continuous_Dependent2) %>% round(digits = 3),
+                Dependent3_Mean = mean(Continuous_Dependent3) %>% round(digits = 3),
+                Dependent3_SD = sd(Continuous_Dependent3) %>% round(digits = 3),
+                n = n())
+  }
+  
+  if(isTruthy(input$name_Continuous_Dependent4)) {
+    summary = summary_by_factors %>%
+      summarise(Dependent1_Mean = mean(Continuous_Dependent1) %>% round(digits = 3),
+                Dependent1_SD = sd(Continuous_Dependent1) %>% round(digits = 3),
+                Dependent2_Mean = mean(Continuous_Dependent2) %>% round(digits = 3),
+                Dependent2_SD = sd(Continuous_Dependent2) %>% round(digits = 3),
+                Dependent3_Mean = mean(Continuous_Dependent3) %>% round(digits = 3),
+                Dependent3_SD = sd(Continuous_Dependent3) %>% round(digits = 3),
+                Dependent4_Mean = mean(Continuous_Dependent4) %>% round(digits = 3),
+                Dependent4_SD = sd(Continuous_Dependent4) %>% round(digits = 3),
+                n = n())
+  }
+  
+  # Rename columns or remove if not included by user
+  
+  if(isTruthy(input$name_BetweenGroup1)) {
+    names(summary)[names(summary)=="BetweenGroup1"] = input$name_BetweenGroup1
+  }
+  
+  if(isTruthy(input$name_BetweenGroup2)) {
+    names(summary)[names(summary)=="BetweenGroup2"] = input$name_BetweenGroup2
+  }
+  
+  if(isTruthy(input$name_BetweenGroup3)) {
+    names(summary)[names(summary)=="BetweenGroup3"] = input$name_BetweenGroup3
+  }
+  
+  if(isTruthy(input$name_WithinSubject1)) {
+    names(summary)[names(summary)=="WithinSubject1"] = input$name_WithinSubject1
+  }
+  
+  if(isTruthy(input$name_WithinSubject2)) {
+    names(summary)[names(summary)=="WithinSubject2"] = input$name_WithinSubject2
+  }
+  
+  if(isTruthy(input$name_WithinSubject3)) {
+    names(summary)[names(summary)=="WithinSubject3"] = input$name_WithinSubject3
+  }
+  
+  if(isTruthy(input$name_Continuous_Dependent1)) {
+    names(summary)[names(summary)=="Dependent1_Mean"] = paste0(input$name_Continuous_Dependent1, '_Mean')
+    names(summary)[names(summary)=="Dependent1_SD"] = paste0(input$name_Continuous_Dependent1, '_SD')
+  }
+  
+  if(isTruthy(input$name_Continuous_Dependent2)) {
+    names(summary)[names(summary)=="Dependent2_Mean"] = paste0(input$name_Continuous_Dependent2, '_Mean')
+    names(summary)[names(summary)=="Dependent2_SD"] = paste0(input$name_Continuous_Dependent2, '_SD')
+  }
+  
+  if(isTruthy(input$name_Continuous_Dependent3)) {
+    names(summary)[names(summary)=="Dependent3_Mean"] = paste0(input$name_Continuous_Dependent3, '_Mean')
+    names(summary)[names(summary)=="Dependent3_SD"] = paste0(input$name_Continuous_Dependent3, '_SD')
+  }
+  
+  if(isTruthy(input$name_Continuous_Dependent4)) {
+    names(summary)[names(summary)=="Dependent4_Mean"] = paste0(input$name_Continuous_Dependent4, '_Mean')
+    names(summary)[names(summary)=="Dependent4_SD"] = paste0(input$name_Continuous_Dependent4, '_SD')
+  }
+  
+  if(isTruthy(input$name_Categorical_Dependent1)) {
+    names(summary)[names(summary)=="Categorical_Dependent1"] = input$name_Categorical_Dependent1
+  }
+  
+  if(isTruthy(input$name_Categorical_Dependent2)) {
+    names(summary)[names(summary)=="Categorical_Dependent2"] = input$name_Categorical_Dependent2
+  }
+  
+  if(isTruthy(input$name_Categorical_Dependent3)) {
+    names(summary)[names(summary)=="Categorical_Dependent3"] = input$name_Categorical_Dependent3
+  }
+  
+  if(isTruthy(input$name_Categorical_Dependent4)) {
+    names(summary)[names(summary)=="Categorical_Dependent4"] = input$name_Categorical_Dependent4
+  }
+  
+  # Because variables with original names remain in the data set (some bug), remove any such variables
+  
+  # summary = summary[, -grep('^BetweenGroup1|^BetweenGroup2|^BetweenGroup3|^WithinSubject1|^WithinSubject2|^WithinSubject3',
+  #                            colnames(summary))]
+  # 
+  # summary = summary[, -grep('^Dependent1_Mean|^Dependent2_Mean|^Dependent3_Mean|^Dependent4_Mean',
+  #                            colnames(summary))]
+  # 
+  # summary = summary[, -grep('^Dependent1_SD|^Dependent2_SD|^Dependent3_SD|^Dependent4_SD',
+  #                            colnames(summary))]
+  # 
+  # summary = summary[, -grep('^Categorical_Dependent1|^Categorical_Dependent2|^Categorical_Dependent3|^Categorical_Dependent4',
+  #                            colnames(summary))]
+  
+  # summary = summary %>%
+  #   select_at(-vars(which(names(.) %in% c('BetweenGroup1', 'BetweenGroup2', 'BetweenGroup3',
+  #                                         'WithinSubject1', 'WithinSubject2', 'WithinSubject3',
+  #                                         'Dependent1_Mean', 'Dependent2_Mean',
+  #                                         'Dependent3_Mean', 'Dependent4_Mean',
+  #                                         'Dependent1_SD', 'Dependent2_SD',
+  #                                         'Dependent3_SD', 'Dependent4_SD',
+  #                                         'Categorical_Dependent1', 'Categorical_Dependent2',
+  #                                         'Categorical_Dependent3', 'Categorical_Dependent4'))))
+  
+  # summary = summary %>% select(-one_of(starts_with('BetweenGroup1'), starts_with('BetweenGroup2'), starts_with('BetweenGroup3'),
+  #                                      starts_with('WithinSubject1'), starts_with('WithinSubject2'), starts_with('WithinSubject3'),
+  #                                      starts_with('Dependent1_Mean'), starts_with('Dependent2_Mean'),
+  #                                      starts_with('Dependent3_Mean'), starts_with('Dependent4_Mean'),
+  #                                      starts_with('Dependent1_SD'), starts_with('Dependent2_SD'),
+  #                                      starts_with('Dependent3_SD'), starts_with('Dependent4_SD'),
+  #                                      starts_with('Categorical_Dependent1'), starts_with('Categorical_Dependent2'),
+  #                                      starts_with('Categorical_Dependent3'), starts_with('Categorical_Dependent4')))
+  
+  # Count observations per cell
+  summary = 
+    
+    # Remove NA-only columns
+    summary = summary[, !map_lgl(summary, ~ all(is.na(.)))]
+  
+  summary
+  
+})
+
+
+renderDT({
+  datatable(dataset_summary(), extensions = c('Buttons', 'FixedHeader'), class = 'compact cell-border',
+            options = list(order = list(1, 'asc'), dom = 'Bifrt', scroller = TRUE, fixedHeader = TRUE,
+                           buttons = list(list(extend = 'csv',
+                                               filename = paste0('Summary of simulation using seed number ', input$seed, ' - retrieved ',
+                                                                 str_replace_all(format(Sys.time(), '%d-%b-%Y_%X-%Z'), ':', '-') %>% 
+                                                                   str_replace_all('\\ ', '-'), ' - ',
+                                                                 'info on GitHub repository pablobernabeu data-simulation-app')),
+                                          list(extend = 'excel',
+                                               filename = paste0('Summary of simulation using seed number ', input$seed, ' - retrieved ',
+                                                                 str_replace_all(format(Sys.time(), '%d-%b-%Y_%X-%Z'), ':', '-') %>% 
+                                                                   str_replace_all('\\ ', '-'), ' - ',
+                                                                 'info on GitHub repository pablobernabeu data-simulation-app'))),
+                           pageLength = nrow(dataset_summary())),
+            selection = 'none')
+})
+
+```
+
+
+### Parameter list
+
+```{r}
+
+# Save parameter list
+
+parameters = reactive({
+  
+  parameters = paste0('\nTotal sample size (N): ', input$Total_N, '\n')
+  
+  if(isTruthy(input$name_BetweenGroup1)) {
+    parameters = paste0(parameters, '\n', 'Between-group factor 1', ': ', input$name_BetweenGroup1, '\n',
+                        'Levels: ',
+                        paste(input$BetweenGroup1_Group1, input$BetweenGroup1_Group2, input$BetweenGroup1_Group3,
+                              input$BetweenGroup1_Group4, input$BetweenGroup1_Group5, input$BetweenGroup1_Group6,
+                              input$BetweenGroup1_Group7, input$BetweenGroup1_Group8, input$BetweenGroup1_Group9,
+                              input$BetweenGroup1_Group10, sep = ', ') %>%
+                          str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% 
+                          str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% 
+                          str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% 
+                          str_replace_all('^*\\, $', ''),
+                        '\n')
+  }
+  
+  if(isTruthy(input$name_BetweenGroup2)) {
+    parameters = paste0(parameters, '\n', 'Between-group factor 2', ': ', input$name_BetweenGroup2, '\n',
+                        'Levels: ',
+                        paste(input$BetweenGroup2_Group1, input$BetweenGroup2_Group2, input$BetweenGroup2_Group3,
+                              input$BetweenGroup2_Group4, input$BetweenGroup2_Group5, input$BetweenGroup2_Group6,
+                              input$BetweenGroup2_Group7, input$BetweenGroup2_Group8, input$BetweenGroup2_Group9,
+                              input$BetweenGroup2_Group10, sep = ', ') %>%
+                          str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% 
+                          str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% 
+                          str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% 
+                          str_replace_all('^*\\, $', ''),
+                        '\n')
+  }
+  
+  if(isTruthy(input$name_BetweenGroup3)) {
+    parameters = paste0(parameters, '\n', 'Between-group factor 3', ': ', input$name_BetweenGroup3, '\n',
+                        'Levels: ',
+                        paste(input$BetweenGroup3_Group1, input$BetweenGroup3_Group2, input$BetweenGroup3_Group3,
+                              input$BetweenGroup3_Group4, input$BetweenGroup3_Group5, input$BetweenGroup3_Group6,
+                              input$BetweenGroup3_Group7, input$BetweenGroup3_Group8, input$BetweenGroup3_Group9,
+                              input$BetweenGroup3_Group10, sep = ', ') %>%
+                          str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% 
+                          str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% 
+                          str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% 
+                          str_replace_all('^*\\, $', ''),
+                        '\n')
+  }
+  
+  if(isTruthy(input$name_WithinSubject1)) {
+    parameters = paste0(parameters, '\n', 'Within-subject factor 1', ': ', input$name_WithinSubject1, '\n',
+                        'Levels: ',
+                        paste(input$WithinSubject1_Condition1, input$WithinSubject1_Condition2, input$WithinSubject1_Condition3,
+                              input$WithinSubject1_Condition4, input$WithinSubject1_Condition5, input$WithinSubject1_Condition6,
+                              input$WithinSubject1_Condition7, input$WithinSubject1_Condition8, input$WithinSubject1_Condition9,
+                              input$WithinSubject1_Condition10, sep = ', ') %>%
+                          str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% 
+                          str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% 
+                          str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% 
+                          str_replace_all('^*\\, $', ''),
+                        '\n')
+  }
+  
+  if(isTruthy(input$name_WithinSubject2)) {
+    parameters = paste0(parameters, '\n', 'Within-subject factor 2', ': ', input$name_WithinSubject2, '\n',
+                        'Levels: ',
+                        paste(input$WithinSubject2_Condition1, input$WithinSubject2_Condition2, input$WithinSubject2_Condition3,
+                              input$WithinSubject2_Condition4, input$WithinSubject2_Condition5, input$WithinSubject2_Condition6,
+                              input$WithinSubject2_Condition7, input$WithinSubject2_Condition8, input$WithinSubject2_Condition9,
+                              input$WithinSubject2_Condition10, sep = ', ') %>%
+                          str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% 
+                          str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% 
+                          str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% 
+                          str_replace_all('^*\\, $', ''),
+                        '\n')
+  }
+  
+  if(isTruthy(input$name_WithinSubject3)) {
+    parameters = paste0(parameters, '\n', 'Within-subject factor 3', ': ', input$name_WithinSubject3, '\n',
+                        'Levels: ',
+                        paste(input$WithinSubject3_Condition1, input$WithinSubject3_Condition2, input$WithinSubject3_Condition3,
+                              input$WithinSubject3_Condition4, input$WithinSubject3_Condition5, input$WithinSubject3_Condition6,
+                              input$WithinSubject3_Condition7, input$WithinSubject3_Condition8, input$WithinSubject3_Condition9,
+                              input$WithinSubject3_Condition10, sep = ', ') %>%
+                          str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% 
+                          str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% 
+                          str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% str_replace_all('\\, \\,', ',') %>% 
+                          str_replace_all('^*\\, $', ''),
+                        '\n')
+  }
+  
+  if(isTruthy(input$name_Continuous_Dependent1)) {
+    parameters = paste0(parameters, '\n', 'Continuous dependent variable 1', ': ', input$name_Continuous_Dependent1,
+                        '\nMean(s): ', input$mean1, '\nSD(s): ', input$sd1, '\n')
+  }
+  
+  if(isTruthy(input$name_Continuous_Dependent2)) {
+    parameters = paste0(parameters, '\n', 'Continuous dependent variable 2', ': ', input$name_Continuous_Dependent2,
+                        '\nMean(s): ', input$mean2, '\nSD(s): ', input$sd2, '\n')
+  }
+  
+  if(isTruthy(input$name_Continuous_Dependent3)) {
+    parameters = paste0(parameters, '\n', 'Continuous dependent variable 3', ': ', input$name_Continuous_Dependent3,
+                        '\nMean(s): ', input$mean3, '\nSD(s): ', input$sd3, '\n')
+  }
+  
+  if(isTruthy(input$name_Continuous_Dependent4)) {
+    parameters = paste0(parameters, '\n', 'Continuous dependent variable 4', ': ', input$name_Continuous_Dependent4,
+                        '\nMean(s): ', input$mean4, '\nSD(s): ', input$sd4, '\n')
+  }
+  
+  if(isTruthy(input$name_Categorical_Dependent1)) {
+    parameters = paste0(parameters, '\n', 'Categorical dependent variable 1', ': ', input$name_Categorical_Dependent1,
+                        '\nLevels: ', input$levels_categorical_dependent1, '\nProbability/ies: ', 
+                        input$probability_categorical_dependent1, '\n')
+  }
+  
+  if(isTruthy(input$name_Categorical_Dependent2)) {
+    parameters = paste0(parameters, '\n', 'Categorical dependent variable 2', ': ', input$name_Categorical_Dependent2,
+                        '\nLevels: ', input$levels_categorical_dependent2, '\nProbability/ies: ', 
+                        input$probability_categorical_dependent2, '\n')
+  }
+  
+  if(isTruthy(input$name_Categorical_Dependent3)) {
+    parameters = paste0(parameters, '\n', 'Categorical dependent variable 3', ': ', input$name_Categorical_Dependent3,
+                        '\nLevels: ', input$levels_categorical_dependent3, '\nProbability/ies: ', 
+                        input$probability_categorical_dependent3, '\n')
+  }
+  
+  if(isTruthy(input$name_Categorical_Dependent4)) {
+    parameters = paste0(parameters, '\n', 'Categorical dependent variable 4', ': ', input$name_Categorical_Dependent4,
+                        '\nLevels: ', input$levels_categorical_dependent4, '\nProbability/ies: ', 
+                        input$probability_categorical_dependent4, '\n')
+  }
+  
+  parameters
+})
+
+
+# Print list
+reactive(cat(parameters()))
+
+# Enable download -- link shown in last tab
+
+# Create the actual downloadLink
+output$parameters_download_link = renderUI({
+  downloadLink('parameters_download', HTML('&nbsp; Download parameter list'), class = 'fa fa-download', style = 'border-bottom:none !important')
+})
+
+# Add download handling
+output$parameters_download = downloadHandler(
+  filename = function() {
+    paste0('Parameter list (seed number ', input$seed, ') - retrieved ',
+           str_replace_all(format(Sys.time(), '%d-%b-%Y_%X-%Z'), ':', '-') %>%
+             str_replace_all('\\ ', '-'), ' - ',
+           'info on GitHub repository pablobernabeu data-simulation-app.txt')
+  },
+  content = function(file) { cat(parameters(), file = file) }
+)
+
+```
+
+
+
+Column
+-----------------------------------------------------------------------
+
+### <span style='font-weight:bold; font-size:15px; color:#0E6D00;'>Continuous 1</span>
+
+```{r}
+
+textInput('name_Continuous_Dependent1', '', placeholder = 'Variable name')
+textInput('mean1', '', placeholder = 'Mean(s)')
+textInput('sd1', '', placeholder = 'Standard deviation(s)')
+
+```
+
+
+### <span style='font-weight:bold; font-size:15px; color:#0E6D00;'>Continuous 2</span>
+
+```{r}
+
+textInput('name_Continuous_Dependent2', '', placeholder = 'Variable name')
+textInput('mean2', '', placeholder = 'Mean(s)')
+textInput('sd2', '', placeholder = 'Standard deviation(s)')
+
+```
+
+
+### <span style='font-weight:bold; font-size:15px; color:#0E6D00;'>Continuous 3</span>
+
+```{r}
+
+textInput('name_Continuous_Dependent3', '', placeholder = 'Variable name')
+textInput('mean3', '', placeholder = 'Mean(s)')
+textInput('sd3', '', placeholder = 'Standard deviation(s)')
+
+```
+
+
+### <span style='font-weight:bold; font-size:15px; color:#0E6D00;'>Continuous 4</span>
+
+```{r}
+
+textInput('name_Continuous_Dependent4', '', placeholder = 'Variable name')
+textInput('mean4', '', placeholder = 'Mean(s)')
+textInput('sd4', '', placeholder = 'Standard deviation(s)')
+
+```
+
+
+
+Column
+-----------------------------------------------------------------------
+
+### <span style='font-weight:bold; font-size:15px; color:#0E6D00;'>Categorical 1</span>
+
+```{r}
+
+textInput('name_Categorical_Dependent1', '', placeholder = 'Variable name')
+textInput('levels_categorical_dependent1', '', placeholder = 'Levels')
+textInput('probability_categorical_dependent1',
+          HTML('<span data-toggle="tooltip1" data-placement="right" title="Proportion of each level, overall or per cell (comma-separated), with values between 0 and 1. Values toward 0 increase proportion of first-entered levels; values toward 1 increase last-entered levels. Please check result, and if necessary, rearrange levels or increase sample size." style="border-bottom: 0.9px dotted grey;"><b> Probability </b><i class="fas fa-info-circle"></i></span>'),
+          placeholder = 'Probability/ies')
+
+reactive({
+  
+  if(isTruthy(input$probability_categorical_dependent1)) {
+    
+    Categorical_Dependent1 = rbinom(input$Total_N,
+                                 # Below, count number of levels
+                                 ngram::wordcount(input$levels_categorical_dependent1) - 1,  # One has to be subtracted for rbinom() to be be accurate
+                                 eval(parse(text = paste0('c(', input$probability_categorical_dependent1, ')'))))
+    
+    # Place quotes around each factor level
+    levels_categorical_dependent1 = sapply(strsplit(input$levels_categorical_dependent1, '[, ]+'), function(x) toString(dQuote(x)))
+    
+    # Wrap levels in c()
+    levels_categorical_dependent1 = eval(parse(text = paste0('c(', levels_categorical_dependent1, ')')))
+    
+    Categorical_Dependent1 = as.factor(Categorical_Dependent1)
+    levels(Categorical_Dependent1) = levels_categorical_dependent1
+    
+    cat('Overall proportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
+    Categorical_Dependent1 %>% levels() %>%
+      paste0(., ': ', table(Categorical_Dependent1) / sum(table(Categorical_Dependent1)) * 100, '%', collapse = '\n') %>%
+      paste0(., '\n') %>% cat
+    cat('\nTo see proportions in each cell,\nplease refer to summary table.')
+    
+  }
+})
+
+```
+
+
+### <span style='font-weight:bold; font-size:15px; color:#0E6D00;'>Categorical 2</span>
+
+```{r}
+
+textInput('name_Categorical_Dependent2', '', placeholder = 'Variable name')
+textInput('levels_categorical_dependent2', '', placeholder = 'Levels')
+textInput('probability_categorical_dependent2',
+          HTML('<span data-toggle="tooltip1" data-placement="right" title="Proportion of each level, overall or per cell (comma-separated), with values between 0 and 1. Values toward 0 increase proportion of first-entered levels; values toward 1 increase last-entered levels. Please check result, and if necessary, rearrange levels or increase sample size." style="border-bottom: 0.9px dotted grey;"><b> Probability </b><i class="fas fa-info-circle"></i></span>'),
+          placeholder = 'Probability/ies')
+
+reactive({
+  
+  if(isTruthy(input$probability_categorical_dependent2)) {
+    
+    Categorical_Dependent2 = rbinom(input$Total_N,
+                                 # Below, count number of levels
+                                 ngram::wordcount(input$levels_categorical_dependent2) - 1,  # One has to be subtracted for rbinom() to be be accurate
+                                 eval(parse(text = paste0('c(', input$probability_categorical_dependent2, ')'))))
+    
+    # Place quotes around each factor level
+    levels_categorical_dependent2 = sapply(strsplit(input$levels_categorical_dependent2, '[, ]+'), function(x) toString(dQuote(x)))
+    
+    # Wrap levels in c()
+    levels_categorical_dependent2 = eval(parse(text = paste0('c(', levels_categorical_dependent2, ')')))
+    
+    Categorical_Dependent2 = as.factor(Categorical_Dependent2)
+    levels(Categorical_Dependent2) = levels_categorical_dependent2
+    
+    cat('Overall proportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
+    Categorical_Dependent2 %>% levels() %>%
+      paste0(., ': ', table(Categorical_Dependent2) / sum(table(Categorical_Dependent2)) * 100, '%', collapse = '\n') %>%
+      paste0(., '\n') %>% cat
+    cat('\nTo see proportions in each cell,\nplease refer to summary table.')
+    
+  }
+})
+
+```
+
+
+### <span style='font-weight:bold; font-size:15px; color:#0E6D00;'>Categorical 3</span>
+
+```{r}
+
+textInput('name_Categorical_Dependent3', '', placeholder = 'Variable name')
+textInput('levels_categorical_dependent3', '', placeholder = 'Levels')
+textInput('probability_categorical_dependent3',
+          HTML('<span data-toggle="tooltip1" data-placement="right" title="Proportion of each level, overall or per cell (comma-separated), with values between 0 and 1. Values toward 0 increase proportion of first-entered levels; values toward 1 increase last-entered levels. Please check result, and if necessary, rearrange levels or increase sample size." style="border-bottom: 0.9px dotted grey;"><b> Probability </b><i class="fas fa-info-circle"></i></span>'),
+          placeholder = 'Probability/ies')
+
+reactive({
+  
+  if(isTruthy(input$probability_categorical_dependent3)) {
+    
+    Categorical_Dependent3 = rbinom(input$Total_N,
+                                 # Below, count number of levels
+                                 ngram::wordcount(input$levels_categorical_dependent3) - 1,  # One has to be subtracted for rbinom() to be be accurate
+                                 eval(parse(text = paste0('c(', input$probability_categorical_dependent3, ')'))))
+    
+    # Place quotes around each factor level
+    levels_categorical_dependent3 = sapply(strsplit(input$levels_categorical_dependent3, '[, ]+'), function(x) toString(dQuote(x)))
+    
+    # Wrap levels in c()
+    levels_categorical_dependent3 = eval(parse(text = paste0('c(', levels_categorical_dependent3, ')')))
+    
+    Categorical_Dependent3 = as.factor(Categorical_Dependent3)
+    levels(Categorical_Dependent3) = levels_categorical_dependent3
+    
+    cat('Overall proportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
+    Categorical_Dependent3 %>% levels() %>%
+      paste0(., ': ', table(Categorical_Dependent3) / sum(table(Categorical_Dependent3)) * 100, '%', collapse = '\n') %>%
+      paste0(., '\n') %>% cat
+    cat('\nTo see proportions in each cell,\nplease refer to summary table.')
+    
+  }
+})
+
+```
+
+
+### <span style='font-weight:bold; font-size:15px; color:#0E6D00;'>Categorical 4</span>
+
+```{r}
+
+textInput('name_Categorical_Dependent4', '', placeholder = 'Variable name')
+textInput('levels_categorical_dependent4', '', placeholder = 'Levels')
+textInput('probability_categorical_dependent4',
+          HTML('<span data-toggle="tooltip1" data-placement="right" title="Proportion of each level, overall or per cell (comma-separated), with values between 0 and 1. Values toward 0 increase proportion of first-entered levels; values toward 1 increase last-entered levels. Please check result, and if necessary, rearrange levels or increase sample size." style="border-bottom: 0.9px dotted grey;"><b> Probability </b><i class="fas fa-info-circle"></i></span>'),
+          placeholder = 'Probability/ies')
+
+reactive({
+  
+  if(isTruthy(input$probability_categorical_dependent4)) {
+    
+    Categorical_Dependent4 = rbinom(input$Total_N,
+                                 # Below, count number of levels
+                                 ngram::wordcount(input$levels_categorical_dependent4) - 1,  # One has to be subtracted for rbinom() to be be accurate
+                                 eval(parse(text = paste0('c(', input$probability_categorical_dependent4, ')'))))
+    
+    # Place quotes around each factor level
+    levels_categorical_dependent4 = sapply(strsplit(input$levels_categorical_dependent4, '[, ]+'), function(x) toString(dQuote(x)))
+    
+    # Wrap levels in c()
+    levels_categorical_dependent4 = eval(parse(text = paste0('c(', levels_categorical_dependent4, ')')))
+    
+    Categorical_Dependent4 = as.factor(Categorical_Dependent4)
+    levels(Categorical_Dependent4) = levels_categorical_dependent4
+    
+    cat('Overall proportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
+    Categorical_Dependent4 %>% levels() %>%
+      paste0(., ': ', table(Categorical_Dependent4) / sum(table(Categorical_Dependent4)) * 100, '%', collapse = '\n') %>%
+      paste0(., '\n') %>% cat
+    cat('\nTo see proportions in each cell,\nplease refer to summary table.')
+    
+  }
+})
+
+```
+
+
+```{r}
+
+# Create final data set
+
+# Participants
+
+Participants = reactive(data.frame(stringsAsFactors = FALSE,
+                                   Participants = factor(c(rep(seq(1, input$Total_N), each = 1)))))
+
+# Between-group
+
+BetweenGroup1 = reactive({
+  if(isTruthy(input$name_BetweenGroup1)) {
+    data.frame(stringsAsFactors = FALSE,
+               BetweenGroup1 = rep(c(input$BetweenGroup1_Group1, input$BetweenGroup1_Group2,
+                                     input$BetweenGroup1_Group3, input$BetweenGroup1_Group4,
+                                     input$BetweenGroup1_Group5, input$BetweenGroup1_Group6,
+                                     input$BetweenGroup1_Group7, input$BetweenGroup1_Group8,
+                                     input$BetweenGroup1_Group9, input$BetweenGroup1_Group10),
+                                   each = 1,
+                                   input$Total_N /
+                                     sum(c(which(isTruthy(input$BetweenGroup1_Group1)),
+                                           which(isTruthy(input$BetweenGroup1_Group2)),
+                                           which(isTruthy(input$BetweenGroup1_Group3)),
+                                           which(isTruthy(input$BetweenGroup1_Group4)),
+                                           which(isTruthy(input$BetweenGroup1_Group5)),
+                                           which(isTruthy(input$BetweenGroup1_Group6)),
+                                           which(isTruthy(input$BetweenGroup1_Group7)),
+                                           which(isTruthy(input$BetweenGroup1_Group8)),
+                                           which(isTruthy(input$BetweenGroup1_Group9)),
+                                           which(isTruthy(input$BetweenGroup1_Group10)))))
+    ) %>% mutate_all(~ifelse(. %in% c(''), NA, .)) %>% na.omit()
+  } else { data.frame(stringsAsFactors = FALSE, BetweenGroup1 = rep('1', each = 1, input$Total_N)) }
+})
+
+BetweenGroup2 = reactive({
+  if(isTruthy(input$name_BetweenGroup2)) {
+    data.frame(stringsAsFactors = FALSE,
+               BetweenGroup2 = rep(c(input$BetweenGroup2_Group1, input$BetweenGroup2_Group2,
+                                     input$BetweenGroup2_Group3, input$BetweenGroup2_Group4,
+                                     input$BetweenGroup2_Group5, input$BetweenGroup2_Group6,
+                                     input$BetweenGroup2_Group7, input$BetweenGroup2_Group8,
+                                     input$WithinSubject2_Condition9, input$WithinSubject2_Condition10),
+                                   each = 1,
+                                   input$Total_N /
+                                     sum(c(which(isTruthy(input$BetweenGroup2_Group1)),
+                                           which(isTruthy(input$BetweenGroup2_Group2)),
+                                           which(isTruthy(input$BetweenGroup2_Group3)),
+                                           which(isTruthy(input$BetweenGroup2_Group4)),
+                                           which(isTruthy(input$BetweenGroup2_Group5)),
+                                           which(isTruthy(input$BetweenGroup2_Group6)),
+                                           which(isTruthy(input$BetweenGroup2_Group7)),
+                                           which(isTruthy(input$BetweenGroup2_Group8)),
+                                           which(isTruthy(input$BetweenGroup2_Group9)),
+                                           which(isTruthy(input$BetweenGroup2_Group10)))))
+    ) %>% mutate_all(~ifelse(. %in% c(''), NA, .)) %>% na.omit()
+  } else { data.frame(stringsAsFactors = FALSE, BetweenGroup2 = rep('1', each = 1, input$Total_N)) }
+})
+
+BetweenGroup3 = reactive({
+  if(isTruthy(input$name_BetweenGroup3)) {
+    data.frame(stringsAsFactors = FALSE,
+               BetweenGroup3 = rep(c(input$BetweenGroup3_Group1, input$BetweenGroup3_Group2,
+                                     input$BetweenGroup3_Group3, input$BetweenGroup3_Group4,
+                                     input$BetweenGroup3_Group5, input$BetweenGroup3_Group6,
+                                     input$BetweenGroup3_Group7, input$BetweenGroup3_Group8,
+                                     input$WithinSubject3_Condition9, input$WithinSubject3_Condition10),
+                                   each = 1,
+                                   input$Total_N /
+                                     sum(c(which(isTruthy(input$BetweenGroup3_Group1)),
+                                           which(isTruthy(input$BetweenGroup3_Group2)),
+                                           which(isTruthy(input$BetweenGroup3_Group3)),
+                                           which(isTruthy(input$BetweenGroup3_Group4)),
+                                           which(isTruthy(input$BetweenGroup3_Group5)),
+                                           which(isTruthy(input$BetweenGroup3_Group6)),
+                                           which(isTruthy(input$BetweenGroup3_Group7)),
+                                           which(isTruthy(input$BetweenGroup3_Group8)),
+                                           which(isTruthy(input$BetweenGroup3_Group9)),
+                                           which(isTruthy(input$BetweenGroup3_Group10)))))
+    ) %>% mutate_all(~ifelse(. %in% c(''), NA, .)) %>% na.omit()
+  } else { data.frame(stringsAsFactors = FALSE, BetweenGroup3 = rep('1', each = 1, input$Total_N)) }
+})
+
+# Within-subject
+
+WithinSubject1 = reactive({
+  if(isTruthy(input$name_WithinSubject1)) {
+    df = data.frame(stringsAsFactors = FALSE,
+                    WithinSubject1 = rep(c(input$WithinSubject1_Condition1, input$WithinSubject1_Condition2,
+                                           input$WithinSubject1_Condition3, input$WithinSubject1_Condition4,
+                                           input$WithinSubject1_Condition5, input$WithinSubject1_Condition6,
+                                           input$WithinSubject1_Condition7, input$WithinSubject1_Condition8,
+                                           input$WithinSubject1_Condition9, input$WithinSubject1_Condition10),
+                                         each = 1, input$Total_N)) %>%
+      mutate_all(~ifelse(. %in% c(''), NA, .)) %>% na.omit()
+  } else { data.frame(stringsAsFactors = FALSE, WithinSubject1 = rep('1', each = 1, input$Total_N)) }
+})
+
+WithinSubject2 = reactive({
+  if(isTruthy(input$name_WithinSubject2)) {
+    data.frame(stringsAsFactors = FALSE,
+               WithinSubject2 = rep(c(input$WithinSubject2_Condition1, input$WithinSubject2_Condition2,
+                                      input$WithinSubject2_Condition3, input$WithinSubject2_Condition4,
+                                      input$WithinSubject2_Condition5, input$WithinSubject2_Condition6,
+                                      input$WithinSubject2_Condition7, input$WithinSubject2_Condition8,
+                                      input$WithinSubject2_Condition9, input$WithinSubject2_Condition10),
+                                    each = 1, input$Total_N)) %>%
+      mutate_all(~ifelse(. %in% c(''), NA, .)) %>% na.omit()
+  } else { data.frame(stringsAsFactors = FALSE, WithinSubject2 = rep('1', each = 1, input$Total_N)) }
+})
+
+WithinSubject3 = reactive({
+  if(isTruthy(input$name_WithinSubject3)) {
+    data.frame(stringsAsFactors = FALSE,
+               WithinSubject3 = rep(c(input$WithinSubject3_Condition1, input$WithinSubject3_Condition2,
+                                      input$WithinSubject3_Condition3, input$WithinSubject3_Condition4,
+                                      input$WithinSubject3_Condition5, input$WithinSubject3_Condition6,
+                                      input$WithinSubject3_Condition7, input$WithinSubject3_Condition8,
+                                      input$WithinSubject3_Condition9, input$WithinSubject3_Condition10),
+                                    each = 1, input$Total_N)
+    ) %>% mutate_all(~ifelse(. %in% c(''), NA, .)) %>% na.omit()
+  } else { data.frame(stringsAsFactors = FALSE, WithinSubject3 = rep('1', each = 1, input$Total_N)) }
+})
+
+# Continuous dependent variables
+
+Continuous_Dependent1 = reactive({
+  if(isTruthy(input$name_Continuous_Dependent1)) {
+    set.seed(input$seed)
+    rnorm(input$Total_N,
+          mean = eval(parse(text = paste0('c(', input$mean1, ')'))),
+          sd = eval(parse(text = paste0('c(', input$sd1, ')')))) %>%
+      round(digits = 3)
+  } else { set.seed(input$seed)
+    rnorm(input$Total_N, mean = 1, sd = 1) %>%
+      round(digits = 3) }
+})
+
+Continuous_Dependent2 = reactive({
+  if(isTruthy(input$name_Continuous_Dependent2)) {
+    set.seed(input$seed)
+    rnorm(input$Total_N,
+          mean = eval(parse(text = paste0('c(', input$mean2, ')'))),
+          sd = eval(parse(text = paste0('c(', input$sd2, ')')))) %>%
+      round(digits = 3)
+  } else { set.seed(input$seed)
+    rnorm(input$Total_N, mean = 1, sd = 1) %>%
+      round(digits = 3) }
+})
+
+Continuous_Dependent3 = reactive({
+  if(isTruthy(input$name_Continuous_Dependent3)) {
+    set.seed(input$seed)
+    rnorm(input$Total_N,
+          mean = eval(parse(text = paste0('c(', input$mean3, ')'))),
+          sd = eval(parse(text = paste0('c(', input$sd3, ')')))) %>%
+      round(digits = 3)
+  } else { set.seed(input$seed)
+    rnorm(input$Total_N, mean = 1, sd = 1) %>%
+      round(digits = 3) }
+})
+
+Continuous_Dependent4 = reactive({
+  if(isTruthy(input$name_Continuous_Dependent4)) {
+    set.seed(input$seed)
+    rnorm(input$Total_N,
+          mean = eval(parse(text = paste0('c(', input$mean4, ')'))),
+          sd = eval(parse(text = paste0('c(', input$sd4, ')')))) %>%
+      round(digits = 3)
+  } else { set.seed(input$seed)
+    rnorm(input$Total_N, mean = 1, sd = 1) %>%
+      round(digits = 3) }
+})
+
+
+# Categorical dependent variables
+
+Categorical_Dependent1 = reactive({
+  if(isTruthy(input$name_Categorical_Dependent1)) {
+    set.seed(input$seed)
+    categorical1 = rbinom(input$Total_N,
+                       # Below, count number of levels
+                       ngram::wordcount(input$levels_categorical_dependent1) - 1,  # One has to be subtracted for rbinom() to be be accurate
+                       eval(parse(text = paste0('c(', input$probability_categorical_dependent1, ')'))))
+    # Place quotes around each factor level
+    levels_categorical_dependent1 = sapply(strsplit(input$levels_categorical_dependent1, '[, ]+'), function(x) toString(dQuote(x)))
+    levels_categorical_dependent1 = eval(parse(text = paste0('c(', levels_categorical_dependent1, ')')))
+    categorical1 = as.factor(categorical1)
+    levels(categorical1) = levels_categorical_dependent1
+    categorical1
+  } else { set.seed(input$seed)
+    rbinom(input$Total_N, 1, 1)
+  }
+})
+
+Categorical_Dependent2 = reactive({
+  if(isTruthy(input$name_Categorical_Dependent2)) {
+    set.seed(input$seed)
+    categorical2 = rbinom(input$Total_N,
+                       # Below, count number of levels
+                       ngram::wordcount(input$levels_categorical_dependent2) - 1,  # One has to be subtracted for rbinom() to be be accurate
+                       eval(parse(text = paste0('c(', input$probability_categorical_dependent2, ')'))))
+    # Place quotes around each factor level
+    levels_categorical_dependent2 = sapply(strsplit(input$levels_categorical_dependent2, '[, ]+'), function(x) toString(dQuote(x)))
+    levels_categorical_dependent2 = eval(parse(text = paste0('c(', levels_categorical_dependent2, ')')))
+    categorical2 = as.factor(categorical2)
+    levels(categorical2) = levels_categorical_dependent2
+    categorical2
+  } else { set.seed(input$seed)
+    rbinom(input$Total_N, 1, 1)
+  }
+})
+
+Categorical_Dependent3 = reactive({
+  if(isTruthy(input$name_Categorical_Dependent3)) {
+    set.seed(input$seed)
+    categorical3 = rbinom(input$Total_N,
+                       # Below, count number of levels
+                       ngram::wordcount(input$levels_categorical_dependent3) - 1,  # One has to be subtracted for rbinom() to be be accurate
+                       eval(parse(text = paste0('c(', input$probability_categorical_dependent3, ')'))))
+    # Place quotes around each factor level
+    levels_categorical_dependent3 = sapply(strsplit(input$levels_categorical_dependent3, '[, ]+'), function(x) toString(dQuote(x)))
+    levels_categorical_dependent3 = eval(parse(text = paste0('c(', levels_categorical_dependent3, ')')))
+    categorical3 = as.factor(categorical3)
+    levels(categorical3) = levels_categorical_dependent3
+    categorical3
+  } else { set.seed(input$seed)
+    rbinom(input$Total_N, 1, 1)
+  }
+})
+
+Categorical_Dependent4 = reactive({
+  if(isTruthy(input$name_Categorical_Dependent4)) {
+    set.seed(input$seed)
+    categorical4 = rbinom(input$Total_N,
+                       # Below, count number of levels
+                       ngram::wordcount(input$levels_categorical_dependent4) - 1,  # One has to be subtracted for rbinom() to be be accurate
+                       eval(parse(text = paste0('c(', input$probability_categorical_dependent4, ')'))))
+    # Place quotes around each factor level
+    levels_categorical_dependent4 = sapply(strsplit(input$levels_categorical_dependent4, '[, ]+'), function(x) toString(dQuote(x)))
+    levels_categorical_dependent4 = eval(parse(text = paste0('c(', levels_categorical_dependent4, ')')))
+    categorical4 = as.factor(categorical4)
+    levels(categorical4) = levels_categorical_dependent4
+    categorical4
+  } else { set.seed(input$seed)
+    rbinom(input$Total_N, 1, 1)
+  }
+})
+
+# Final data set
+
+dataset = reactive({
+  
+  # General, initial structure
+  
+  df = data.frame(
+    Participant = Participants(), BetweenGroup1(), BetweenGroup2(), BetweenGroup3(),
+    WithinSubject1(), WithinSubject2(), WithinSubject3(), Categorical_Dependent1(),
+    Categorical_Dependent2(), Categorical_Dependent3(), Categorical_Dependent4()
+  ) %>%
+    expand(
+      nesting(Participants(), BetweenGroup1(), BetweenGroup2(), BetweenGroup3(), 
+              Categorical_Dependent1(), Categorical_Dependent2(), Categorical_Dependent3(), 
+              Categorical_Dependent4()),
+      WithinSubject1(), WithinSubject2(), WithinSubject3()
+    ) %>%
+    cbind(Continuous_Dependent1 = Continuous_Dependent1(), 
+          Continuous_Dependent2 = Continuous_Dependent2(), 
+          Continuous_Dependent3 = Continuous_Dependent3(),
+          Continuous_Dependent4 = Continuous_Dependent4())
+  
+  # Having created a general structure, remove variables that haven't been filled in by user
+  # and name each variable with the user's choice
+  
+  # Within-subject variables
+  
+  # if(isTruthy(input$name_WithinSubject3)) {
+  #   names(df)[names(df)=='WithinSubject1'] = input$name_WithinSubject1
+  #   names(df)[names(df)=='WithinSubject2'] = input$name_WithinSubject2
+  #   names(df)[names(df)=='WithinSubject3'] = input$name_WithinSubject3
+  # }
+  
+  if(isTruthy(input$name_WithinSubject2) & !isTruthy(input$name_WithinSubject3)) {
+    df = df %>% select(-WithinSubject3) %>% select_if(is.numeric) %>%
+      aggregate(by = list(Participant = df$Participant, BetweenGroup1 = df$BetweenGroup1,
+                          BetweenGroup2 = df$BetweenGroup2, BetweenGroup3 = df$BetweenGroup3,
+                          WithinSubject1 = df$WithinSubject1, WithinSubject2 = df$WithinSubject2,
+                          Categorical_Dependent1 = df$Categorical_Dependent1,
+                          Categorical_Dependent2 = df$Categorical_Dependent2,
+                          Categorical_Dependent3 = df$Categorical_Dependent3,
+                          Categorical_Dependent4 = df$Categorical_Dependent4),
+                FUN = mean)
+    # names(df)[names(df)=='WithinSubject1'] = input$name_WithinSubject1
+    # names(df)[names(df)=='WithinSubject2'] = input$name_WithinSubject2
+  } 
+  
+  if(isTruthy(input$name_WithinSubject1) & !isTruthy(input$name_WithinSubject2)) {
+    df = df %>% select(-c(WithinSubject2, WithinSubject3)) %>% select_if(is.numeric) %>%
+      aggregate(by = list(Participant = df$Participant, BetweenGroup1 = df$BetweenGroup1,
+                          BetweenGroup2 = df$BetweenGroup2, BetweenGroup3 = df$BetweenGroup3,
+                          WithinSubject1 = df$WithinSubject1, 
+                          Categorical_Dependent1 = df$Categorical_Dependent1,
+                          Categorical_Dependent2 = df$Categorical_Dependent2,
+                          Categorical_Dependent3 = df$Categorical_Dependent3,
+                          Categorical_Dependent4 = df$Categorical_Dependent4),
+                FUN = mean)
+    # names(df)[names(df)=='WithinSubject1'] = input$name_WithinSubject1
+  } 
+  
+  if(!isTruthy(input$name_WithinSubject1)) {
+    df = df %>% select(-c(WithinSubject1, WithinSubject2, WithinSubject3)) %>% select_if(is.numeric) %>%
+      aggregate(by = list(Participant = df$Participant, BetweenGroup1 = df$BetweenGroup1,
+                          BetweenGroup2 = df$BetweenGroup2, BetweenGroup3 = df$BetweenGroup3,
+                          Categorical_Dependent1 = df$Categorical_Dependent1,
+                          Categorical_Dependent2 = df$Categorical_Dependent2,
+                          Categorical_Dependent3 = df$Categorical_Dependent3,
+                          Categorical_Dependent4 = df$Categorical_Dependent4),
+                FUN = mean)
+  }
+  
+  # Between-group variables
+  
+  # if(isTruthy(input$name_BetweenGroup3)) {
+  #   names(df)[names(df)=='BetweenGroup1'] = input$name_BetweenGroup1
+  #   names(df)[names(df)=='BetweenGroup2'] = input$name_BetweenGroup2
+  #   names(df)[names(df)=='BetweenGroup3'] = input$name_BetweenGroup3
+  # }
+  
+  if(!isTruthy(input$name_BetweenGroup3)) {
+    df = df %>% select(-c(BetweenGroup3))
+    # names(df)[names(df)=='BetweenGroup1'] = input$name_BetweenGroup1
+    # names(df)[names(df)=='BetweenGroup2'] = input$name_BetweenGroup2
+  } 
+  
+  if(!isTruthy(input$name_BetweenGroup2)) {
+    df = df %>% select(-c(BetweenGroup2))
+    # names(df)[names(df)=='BetweenGroup1'] = input$name_BetweenGroup1
+  }
+  
+  if(!isTruthy(input$name_BetweenGroup1)) {
+    df = df %>% select(-c(BetweenGroup1))
+  }
+  
+  # Continuous dependent variables
+  
+  if(!isTruthy(input$name_Continuous_Dependent4)) {
+    df = df %>% select(-c(Continuous_Dependent4))
+    # names(df)[names(df)=='Continuous_Dependent1'] = input$name_Continuous_Dependent1
+    # names(df)[names(df)=='Continuous_Dependent2'] = input$name_Continuous_Dependent2
+    # names(df)[names(df)=='Continuous_Dependent3'] = input$name_Continuous_Dependent3
+  } 
+  
+  if(!isTruthy(input$name_Continuous_Dependent3)) {
+    df = df %>% select(-c(Continuous_Dependent3))
+    # names(df)[names(df)=='Continuous_Dependent1'] = input$name_Continuous_Dependent1
+    # names(df)[names(df)=='Continuous_Dependent2'] = input$name_Continuous_Dependent2
+  } 
+  
+  if(!isTruthy(input$name_Continuous_Dependent2)) {
+    df = df %>% select(-c(Continuous_Dependent2))
+    # names(df)[names(df)=='Continuous_Dependent1'] = input$name_Continuous_Dependent1
+  }
+  
+  if(!isTruthy(input$name_Continuous_Dependent1)) {
+    df = df %>% select(-c(Continuous_Dependent1))
+  }
+  
+  # Categorical dependent variables
+  
+  if(!isTruthy(input$name_Categorical_Dependent4)) {
+    df = df %>% select(-c(Categorical_Dependent4, 'Categorical_Dependent4()'))
+  }
+  
+  if(!isTruthy(input$name_Categorical_Dependent3)) {
+    df = df %>% select(-c(Categorical_Dependent3, 'Categorical_Dependent3()'))
+  }
+  
+  if(!isTruthy(input$name_Categorical_Dependent2)) {
+    df = df %>% select(-c(Categorical_Dependent2, 'Categorical_Dependent2()'))
+  }
+  
+  if(!isTruthy(input$name_Categorical_Dependent1)) {
+    df = df %>% select(-c(Categorical_Dependent1, 'Categorical_Dependent1()'))
+  }
+  
+  df
+})
+
+```
+
+
+
+Summary
+=======================================================================
+
+Column {style="data-width:100%; position:static; height:1000px;"}
+-----------------------------------------------------------------------
+
+### **Summary of the data collapsed across participants**
+
+```{r}
+
+renderDT({
+  datatable(dataset_summary(), extensions = c('Buttons', 'FixedHeader'), class = 'compact cell-border',
+            options = list(order = list(1, 'asc'), dom = 'Bifrt', scroller = TRUE, fixedHeader = TRUE,
+                           buttons = list(list(extend = 'csv',
+                                               filename = paste0('Summary of simulation using seed number ', input$seed, ' - retrieved ',
+                                                                 str_replace_all(format(Sys.time(), '%d-%b-%Y_%X-%Z'), ':', '-') %>% 
+                                                                   str_replace_all('\\ ', '-'), ' - ',
+                                                                 'info on GitHub repository pablobernabeu data-simulation-app')),
+                                          list(extend = 'excel',
+                                               filename = paste0('Summary of simulation using seed number ', input$seed, ' - retrieved ',
+                                                                 str_replace_all(format(Sys.time(), '%d-%b-%Y_%X-%Z'), ':', '-') %>% 
+                                                                   str_replace_all('\\ ', '-'), ' - ',
+                                                                 'info on GitHub repository pablobernabeu data-simulation-app'))),
+                           pageLength = nrow(dataset_summary())),
+            selection = 'none')
+})
+
+```
+
+
+
+Dataset
+=======================================================================
+
+Column {style="data-width:100%; position:static; height:1000px;"}
+-----------------------------------------------------------------------
+
+### **Final data set** 
+
+If you wish to ensure the reproducibility of the simulated data, please download this data set as well as the parameter list (below) and keep the seed number (`r reactive(input$seed)`, also shown in the names of the downloaded files).
+
+`r uiOutput('parameters_download_link')`
+
+<br>
+
+```{r}
+
+# Rename columns
+
+final_dataset = reactive({
+  
+  final = dataset()
+  
+  if(isTruthy(input$name_BetweenGroup1)) {
+    names(final)[names(final)=="BetweenGroup1"] = input$name_BetweenGroup1
+  }
+  
+  if(isTruthy(input$name_BetweenGroup2)) {
+    names(final)[names(final)=="BetweenGroup2"] = input$name_BetweenGroup2
+  }
+  
+  if(isTruthy(input$name_BetweenGroup3)) {
+    names(final)[names(final)=="BetweenGroup3"] = input$name_BetweenGroup3
+  }
+  
+  if(isTruthy(input$name_WithinSubject1)) {
+    names(final)[names(final)=="WithinSubject1"] = input$name_WithinSubject1
+  }
+  
+  if(isTruthy(input$name_WithinSubject2)) {
+    names(final)[names(final)=="WithinSubject2"] = input$name_WithinSubject2
+  }
+  
+  if(isTruthy(input$name_WithinSubject3)) {
+    names(final)[names(final)=="WithinSubject3"] = input$name_WithinSubject3
+  }
+  
+  if(isTruthy(input$name_Continuous_Dependent1)) {
+    names(final)[names(final)=="Continuous_Dependent1"] = input$name_Continuous_Dependent1
+  }
+  
+  if(isTruthy(input$name_Continuous_Dependent2)) {
+    names(final)[names(final)=="Continuous_Dependent2"] = input$name_Continuous_Dependent2
+  }
+  
+  if(isTruthy(input$name_Continuous_Dependent3)) {
+    names(final)[names(final)=="Continuous_Dependent3"] = input$name_Continuous_Dependent3
+  }
+  
+  if(isTruthy(input$name_Continuous_Dependent4)) {
+    names(final)[names(final)=="Continuous_Dependent4"] = input$name_Continuous_Dependent4
+  }
+  
+  if(isTruthy(input$name_Categorical_Dependent1)) {
+    names(final)[names(final)=="Categorical_Dependent1"] = input$name_Categorical_Dependent1
+  }
+  
+  if(isTruthy(input$name_Categorical_Dependent2)) {
+    names(final)[names(final)=="Categorical_Dependent2"] = input$name_Categorical_Dependent2
+  }
+  
+  if(isTruthy(input$name_Categorical_Dependent3)) {
+    names(final)[names(final)=="Categorical_Dependent3"] = input$name_Categorical_Dependent3
+  }
+  
+  if(isTruthy(input$name_Categorical_Dependent4)) {
+    names(final)[names(final)=="Categorical_Dependent4"] = input$name_Categorical_Dependent4
+  }
+  
+  final
+  
+})
+
+
+renderDT(datatable(final_dataset(), extensions = c('Buttons', 'FixedHeader'), class="compact cell-border",
+                   options = list(order = list(0, 'asc'), dom = 'Bifrt', pageLength = nrow(final_dataset()),
+                                  buttons = list(list(extend = 'csv',
+                                                      filename = paste0('Data simulation using seed number ', input$seed, ' - retrieved ',
+                                                                        str_replace_all(format(Sys.time(), '%d-%b-%Y_%X-%Z'), ':', '-') %>%
+                                                                          str_replace_all('\\ ', '-'), ' - ',
+                                                                        'info on GitHub repository pablobernabeu data-simulation-app')),
+                                                 list(extend = 'excel',
+                                                      filename = paste0('Data simulation using seed number ', input$seed, ' - retrieved ',
+                                                                        str_replace_all(format(Sys.time(), '%d-%b-%Y_%X-%Z'), ':', '-') %>%
+                                                                          str_replace_all('\\ ', '-'), ' - ',
+                                                                        'info on GitHub repository pablobernabeu data-simulation-app'))),
+                                  scroller = TRUE, fixedHeader = TRUE),
+                   selection = 'none', rownames = FALSE))
+
+```
+
