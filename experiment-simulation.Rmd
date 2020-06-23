@@ -240,23 +240,29 @@ $("#message").css({
 
 
 
-<i class="fas fa-info-circle" aria-hidden="true"></i>&nbsp; Home {style="background-color: #FCFCFC; data-width: 100%; width: 900px; margin: 0 auto;"}
+<i class="fas fa-info-circle" aria-hidden="true"></i>&nbsp; Home {style="background-color: #FEFEFE; data-width: 100%; width: 900px; margin: 0 auto;"}
 =======================================================================
 
-Column
+Column {style='padding-top:40px;'}
 -----------------------------------------------------------------------
 
-### <span style='font-size:18px; color:#4D4F54;'> &nbsp; &nbsp; &nbsp; &nbsp;  Generate a pseudorandom data set to simulate an experiment [PRE-RELEASE].</span>
+### <span style='font-size:18px;'> &nbsp; &nbsp; &nbsp; &nbsp;  **Generate a pseudorandom data set to simulate an experiment.**</span>
 
-<div style = "padding-top: 5px; padding-left: 60px; padding-right: 60px; background-color: #FEFEFE; font-size: 16px; line-height: 1.6;">
+<div style = "padding-top: 5px; padding-left: 60px; padding-right: 60px; font-size: 16px; line-height: 1.6;">
 
-<div style='text-align:right;'>
+<div style='text-align:right; margin-bottom: -30px;'>
 <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="Attribution licence" style="color:#CEC7BF; font-size:13px;"> Licence &nbsp;<img style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/80x15.png" alt="Creative Commons License"></img> </a>
 </div>
 
+<span style = 'font-size: 20px; color: #614064; padding-bottom: 5px;'><i class="fas fa-chalkboard-teacher"></i> &nbsp; <i class="fas fa-university"></i>
+
+This web application is suitable for educational and research contexts in the experimental sciences. It allows the creation of varied data sets with specified characteristics, such as categorical or continuous, between-group or within-participant variables. Each of these characteristics can be selected along the different tabs. In the penultimate tab, a custom summary of the current data set can be constructed. In the last tab, the list of parameters and the data set can be downloaded.
+
+Below, you can select the **number of decimals** to be kept in your continuous variables (if any).
+
 ```{r}
 
-numericInput('rounding', 'Number of decimal places (rounding)', 3, min = 1)
+numericInput('rounding', NULL, 3, min = 1, width = '60px')
 
 ```
 
@@ -278,15 +284,19 @@ numericInput('seed', NULL, sample(1:99999, 1), min = 1, step = 1, max = .Machine
 
 ```
 
-### Examples
+<!-- <br> -->
 
--- Not enabled yet --
+<!-- ### Examples -->
 
-```{r}
+<!-- -- Feature not enabled yet -- -->
 
-selectInput('examples', NULL, c('None', 'Example 1', 'Example 2', 'Example 3'))
+<!-- ```{r} -->
 
-```
+<!-- selectInput('examples', NULL, c('None', 'Example 1', 'Example 2', 'Example 3')) -->
+
+<!-- ``` -->
+
+<br>
 
 ### Citing this app
 
@@ -545,7 +555,7 @@ Inputs {.sidebar style='padding-left: 70px; min-width: 500px; max-width: 500px; 
 
 <div style = 'padding-left: 40px; padding-right: 40px; padding-top: 20px; padding-bottom: 20px; background-color: #FEFEFE; font-size: 16px; line-height: 1.6;'>
 
-### Guidelines for categorical variables
+### Categorical variables
 
 Where any groups exist (created in the Groups tab), to adjust the frequency of each level in the factors below per group, multiple probability values may be entered, separated by commas, each corresponding to a group. For instance, with four groups, the levels of a categorical independent variable could be entered as 'A, B, C', and the probabilities as $.2, .8, .4, .7$. This would mean that the most frequent level in Groups 1 to 4, respectively, would be A, C, B, and B.
 
@@ -556,31 +566,32 @@ Where any groups exist (created in the Groups tab), to adjust the frequency of e
 ```{r}
 
 renderUI({
-  if(input$examples == 'None') {
+  # if(input$examples == 'None') {
     tagList(
       textAreaInput(height = '45px', resize = 'vertical', 'name_Categorical_Independent1', NULL, placeholder = 'Variable name'),
       textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Independent1', NULL, placeholder = 'Levels'),
       textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Independent1', NULL, placeholder = 'Relative probability [0, 1] (per group)')
     )
-  } else if(input$examples == 'Example 1') {
-    tagList(
-      textAreaInput(height = '45px', resize = 'vertical', 'name_Categorical_Independent1', NULL, value = 'Cat_Indiv_1'),
-      textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Independent1', NULL, value = 'po, wer, wera'),
-      textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Independent1', NULL, value = '.3')
-    )   
-  } else if(input$examples == 'Example 2') {
-    tagList(
-      textAreaInput(height = '45px', resize = 'vertical', 'name_Categorical_Independent1', NULL, value = 'Cat_Indiv_1'),
-      textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Independent1', NULL, value = 'po, wer, wera'),
-      textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Independent1', NULL, value = '.3')
-    )   
-  } else if(input$examples == 'Example 3') {
-    tagList(
-      textAreaInput(height = '45px', resize = 'vertical', 'name_Categorical_Independent1', NULL, value = 'Cat_Indiv_1'),
-      textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Independent1', NULL, value = 'po, wer, wera'),
-      textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Independent1', NULL, value = '.3')
-    )   
-  }
+  # }
+  # else if(input$examples == 'Example 1') {
+  #   tagList(
+  #     textAreaInput(height = '45px', resize = 'vertical', 'name_Categorical_Independent1', NULL, value = 'Cat_Indiv_1'),
+  #     textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Independent1', NULL, value = 'A, B, C'),
+  #     textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Independent1', NULL, value = '.3')
+  #   )   
+  # } else if(input$examples == 'Example 2') {
+  #   tagList(
+  #     textAreaInput(height = '45px', resize = 'vertical', 'name_Categorical_Independent1', NULL, value = 'Cat_Indiv_2'),
+  #     textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Independent1', NULL, value = 'A, B, C'),
+  #     textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Independent1', NULL, value = '.3')
+  #   )   
+  # } else if(input$examples == 'Example 3') {
+  #   tagList(
+  #     textAreaInput(height = '45px', resize = 'vertical', 'name_Categorical_Independent1', NULL, value = 'Cat_Indiv_3'),
+  #     textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Independent1', NULL, value = 'A, B, C'),
+  #     textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Independent1', NULL, value = '.3')
+  #   )   
+  # }
 })
 
 
@@ -603,7 +614,7 @@ reactive({
       paste0(., ': ', (table(Categorical_Independent1) / sum(table(Categorical_Independent1)) * 100) %>%
                round(digits = input$rounding), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
-    cat("If any level has 0%, please increase sample size in the 'Size (N)' tab")
+    cat("\n\nNOTE: If any level has 0%, please slightly\nincrease sample size in the 'Size (N)' tab.")
   }
 })
 
@@ -619,32 +630,25 @@ textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Independ
 textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Independent2', NULL, placeholder = 'Relative probability [0, 1] (per group)')
 
 reactive({
-  
   if(isTruthy(input$probability_Categorical_Independent2)) {
-    
     set.seed(input$seed)
-    
     Categorical_Independent2 = rbinom(final_N(),
                                       # Below, count number of levels
                                       # One unit has to be subtracted from the word count to make rbinom() accurate
                                       ngram::wordcount(input$levels_Categorical_Independent2, sep = ',') - 1,
                                       eval(parse(text = paste0('c(', input$probability_Categorical_Independent2, ')'))))
-    
     # Place quotes around each factor level
     levels_Categorical_Independent2 = sapply(strsplit(input$levels_Categorical_Independent2, ',+'), function(x) toString(dQuote(x, FALSE)))
-    
     # Wrap levels in c()
     levels_Categorical_Independent2 = eval(parse(text = paste0('c(', levels_Categorical_Independent2, ')')))
-    
     Categorical_Independent2 = as.factor(Categorical_Independent2)
     levels(Categorical_Independent2) = levels_Categorical_Independent2
-    
     cat('\nProportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~\n')
     Categorical_Independent2 %>% levels() %>% trimws() %>%
       paste0(., ': ', (table(Categorical_Independent2) / sum(table(Categorical_Independent2)) * 100) %>% 
                round(digits = input$rounding), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
-    
+    cat("\n\nNOTE: If any level has 0%, please slightly\nincrease sample size in the 'Size (N)' tab.")
   }
 })
 
@@ -660,32 +664,25 @@ textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Independ
 textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Independent3', NULL, placeholder = 'Relative probability [0, 1] (per group)')
 
 reactive({
-  
   if(isTruthy(input$probability_Categorical_Independent3)) {
-    
     set.seed(input$seed)
-    
     Categorical_Independent3 = rbinom(final_N(),
                                       # Below, count number of levels
                                       # One unit has to be subtracted from the word count to make rbinom() accurate
                                       ngram::wordcount(input$levels_Categorical_Independent3, sep = ',') - 1,
                                       eval(parse(text = paste0('c(', input$probability_Categorical_Independent3, ')'))))
-    
     # Place quotes around each factor level
     levels_Categorical_Independent3 = sapply(strsplit(input$levels_Categorical_Independent3, ',+'), function(x) toString(dQuote(x, FALSE)))
-    
     # Wrap levels in c()
     levels_Categorical_Independent3 = eval(parse(text = paste0('c(', levels_Categorical_Independent3, ')')))
-    
     Categorical_Independent3 = as.factor(Categorical_Independent3)
     levels(Categorical_Independent3) = levels_Categorical_Independent3
-    
     cat('\nProportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~\n')
     Categorical_Independent3 %>% levels() %>% trimws() %>%
       paste0(., ': ', (table(Categorical_Independent3) / sum(table(Categorical_Independent3)) * 100) %>% 
                round(digits = input$rounding), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
-    
+    cat("\n\nNOTE: If any level has 0%, please slightly\nincrease sample size in the 'Size (N)' tab.")
   }
 })
 
@@ -701,32 +698,25 @@ textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Independ
 textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Independent4', NULL, placeholder = 'Relative probability [0, 1] (per group)')
 
 reactive({
-  
   if(isTruthy(input$probability_Categorical_Independent4)) {
-    
     set.seed(input$seed)
-    
     Categorical_Independent4 = rbinom(final_N(),
                                       # Below, count number of levels
                                       # One unit has to be subtracted from the word count to make rbinom() accurate
                                       ngram::wordcount(input$levels_Categorical_Independent4, sep = ',') - 1,
                                       eval(parse(text = paste0('c(', input$probability_Categorical_Independent4, ')'))))
-    
     # Place quotes around each factor level
     levels_Categorical_Independent4 = sapply(strsplit(input$levels_Categorical_Independent4, ',+'), function(x) toString(dQuote(x, FALSE)))
-    
     # Wrap levels in c()
     levels_Categorical_Independent4 = eval(parse(text = paste0('c(', levels_Categorical_Independent4, ')')))
-    
     Categorical_Independent4 = as.factor(Categorical_Independent4)
     levels(Categorical_Independent4) = levels_Categorical_Independent4
-    
     cat('\nProportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~\n')
     Categorical_Independent4 %>% levels() %>% trimws() %>%
       paste0(., ': ', (table(Categorical_Independent4) / sum(table(Categorical_Independent4)) * 100) %>% 
                round(digits = input$rounding), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
-    
+    cat("\n\nNOTE: If any level has 0%, please slightly\nincrease sample size in the 'Size (N)' tab.")
   }
 })
 
@@ -742,32 +732,25 @@ textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Independ
 textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Independent5', NULL, placeholder = 'Relative probability [0, 1] (per group)')
 
 reactive({
-  
   if(isTruthy(input$probability_Categorical_Independent5)) {
-    
     set.seed(input$seed)
-    
     Categorical_Independent5 = rbinom(final_N(),
                                       # Below, count number of levels
                                       # One unit has to be subtracted from the word count to make rbinom() accurate
                                       ngram::wordcount(input$levels_Categorical_Independent5, sep = ',') - 1,
                                       eval(parse(text = paste0('c(', input$probability_Categorical_Independent5, ')'))))
-    
     # Place quotes around each factor level
     levels_Categorical_Independent5 = sapply(strsplit(input$levels_Categorical_Independent5, ',+'), function(x) toString(dQuote(x, FALSE)))
-    
     # Wrap levels in c()
     levels_Categorical_Independent5 = eval(parse(text = paste0('c(', levels_Categorical_Independent5, ')')))
-    
     Categorical_Independent5 = as.factor(Categorical_Independent5)
     levels(Categorical_Independent5) = levels_Categorical_Independent5
-    
     cat('\nProportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~\n')
     Categorical_Independent5 %>% levels() %>% trimws() %>%
       paste0(., ': ', (table(Categorical_Independent5) / sum(table(Categorical_Independent5)) * 100) %>% 
                round(digits = input$rounding), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
-    
+    cat("\n\nNOTE: If any level has 0%, please slightly\nincrease sample size in the 'Size (N)' tab.")
   }
 })
 
@@ -783,32 +766,25 @@ textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Independ
 textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Independent6', NULL, placeholder = 'Relative probability [0, 1] (per group)')
 
 reactive({
-  
   if(isTruthy(input$probability_Categorical_Independent6)) {
-    
     set.seed(input$seed)
-    
     Categorical_Independent6 = rbinom(final_N(),
                                       # Below, count number of levels
                                       # One unit has to be subtracted from the word count to make rbinom() accurate
                                       ngram::wordcount(input$levels_Categorical_Independent6, sep = ',') - 1,
                                       eval(parse(text = paste0('c(', input$probability_Categorical_Independent6, ')'))))
-    
     # Place quotes around each factor level
     levels_Categorical_Independent6 = sapply(strsplit(input$levels_Categorical_Independent6, ',+'), function(x) toString(dQuote(x, FALSE)))
-    
     # Wrap levels in c()
     levels_Categorical_Independent6 = eval(parse(text = paste0('c(', levels_Categorical_Independent6, ')')))
-    
     Categorical_Independent6 = as.factor(Categorical_Independent6)
     levels(Categorical_Independent6) = levels_Categorical_Independent6
-    
     cat('\nProportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~\n')
     Categorical_Independent6 %>% levels() %>% trimws() %>%
       paste0(., ': ', (table(Categorical_Independent6) / sum(table(Categorical_Independent6)) * 100) %>% 
                round(digits = input$rounding), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
-    
+    cat("\n\nNOTE: If any level has 0%, please slightly\nincrease sample size in the 'Size (N)' tab.")
   }
 })
 
@@ -824,32 +800,25 @@ textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Independ
 textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Independent7', NULL, placeholder = 'Relative probability [0, 1] (per group)')
 
 reactive({
-  
   if(isTruthy(input$probability_Categorical_Independent7)) {
-    
     set.seed(input$seed)
-    
     Categorical_Independent7 = rbinom(final_N(),
                                       # Below, count number of levels
                                       # One unit has to be subtracted from the word count to make rbinom() accurate
                                       ngram::wordcount(input$levels_Categorical_Independent7, sep = ',') - 1,
                                       eval(parse(text = paste0('c(', input$probability_Categorical_Independent7, ')'))))
-    
     # Place quotes around each factor level
     levels_Categorical_Independent7 = sapply(strsplit(input$levels_Categorical_Independent7, ',+'), function(x) toString(dQuote(x, FALSE)))
-    
     # Wrap levels in c()
     levels_Categorical_Independent7 = eval(parse(text = paste0('c(', levels_Categorical_Independent7, ')')))
-    
     Categorical_Independent7 = as.factor(Categorical_Independent7)
     levels(Categorical_Independent7) = levels_Categorical_Independent7
-    
     cat('\nProportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~\n')
     Categorical_Independent7 %>% levels() %>% trimws() %>%
       paste0(., ': ', (table(Categorical_Independent7) / sum(table(Categorical_Independent7)) * 100) %>% 
                round(digits = input$rounding), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
-    
+    cat("\n\nNOTE: If any level has 0%, please slightly\nincrease sample size in the 'Size (N)' tab.")
   }
 })
 
@@ -865,32 +834,25 @@ textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Independ
 textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Independent8', NULL, placeholder = 'Relative probability [0, 1] (per group)')
 
 reactive({
-  
   if(isTruthy(input$probability_Categorical_Independent8)) {
-    
     set.seed(input$seed)
-    
     Categorical_Independent8 = rbinom(final_N(),
                                       # Below, count number of levels
                                       # One unit has to be subtracted from the word count to make rbinom() accurate
                                       ngram::wordcount(input$levels_Categorical_Independent8, sep = ',') - 1,
                                       eval(parse(text = paste0('c(', input$probability_Categorical_Independent8, ')'))))
-    
     # Place quotes around each factor level
     levels_Categorical_Independent8 = sapply(strsplit(input$levels_Categorical_Independent8, ',+'), function(x) toString(dQuote(x, FALSE)))
-    
     # Wrap levels in c()
     levels_Categorical_Independent8 = eval(parse(text = paste0('c(', levels_Categorical_Independent8, ')')))
-    
     Categorical_Independent8 = as.factor(Categorical_Independent8)
     levels(Categorical_Independent8) = levels_Categorical_Independent8
-    
     cat('\nProportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~\n')
     Categorical_Independent8 %>% levels() %>% trimws() %>%
       paste0(., ': ', (table(Categorical_Independent8) / sum(table(Categorical_Independent8)) * 100) %>% 
                round(digits = input$rounding), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
-    
+    cat("\n\nNOTE: If any level has 0%, please slightly\nincrease sample size in the 'Size (N)' tab.")
   }
 })
 
@@ -1020,7 +982,7 @@ Column {style='padding-left: 40px; margin-left: 230px;'}
 
 <div style = 'padding-left: 40px; padding-right: 40px; padding-top: 20px; padding-bottom: 20px; background-color: #FEFEFE; font-size: 16px; line-height: 1.6; max-width: 600px;'>
 
-### Guidelines for continuous variables
+### Continuous variables
 
 Where any groups exist (created in the Groups tab), to adjust the means and standard deviations for each group, multiple values may be entered, separated by commas, each corresponding to a group. For instance, with four groups, the means could be entered as $34, 543, 657, 123$, and the standard deviations as $10, 20, 25, 5$.
 
@@ -2939,7 +2901,7 @@ Adjust *N* by changing the multiplication factor below. Note that large samples 
 
 textAreaInput(height = '45px', resize = 'vertical', 'name_Participant_column', 'Name of the base ID column', value = 'Participant')
 
-numericInput('multiply_N', NULL, 3, min = 1)
+numericInput('multiply_N', NULL, 3, min = 1, width = '120px')
 
 checkboxInput('include_Participant_column', 'Include this column (un/check)', value = TRUE)
 
