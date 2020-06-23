@@ -219,11 +219,6 @@ color: #932323;
 letter-spacing: 4px;
 }
 
-/* Format the 'Replace this column with names/categories' field */
-#section-adjust-sample-size > div.chart-stage > div > div:nth-child(8) > label {
-max-width: 250%;
-}
-
 </style>
 
 <!-- Load Bootstrap libraries for icons -->
@@ -253,7 +248,7 @@ Column
 
 ### <span style='font-size:18px; color:#4D4F54;'> &nbsp; &nbsp; &nbsp; &nbsp;  Generate a pseudorandom data set to simulate an experiment [PRE-RELEASE].</span>
 
-<div style = "padding-left: 60px; padding-right: 60px; background-color: #FEFEFE; font-size: 16px; line-height: 1.6; padding-top: 5px;">
+<div style = "padding-top: 5px; padding-left: 60px; padding-right: 60px; background-color: #FEFEFE; font-size: 16px; line-height: 1.6;">
 
 <div style='text-align:right;'>
 <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="Attribution licence" style="color:#CEC7BF; font-size:13px;"> Licence &nbsp;<img style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/80x15.png" alt="Creative Commons License"></img> </a>
@@ -266,6 +261,8 @@ numericInput('rounding', 'Number of decimal places (rounding)', 3, min = 1)
 ```
 
 ### Ensuring reproducibility of simulated data
+
+Reproducing a simulation requires three pieces of data: the seed number, the parameter list and the final data set. After creating the variables wanted, make sure to download the parameter list and the final data set in the [last tab](#dataset). The seed number will be part of the names of the downloaded files.
 
 A seed number is a code that allows the reproducibility of any data involving random generation. Please find your current seed number below, and feel free to note it down, or change it to any integer number up to Â±`r .Machine$integer.max`.
 
@@ -281,11 +278,9 @@ numericInput('seed', NULL, sample(1:99999, 1), min = 1, step = 1, max = .Machine
 
 ```
 
-Reproducing a simulation requires three pieces of data: the seed number, the parameter list and the final data set. Therefore, after creating the variables wanted, make sure to download the parameter list and the final data set in the [last tab](#dataset).
+### Examples
 
-### Example
-
-In an example of a 2x2 design (four cells), one of the categorical variables could have the levels 'correct, incorrect, unresponded', and probabilities of ........
+-- Not enabled yet --
 
 ```{r}
 
@@ -548,9 +543,13 @@ Individuals
 Inputs {.sidebar style='padding-left: 70px; min-width: 500px; max-width: 500px; overflow: scroll; padding-right: 40px; margin-right: 140px;'}
 -----------------------------------------------------------------------
 
-### Guidelines
+<div style = 'padding-left: 40px; padding-right: 40px; padding-top: 20px; padding-bottom: 20px; background-color: #FEFEFE; font-size: 16px; line-height: 1.6;'>
 
-Where any groups exist (created in the Groups tab), to adjust the frequency of each level in the factors below per group, multiple probability values may be entered, separated by commas, each corresponding to a group. For instance, with four groups, the levels of a categorical dependent variable could be entered as 'correct, incorrect, unresponded', and the probabilities as $.2, .8, .4, .7$. This would mean that the most frequent level in Cells 1 to 4, respectively, would be 'correct', 'unresponded', 'incorrect', 'unresponded'.
+### Guidelines for categorical variables
+
+Where any groups exist (created in the Groups tab), to adjust the frequency of each level in the factors below per group, multiple probability values may be entered, separated by commas, each corresponding to a group. For instance, with four groups, the levels of a categorical independent variable could be entered as 'A, B, C', and the probabilities as $.2, .8, .4, .7$. This would mean that the most frequent level in Groups 1 to 4, respectively, would be A, C, B, and B.
+
+</div>
 
 ### <span style='font-weight:bold; font-size:15px; color:#BF4000;'>Categorical 1</span>
 
@@ -1019,9 +1018,9 @@ levels_Categorical_Independent = reactive({
 Column {style='padding-left: 40px; margin-left: 230px;'}
 -----------------------------------------------------------------------
 
-### **Guidelines**
+<div style = 'padding-left: 40px; padding-right: 40px; padding-top: 20px; padding-bottom: 20px; background-color: #FEFEFE; font-size: 16px; line-height: 1.6; max-width: 600px;'>
 
-<div style = 'max-width: 600px;'>
+### Guidelines for continuous variables
 
 Where any groups exist (created in the Groups tab), to adjust the means and standard deviations for each group, multiple values may be entered, separated by commas, each corresponding to a group. For instance, with four groups, the means could be entered as $34, 543, 657, 123$, and the standard deviations as $10, 20, 25, 5$.
 
@@ -1139,25 +1138,6 @@ renderDT({
 ```
 
 
-<!-- ### **Guidelines** -->
-
-<!-- <div style='min-width: 400px; max-width: 800px; padding-top: 16px; padding-left: 20px; padding-right: 20px; padding-bottom: 10px; background-color: #FCFCFC; font-size: 16px; line-height: 1.6;'> -->
-
-<!-- If any within-participant factors were created, each row in the summary table will represent a unique combination of the levels of factors, which is known as a *cell* in a factorial design. The number of cells will be displayed at the top bar. To assign each cell a particular value in a dependent variable, the user may enter multiple values separated by commas in the same fields (specifically, in *Probabilities*, *Means* or *SDs*). Note that the *Levels* fields also accept several entries, but these entries are not related to the number of cells. -->
-
-<!-- For instance, with a 2x2 design (four cells), the levels of a categorical dependent variable could be entered as 'correct, incorrect, unresponded', and the probabilities as $.2, .8, .4, .7$. This would mean that the most frequent level in Cells 1 to 4, respectively, would be 'correct', 'unresponded', 'incorrect', 'unresponded'. -->
-
-<!-- For a continuous variable, the means could be entered as $234, 543, 657, 123$, and the standard deviations as $10, 20, 25, 5$. -->
-
-<!-- Fewer values than the number of cells could be entered in Means, SDs and Probabilities&mdash;specifically, any fraction of the number of cells (e.g., one or two values instead of four)&mdash;, but this would cancel the difference between some factor levels.  -->
-
-<!-- The result from the inputs may be checked in the summary table. -->
-
-<!-- [<i class="fas fa-info-circle" aria-hidden="true"></i> Further guidelines and example](#home) -->
-
-<!-- </div> -->
-
-
 Column
 -----------------------------------------------------------------------
 
@@ -1234,6 +1214,8 @@ textAreaInput(height = '45px', resize = 'vertical', 'WithinParticipant3_Conditio
 Column {style="padding-left: 50px;"}
 -----------------------------------------------------------------------
 
+<div style = 'padding-left: 40px; padding-right: 40px; padding-top: 20px; padding-bottom: 20px; background-color: #FEFEFE; font-size: 16px; line-height: 1.6;'>
+
 ### **Nested factors**
 
 Nested factors such as trials are also available.
@@ -1249,6 +1231,8 @@ checkboxInput('include_Extra_nested_column', 'Include this nested factor (un/che
 numericInput('Extra_nested_N', NULL, 1, min = 1)
 
 ```
+
+</div>
 
 
 
@@ -1282,13 +1266,17 @@ renderDT({
 
 <br>
 
+<div style = 'padding-left: 40px; padding-right: 40px; padding-top: 20px; padding-bottom: 20px; background-color: #FEFEFE; font-size: 16px; line-height: 1.6;'>
+
 The factorial structure above should guide the setting of parameters in categorical and continuous dependent variables. Each row in the table corresponds to a *cell* in the current design. The overall summary including the dependent variables may be seen further below.
 
-**Categorical: probability parameters.** To adjust the frequency of each level in each cell, multiple probability values may be entered, separated by commas, each corresponding to a cell. For instance, with a 2x2 design (four cells), the levels of a categorical dependent variable could be entered as 'correct, incorrect, unresponded', and the probabilities as $.2, .8, .4, .7$. This would mean that the most frequent level in Cells 1 to 4, respectively, would be 'correct', 'unresponded', 'incorrect', 'unresponded'.
+**Categorical: probability parameters.** To adjust the frequency of each level in each cell, multiple probability values may be entered, separated by commas, each corresponding to a cell. For instance, with a 2x2 design (four cells), the levels of a categorical dependent variable could be entered as 'correct, incorrect, unresponded', and the probabilities as $.2, .8, .4, .7$. This would mean that the most frequent level in Cells 1 to 4, respectively, would be 'correct', 'unresponded', 'incorrect', and 'unresponded'.
 
 **Continuous: means and standard deviations.** To adjust the means and standard deviations for each cell, multiple values may be entered, separated by commas, each corresponding to a cell. For instance, with a 2x2 design (four cells), the means could be entered as $34, 543, 657, 123$, and the standard deviations as $10, 20, 25, 5$.
 
 [<i class="fas fa-info-circle" aria-hidden="true"></i> Further guidelines and example](#home)
+
+</div>
 
 
 ### **Summary including dependent variables** ([expand](#summary))
@@ -2941,11 +2929,11 @@ Column
 
 ### <span style='font-size:18px; color:#4D4F54;'> &nbsp; &nbsp; &nbsp; &nbsp;  Adjust sample size</span>
 
-<div style = "padding-left: 60px; padding-right: 60px; background-color: #FEFEFE; font-size: 16px; line-height: 1.6; padding-top: 5px;">
+<div style = "padding-top: 5px; padding-right: 60px; padding-bottom: 100px; padding-left: 60px; background-color: #FEFEFE; font-size: 16px; line-height: 1.6;">
 
 <h3 style='color:#2C6367'> Current sample size (*N*): `r reactive(final_N())` </h3>
 
-Adjust *N* by changing the multiplication factor below.
+Adjust *N* by changing the multiplication factor below. Note that large samples may incur some processing time.
 
 ```{r}
 
@@ -2955,17 +2943,22 @@ numericInput('multiply_N', NULL, 3, min = 1)
 
 checkboxInput('include_Participant_column', 'Include this column (un/check)', value = TRUE)
 
-textAreaInput(height = '45px', resize = 'vertical', 'ID_labels', 
-              'Replace this column with names/categories (comma-separated). Delete back to revert.', 
+```
+
+Replace this column with names/categories (comma-separated). Delete to revert to numeric.
+
+```{r}
+
+textAreaInput(height = '45px', resize = 'vertical', 'ID_labels', NULL, 
               placeholder = "E.g., people's names, cities, treatments, etc.", width = '500px')
 
 ```
 
 <br>
 
-### Details
+#### Code details
 
-The sample size is interlocked with the factorial structure of the data set. That is, if any between-group factors are created, participants will be evenly drawn from the total *N*. Similarly, for any within-participant factors, repeated measures will be created by expanding the number of rows in the long-format data set ([last tab](#dataset)).
+The sample size is interlocked with the factorial structure of the data set. That is, if any groups are created in the Groups tab, participants will be evenly drawn from the total *N* (in contrast, groups created in the Individuals tab distribute the number of participants as the user indicates in the *Probability* field). For any within-participant factors, repeated measures are created by expanding the number of rows in the long-format data set ([last tab](#dataset)).
 
 </div>
 
@@ -3113,7 +3106,7 @@ renderDT(
 Dataset &nbsp;<i class="fas fa-flag-checkered"></i>
 =======================================================================
 
-Column {style="position:static; min-width: 500px; max-width: 550px; min-height: 1000px;"}
+Column {style="position:static; min-width: 560px; max-width: 560px; min-height: 1000px;"}
 -----------------------------------------------------------------------
 
 ### **Parameters** (user input) {style='max-height: 70px;'}
