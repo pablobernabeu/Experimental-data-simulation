@@ -1,6 +1,6 @@
 ---
 title: Simulation
-author: '<a href="https://github.com/pablobernabeu/Experiment-simulation-app" target="_blank"><button class="button-version">v 0.1</button></a> &nbsp; <a href = "#section-size-n"><button class="button-samplesize"><span style = "color: #FCFF89;"><em>N</em> = `r reactive(try(paste0(final_N()), silent = TRUE) %>% gsub("\\Error.*", "", .))`</span></button></a>'
+author: '<a href="https://github.com/pablobernabeu/Experiment-simulation-app/" target="_blank"><button class="button-version">v `r app_version = 0.1; app_version # update version number here`</button></a> &nbsp; <a href = "#section-size-n"><button class="button-samplesize"><span style = "color: #FCFF89;">`r reactive(try(if(isTRUE(input$include_Participant_column)){paste0("N = ", final_N())}, silent = TRUE) %>% gsub("\\Error.*", "", .))`</span></button></a>'
 output:
   flexdashboard::flex_dashboard:
     theme: 'spacelab'
@@ -12,19 +12,15 @@ runtime: shiny
 ```{r setup, include = FALSE}
 
 library(flexdashboard)
-library(doBy)
 library(knitr)
 library(dplyr)
 library(tidyr)
 library(DT)
 library(stringr)
 library(purrr)
-library(schoolmath)
 library(ngram)
 library(shiny)
 library(htmltools)
-library(corrgram)
-library(pastecs)
 
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, error = FALSE)
 
@@ -321,11 +317,9 @@ The means could be entered as $234, 543, 657, 123$, and the standard deviations 
 
 Please note that the means and standard deviations entered here are used in a random simulation ([`rnorm`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Normal.html){target="_blank"}). Therefore, the final data will slightly differ, especially with smaller samples. Last, if you wish to ensure the reproducibility of the simulated data, please download the parameter list in the [last tab](#dataset), and the [final data set](#dataset).
 
-Rounding: select number of decimal places
-
 ```{r}
 
-numericInput('rounding', NULL, 3, min = 1)
+numericInput('rounding', 'Number of decimal places (rounding)', 3, min = 1)
 
 ```
 
@@ -341,25 +335,33 @@ selectInput('examples', NULL, c('None', 'Example 1', 'Example 2', 'Example 3'))
 
 ### Citing this app
 
-Bernabeu, P., & Lynott, D. (2020). Experiment simulation app [Web application]. https://github.com/pablobernabeu/Experiment-simulation-app/.
+Bernabeu, P., & Lynott, D. (2020). Experiment simulation app (Version `r app_version`) [Web application]. [https://github.com/pablobernabeu/Experiment-simulation-app/](https://github.com/pablobernabeu/Experiment-simulation-app/){target="_blank"}.
 
 ### Code
 
-This web application was developed in [R](https://www.r-project.org/about.html){target="_blank"} (R Core Team, 2020). The code is [available on Github](https://github.com/pablobernabeu/Experiment-simulation-app/blob/master/experiment-simulation.Rmd){target="_blank"}, where contributions may be made. Part of this work was influenced by Crump (2017), in particular by [Section 5.7 *Simulating data for multi-factor designs*](https://crumplab.github.io/programmingforpsych/simulating-and-analyzing-data-in-r.html#simulating-data-for-multi-factor-designs){target="_blank"}.
+This web application was developed in [R](https://www.r-project.org/about.html){target="_blank"} (R Core Team, 2020). The code is [available on Github](https://github.com/pablobernabeu/Experiment-simulation-app/blob/master/experiment-simulation.Rmd){target="_blank"}, where contributions may be made. The initial code for this application was influenced by Section 5.7 in Crump (2017; [*Simulating data for multi-factor designs*](https://crumplab.github.io/programmingforpsych/simulating-and-analyzing-data-in-r.html#simulating-data-for-multi-factor-designs){target="_blank"}). The R packages used included shiny (Chang, W., Cheng, J., Allaire, J., Xie, Y., & McPherson, 2020), Tidyverse (Wickham et al., 2019).
+
+### Acknowledgements
+
+Thank you to RStudio for the free hosting server used by this application ([shinyapps.io](https://www.shinyapps.io/){target="_blank"}).
 
 ### References
 
 <div style = "text-indent:-1.5em; margin-left:1.5em; background-color:#FCFCFC;">
 
-Crump, M. J. C. (2017). Programming for Psychologists: Data Creation and Analysis (Version 1.1). https://crumplab.github.io/programmingforpsych/
+Chang, W., Cheng, J., Allaire, J., Xie, Y., & McPherson, J. (2015). shiny: Web Application Framework for R, R Package Version 1.4.0. Available at [http://CRAN.R-project.org/package=shiny](http://CRAN.R-project.org/package=shiny){target="_blank"}.
 
-R Core Team (2020). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.
+Crump, M. J. C. (2017). Programming for Psychologists: Data Creation and Analysis (Version 1.1). [https://crumplab.github.io/programmingforpsych/](https://crumplab.github.io/programmingforpsych/){target="_blank"}.
+
+R Core Team (2020). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL [https://www.R-project.org/](https://www.R-project.org/){target="_blank"}.
+
+Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L. D. A., François, R., ... & Kuhn, M. (2019). Welcome to the Tidyverse. *Journal of Open Source Software, 4*(43), 1686. [https://doi.org/10.21105/joss.01686](https://doi.org/10.21105/joss.01686){target="_blank"}.
 
 </div>
 
 ### Contact
 
-To submit any questions or feedback, please post a [GitHub issue](https://github.com/pablobernabeu/Experiment-simulation-app/issues){target="_blank"} or email Pablo Bernabeu at p.bernabeu@lancaster.ac.uk.
+To submit any questions or feedback, please post a [GitHub issue](https://github.com/pablobernabeu/Experiment-simulation-app/issues){target="_blank"} or email Pablo Bernabeu at [p.bernabeu@lancaster.ac.uk](mailto:p.bernabeu@lancaster.ac.uk){target="_blank"}.
 
 <br>
 <br>
@@ -1202,11 +1204,11 @@ Nested factors such as trials are also available.
 ```{r}
 
 textAreaInput(height = '45px', resize = 'vertical', 'name_Trial_column', '', value = 'Trial')
-checkboxInput('include_Trial_column', 'Include this nested factor', value = FALSE)
+checkboxInput('include_Trial_column', 'Include this nested factor (un/check)', value = FALSE)
 numericInput('trial_N', NULL, 1, min = 1)
 
 textAreaInput(height = '45px', resize = 'vertical', 'name_Extra_nested_column', '', value = 'Extra_nested')
-checkboxInput('include_Extra_nested_column', 'Include this nested factor', value = FALSE)
+checkboxInput('include_Extra_nested_column', 'Include this nested factor (un/check)', value = FALSE)
 numericInput('Extra_nested_N', NULL, 1, min = 1)
 
 ```
@@ -1257,32 +1259,30 @@ The factorial structure above should guide the setting of parameters in categori
 ```{r}
 
 factorial_structure_with_dependent = 
-  
-  custom_summary = 
   reactive({
-      final_dataset() %>% 
+    final_dataset() %>% 
       # Remove base ID column (i.e., Participant)
       select(-input$name_Participant_column) %>%
       # This first bit displays number of observations per cell ('n')
-        group_by(across(any_of(
-          final_dataset() %>% select(-input$name_Participant_column) %>% select_if(~is.factor(.) | is.character(.)) %>% names()
-        ))) %>% tally %>%
-        # Add selected columns
-        merge(
-          final_dataset() %>% 
-      # Remove base ID column (i.e., Participant)
-      select(-input$name_Participant_column) %>% 
-            group_by(across(any_of(
-              final_dataset() %>% select(-input$name_Participant_column) %>% select_if(~is.factor(.) | is.character(.)) %>% names()
-            ))) %>% 
-            summarise(across(any_of(
-              final_dataset() %>% select(-input$name_Participant_column) %>% select_if(is.numeric) %>% names()
-            ), list(Mean = mean, SD = sd))) %>% 
-            # round numeric variables
-            mutate(across(is.numeric, round, input$rounding))
-        )
+      group_by(across(any_of(
+        final_dataset() %>% select(-input$name_Participant_column) %>% select_if(~is.factor(.) | is.character(.)) %>% names()
+      ))) %>% tally %>%
+      # Add selected columns
+      merge(
+        final_dataset() %>% 
+          # Remove base ID column (i.e., Participant)
+          select(-input$name_Participant_column) %>% 
+          group_by(across(any_of(
+            final_dataset() %>% select(-input$name_Participant_column) %>% select_if(~is.factor(.) | is.character(.)) %>% names()
+          ))) %>% 
+          summarise(across(any_of(
+            final_dataset() %>% select(-input$name_Participant_column) %>% select_if(is.numeric) %>% names()
+          ), list(Mean = mean, SD = sd))) %>% 
+          # round numeric variables
+          mutate(across(is.numeric, round, input$rounding))
+      )
   })
-  
+
 
 renderDT(
   datatable(factorial_structure_with_dependent(), class = 'nowrap compact cell-border', selection = 'none',
@@ -1781,18 +1781,18 @@ final_N = reactive({
   
   # Final N is a function of the following parameters
   
-  # If any custom ID labels were entered, multiply their number by N.
-  # Else, if no custom ID labels were entered, multiply N by user-entered factor.
-  if(!isTruthy(input$ID_labels)) {
-    N = input$multiply_N
-  } else {
-    N = ngram::wordcount(input$ID_labels, sep = ',')
-  }
+  # If no custom ID labels were entered, process user-entered multiplication factor.
+  # Else, count number of ID labels.
+  if(isTRUE(input$include_Participant_column)) {
+    if(!isTruthy(input$ID_labels)) {
+      N = input$multiply_N
+    } else N = ngram::wordcount(input$ID_labels, sep = ',')
+  } else N = 1
   
   # Trials (if selected by user)
   if(isTRUE(input$include_Trial_column)) N = N * input$trial_N
   
-  # Trials (if selected by user)
+  # Extra nested factor (if selected by user)
   if(isTRUE(input$include_Extra_nested_column)) N = N * input$Extra_nested_N
   
   # Number of between-group conditions (if selected by user)
@@ -1806,24 +1806,18 @@ final_N = reactive({
 })
 
 Participant = reactive({
-  # If Participant column is included by user
   # If no custom ID labels are entered...
-  if(isTRUE(input$include_Participant_column)) {
-    if(!isTruthy(input$ID_labels)) {
-      data.frame(Participant = factor(rep(seq(1, final_N()))))
-      # if any custom ID labels are entered...
-    } else {
-      # Place quotes around each factor level
-      ID_labels = sapply(strsplit(input$ID_labels, ',+'), function(x) toString(dQuote(x, FALSE)))
-      data.frame(Participant = factor(rep(eval(parse(text = paste0('c(', ID_labels, ')'))), sep = ',', 
-                                          # Repeat each item as many times as the product below.
-                                          # Final_N() divided by number of levels to avoid double 
-                                          # count, as number of levels is included in Final_N(). 
-                                          final_N() / ngram::wordcount(input$ID_labels))))
-    }
-    # If Participant column is not included by user...
+  if(!isTruthy(input$ID_labels)) {
+    data.frame(Participant = factor(rep(seq(1, final_N()))))
+    # if any custom ID labels are entered...
   } else {
-    data.frame(Participant = factor(rep(seq(1, 1))))
+    # Place quotes around each factor level
+    ID_labels = sapply(strsplit(input$ID_labels, ',+'), function(x) toString(dQuote(x, FALSE)))
+    data.frame(Participant = factor(rep(eval(parse(text = paste0('c(', ID_labels, ')'))), sep = ',', 
+                                        # Repeat each item as many times as the product below.
+                                        # Final_N() divided by number of levels to avoid double 
+                                        # count, as number of levels is included in Final_N(). 
+                                        final_N() / ngram::wordcount(input$ID_labels))))
   }
 })
 
@@ -2065,7 +2059,7 @@ Continuous_Independent8 = reactive({
 # Count number of active levels
 
 levels_BetweenGroup1 = reactive({
-  if(isTruthy(input$BetweenGroup1_Group2)) {
+  if(isTruthy(input$name_BetweenGroup1) & isTruthy(input$BetweenGroup1_Group2)) {
     sum(c(which(isTruthy(input$BetweenGroup1_Group1)),
           which(isTruthy(input$BetweenGroup1_Group2)),
           which(isTruthy(input$BetweenGroup1_Group3)),
@@ -2080,7 +2074,7 @@ levels_BetweenGroup1 = reactive({
 })
 
 levels_BetweenGroup2 = reactive({
-  if(isTruthy(input$BetweenGroup2_Group2)) {
+  if(isTruthy(input$name_BetweenGroup2) & isTruthy(input$BetweenGroup2_Group2)) {
     sum(c(which(isTruthy(input$BetweenGroup2_Group1)),
           which(isTruthy(input$BetweenGroup2_Group2)),
           which(isTruthy(input$BetweenGroup2_Group3)),
@@ -2095,7 +2089,7 @@ levels_BetweenGroup2 = reactive({
 })
 
 levels_BetweenGroup3 = reactive({
-  if(isTruthy(input$BetweenGroup3_Group2)) {
+  if(isTruthy(input$name_BetweenGroup3) & isTruthy(input$BetweenGroup3_Group2)) {
     sum(c(which(isTruthy(input$BetweenGroup3_Group1)),
           which(isTruthy(input$BetweenGroup3_Group2)),
           which(isTruthy(input$BetweenGroup3_Group3)),
@@ -2199,42 +2193,48 @@ levels_BetweenGroup = reactive({
 # Count number of active levels
 
 levels_WithinParticipant1 = reactive({
-  sum(c(which(isTruthy(input$WithinParticipant1_Condition1)),
-        which(isTruthy(input$WithinParticipant1_Condition2)),
-        which(isTruthy(input$WithinParticipant1_Condition3)),
-        which(isTruthy(input$WithinParticipant1_Condition4)),
-        which(isTruthy(input$WithinParticipant1_Condition5)),
-        which(isTruthy(input$WithinParticipant1_Condition6)),
-        which(isTruthy(input$WithinParticipant1_Condition7)),
-        which(isTruthy(input$WithinParticipant1_Condition8)),
-        which(isTruthy(input$WithinParticipant1_Condition9)),
-        which(isTruthy(input$WithinParticipant1_Condition10))))
+  if(isTruthy(input$name_WithinParticipant1) & isTruthy(input$WithinParticipant1_Condition2)) {
+    sum(c(which(isTruthy(input$WithinParticipant1_Condition1)),
+          which(isTruthy(input$WithinParticipant1_Condition2)),
+          which(isTruthy(input$WithinParticipant1_Condition3)),
+          which(isTruthy(input$WithinParticipant1_Condition4)),
+          which(isTruthy(input$WithinParticipant1_Condition5)),
+          which(isTruthy(input$WithinParticipant1_Condition6)),
+          which(isTruthy(input$WithinParticipant1_Condition7)),
+          which(isTruthy(input$WithinParticipant1_Condition8)),
+          which(isTruthy(input$WithinParticipant1_Condition9)),
+          which(isTruthy(input$WithinParticipant1_Condition10))))
+  } else 1
 })
 
 levels_WithinParticipant2 = reactive({
-  sum(c(which(isTruthy(input$WithinParticipant2_Condition1)),
-        which(isTruthy(input$WithinParticipant2_Condition2)),
-        which(isTruthy(input$WithinParticipant2_Condition3)),
-        which(isTruthy(input$WithinParticipant2_Condition4)),
-        which(isTruthy(input$WithinParticipant2_Condition5)),
-        which(isTruthy(input$WithinParticipant2_Condition6)),
-        which(isTruthy(input$WithinParticipant2_Condition7)),
-        which(isTruthy(input$WithinParticipant2_Condition8)),
-        which(isTruthy(input$WithinParticipant2_Condition9)),
-        which(isTruthy(input$WithinParticipant2_Condition10))))
+  if(isTruthy(input$name_WithinParticipant2) & isTruthy(input$WithinParticipant2_Condition2)) {
+    sum(c(which(isTruthy(input$WithinParticipant2_Condition1)),
+          which(isTruthy(input$WithinParticipant2_Condition2)),
+          which(isTruthy(input$WithinParticipant2_Condition3)),
+          which(isTruthy(input$WithinParticipant2_Condition4)),
+          which(isTruthy(input$WithinParticipant2_Condition5)),
+          which(isTruthy(input$WithinParticipant2_Condition6)),
+          which(isTruthy(input$WithinParticipant2_Condition7)),
+          which(isTruthy(input$WithinParticipant2_Condition8)),
+          which(isTruthy(input$WithinParticipant2_Condition9)),
+          which(isTruthy(input$WithinParticipant2_Condition10))))
+  } else 1
 })
 
 levels_WithinParticipant3 = reactive({
-  sum(c(which(isTruthy(input$WithinParticipant3_Condition1)),
-        which(isTruthy(input$WithinParticipant3_Condition2)),
-        which(isTruthy(input$WithinParticipant3_Condition3)),
-        which(isTruthy(input$WithinParticipant3_Condition4)),
-        which(isTruthy(input$WithinParticipant3_Condition5)),
-        which(isTruthy(input$WithinParticipant3_Condition6)),
-        which(isTruthy(input$WithinParticipant3_Condition7)),
-        which(isTruthy(input$WithinParticipant3_Condition8)),
-        which(isTruthy(input$WithinParticipant3_Condition9)),
-        which(isTruthy(input$WithinParticipant3_Condition10))))
+  if(isTruthy(input$name_WithinParticipant3) & isTruthy(input$WithinParticipant3_Condition2)) {
+    sum(c(which(isTruthy(input$WithinParticipant3_Condition1)),
+          which(isTruthy(input$WithinParticipant3_Condition2)),
+          which(isTruthy(input$WithinParticipant3_Condition3)),
+          which(isTruthy(input$WithinParticipant3_Condition4)),
+          which(isTruthy(input$WithinParticipant3_Condition5)),
+          which(isTruthy(input$WithinParticipant3_Condition6)),
+          which(isTruthy(input$WithinParticipant3_Condition7)),
+          which(isTruthy(input$WithinParticipant3_Condition8)),
+          which(isTruthy(input$WithinParticipant3_Condition9)),
+          which(isTruthy(input$WithinParticipant3_Condition10))))
+  } else 1
 })
 
 # Total
@@ -2914,15 +2914,19 @@ Adjust *N* by changing the multiplication factor below.
 
 textAreaInput(height = '45px', resize = 'vertical', 'name_Participant_column', 'Name of the base ID column', value = 'Participant')
 
-numericInput('multiply_N', NULL, 10, min = 1)
+numericInput('multiply_N', NULL, 3, min = 1)
 
-checkboxInput('include_Participant_column', 'Include this column', value = TRUE)
+checkboxInput('include_Participant_column', 'Include this column (un/check)', value = TRUE)
 
 textAreaInput(height = '45px', resize = 'vertical', 'ID_labels', 
               'Replace this column with names/categories (comma-separated). Delete back to revert.', 
               placeholder = "E.g., people's names, cities, treatments, etc.", width = '500px')
 
 ```
+
+<br>
+
+### Details
 
 The sample size is interlocked with the factorial structure of the data set. That is, if any between-group factors are created, participants will be evenly drawn from the total *N*. Similarly, for any within-participant factors, repeated measures will be created by expanding the number of rows in the long-format data set ([last tab](#dataset)).
 
@@ -3046,7 +3050,7 @@ renderDT(
   datatable(custom_summary(), 
             extensions = c('Buttons'), class="nowrap compact cell-border", selection = 'none',
             options = list(order = list(1, 'asc'), dom = 'Bifrt', pageLength = nrow(custom_summary()), scroller = TRUE,
-                           buttons = list(list(extend = 'csv', text = HTML('<i class="fas fa-download"></i>&nbsp; Download data set (.csv)'),
+                           buttons = list(list(extend = 'csv', text = HTML('<i class="fas fa-download"></i>&nbsp; Download (.csv)'),
                                                filename = paste0('Custom summary of simulated data - retrieved on ',
                                                                  str_replace_all(format(Sys.time(), '%d-%b-%Y_%X-%Z'), ':', '-') %>%
                                                                    str_replace_all('\\ ', '-'), 
@@ -3083,13 +3087,25 @@ Column {style="position:static; min-width: 500px; max-width: 550px; min-height: 
 
 parameters = reactive({
   
-  parameters = paste0('\n\nParameters for the reproducibility of the simulated data\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~', 
-                      '\nInformation and web application available at\nhttps://github.com/pablobernabeu/Experiment-simulation-app/\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~',
-                      '\n\nSeed number: ', input$seed, '\n',
-                      '\nNumber of decimal places: ', input$rounding, '\n')
+  parameters = paste0('\n\nParameters for the reproducibility of the simulated data\n',
+                      '------------------------------------------------------------\n',
+                      'Please consider these parameters along with the data set.\n',
+                      'Information and web application available at:\n',
+                      'https://github.com/pablobernabeu/Experiment-simulation-app/\n',
+                      '- Citation -\n',
+                      'Bernabeu, P., & Lynott, D. (2020). Experiment simulation app\n',
+                      '(Version ', app_version, ') [Web application].\n',
+                      'https://github.com/pablobernabeu/Experiment-simulation-app/.\n',
+                      '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n',
+                      '- Home tab -\n',
+                      'Seed number = ', input$seed, '\n',
+                      'Number of decimal places (rounding) = ', input$rounding, '\n')
   
   if(isTruthy(input$name_BetweenGroup1)) {
-    parameters = paste0(parameters, '\nBetween-group factor 1: ', input$name_BetweenGroup1, '\nLevels: ',
+    parameters = paste0(parameters, 
+                        '\n- Groups tab -',
+                        '\nBetween-group factor 1: ', input$name_BetweenGroup1, 
+                        '\nLevels: ',
                         paste(input$BetweenGroup1_Group1, input$BetweenGroup1_Group2, input$BetweenGroup1_Group3,
                               input$BetweenGroup1_Group4, input$BetweenGroup1_Group5, input$BetweenGroup1_Group6,
                               input$BetweenGroup1_Group7, input$BetweenGroup1_Group8, input$BetweenGroup1_Group9,
@@ -3099,7 +3115,9 @@ parameters = reactive({
   }
   
   if(isTruthy(input$name_BetweenGroup2)) {
-    parameters = paste0(parameters, '\nBetween-group factor 2: ', input$name_BetweenGroup2, '\nLevels: ',
+    parameters = paste0(parameters, 
+                        '\nBetween-group factor 2: ', input$name_BetweenGroup2, 
+                        '\nLevels: ',
                         paste(input$BetweenGroup2_Group1, input$BetweenGroup2_Group2, input$BetweenGroup2_Group3,
                               input$BetweenGroup2_Group4, input$BetweenGroup2_Group5, input$BetweenGroup2_Group6,
                               input$BetweenGroup2_Group7, input$BetweenGroup2_Group8, input$BetweenGroup2_Group9,
@@ -3109,7 +3127,9 @@ parameters = reactive({
   }
   
   if(isTruthy(input$name_BetweenGroup3)) {
-    parameters = paste0(parameters, '\nBetween-group factor 3: ', input$name_BetweenGroup3, '\nLevels: ',
+    parameters = paste0(parameters, 
+                        '\nBetween-group factor 3: ', input$name_BetweenGroup3, 
+                        '\nLevels: ',
                         paste(input$BetweenGroup3_Group1, input$BetweenGroup3_Group2, input$BetweenGroup3_Group3,
                               input$BetweenGroup3_Group4, input$BetweenGroup3_Group5, input$BetweenGroup3_Group6,
                               input$BetweenGroup3_Group7, input$BetweenGroup3_Group8, input$BetweenGroup3_Group9,
@@ -3119,103 +3139,124 @@ parameters = reactive({
   }
   
   if(isTruthy(input$name_Categorical_Independent1)) {
-    parameters = paste0(parameters, '\nCategorical independent variable 1: ', input$name_Categorical_Independent1,
+    parameters = paste0(parameters, 
+                        '\n- Individuals tab -',
+                        '\nCategorical independent variable 1: ', input$name_Categorical_Independent1,
                         '\nLevels: ', input$levels_Categorical_Independent1, '\nProbability [0, 1] (per group): ', 
                         input$probability_Categorical_Independent1, '\n')
   }
   
   if(isTruthy(input$name_Categorical_Independent2)) {
-    parameters = paste0(parameters, '\nCategorical independent variable 2: ', input$name_Categorical_Independent2,
+    parameters = paste0(parameters, 
+                        '\nCategorical independent variable 2: ', input$name_Categorical_Independent2,
                         '\nLevels: ', input$levels_Categorical_Independent2, '\nProbability [0, 1] (per group): ', 
                         input$probability_Categorical_Independent2, '\n')
   }
   
   if(isTruthy(input$name_Categorical_Independent3)) {
-    parameters = paste0(parameters, '\nCategorical independent variable 3: ', input$name_Categorical_Independent3,
+    parameters = paste0(parameters, 
+                        '\nCategorical independent variable 3: ', input$name_Categorical_Independent3,
                         '\nLevels: ', input$levels_Categorical_Independent3, '\nProbability [0, 1] (per group): ', 
                         input$probability_Categorical_Independent3, '\n')
   }
   
   if(isTruthy(input$name_Categorical_Independent4)) {
-    parameters = paste0(parameters, '\nCategorical independent variable 4: ', input$name_Categorical_Independent4,
+    parameters = paste0(parameters, 
+                        '\nCategorical independent variable 4: ', input$name_Categorical_Independent4,
                         '\nLevels: ', input$levels_Categorical_Independent4, '\nProbability [0, 1] (per group): ', 
                         input$probability_Categorical_Independent4, '\n')
   }
   
   if(isTruthy(input$name_Categorical_Independent5)) {
-    parameters = paste0(parameters, '\nCategorical independent variable 5: ', input$name_Categorical_Independent5,
+    parameters = paste0(parameters, 
+                        '\nCategorical independent variable 5: ', input$name_Categorical_Independent5,
                         '\nLevels: ', input$levels_Categorical_Independent5, '\nProbability [0, 1] (per group): ', 
                         input$probability_Categorical_Independent5, '\n')
   }
   
   if(isTruthy(input$name_Categorical_Independent6)) {
-    parameters = paste0(parameters, '\nCategorical independent variable 6: ', input$name_Categorical_Independent6,
+    parameters = paste0(parameters, 
+                        '\nCategorical independent variable 6: ', input$name_Categorical_Independent6,
                         '\nLevels: ', input$levels_Categorical_Independent6, '\nProbability [0, 1] (per group): ', 
                         input$probability_Categorical_Independent6, '\n')
   }
   
   if(isTruthy(input$name_Categorical_Independent7)) {
-    parameters = paste0(parameters, '\nCategorical independent variable 7: ', input$name_Categorical_Independent7,
+    parameters = paste0(parameters,
+                        '\nCategorical independent variable 7: ', input$name_Categorical_Independent7,
                         '\nLevels: ', input$levels_Categorical_Independent7, '\nProbability [0, 1] (per group): ', 
                         input$probability_Categorical_Independent7, '\n')
   }
   
   if(isTruthy(input$name_Categorical_Independent8)) {
-    parameters = paste0(parameters, '\nCategorical independent variable 8: ', input$name_Categorical_Independent8,
+    parameters = paste0(parameters,
+                        '\nCategorical independent variable 8: ', input$name_Categorical_Independent8,
                         '\nLevels: ', input$levels_Categorical_Independent8, '\nProbability [0, 1] (per group): ', 
                         input$probability_Categorical_Independent8, '\n')
   }
   
   if(isTruthy(input$name_Continuous_Independent1)) {
-    parameters = paste0(parameters, '\nContinuous independent variable 1: ', input$name_Continuous_Independent1,
+    parameters = paste0(parameters, 
+                        '\n- Individuals tab -',
+                        '\nContinuous independent variable 1: ', input$name_Continuous_Independent1,
                         '\nMean (per group): ', input$Continuous_Independent_mean1, 
                         '\nSD (per group): ', input$Continuous_Independent1_SD, '\n')
   }
   
   if(isTruthy(input$name_Continuous_Independent2)) {
-    parameters = paste0(parameters, '\nContinuous independent variable 2: ', input$name_Continuous_Independent2,
+    parameters = paste0(parameters, 
+                        '\nContinuous independent variable 2: ', input$name_Continuous_Independent2,
                         '\nMean (per group): ', input$Continuous_Independent_mean2, 
                         '\nSD (per group): ', input$Continuous_Independent2_SD, '\n')
   }
   
   if(isTruthy(input$name_Continuous_Independent3)) {
-    parameters = paste0(parameters, '\nContinuous independent variable 3: ', input$name_Continuous_Independent3,
+    parameters = paste0(parameters,
+                        '\nContinuous independent variable 3: ', input$name_Continuous_Independent3,
                         '\nMean (per group): ', input$Continuous_Independent_mean3, 
                         '\nSD (per group): ', input$Continuous_Independent3_SD, '\n')
   }
   
   if(isTruthy(input$name_Continuous_Independent4)) {
-    parameters = paste0(parameters, '\nContinuous independent variable 4: ', input$name_Continuous_Independent4,
+    parameters = paste0(parameters,
+                        '\nContinuous independent variable 4: ', input$name_Continuous_Independent4,
                         '\nMean (per group): ', input$Continuous_Independent_mean4, 
                         '\nSD (per group): ', input$Continuous_Independent4_SD, '\n')
   }
   
   if(isTruthy(input$name_Continuous_Independent5)) {
-    parameters = paste0(parameters, '\nContinuous independent variable 5: ', input$name_Continuous_Independent5,
+    parameters = paste0(parameters,
+                        '\nContinuous independent variable 5: ', input$name_Continuous_Independent5,
                         '\nMean (per group): ', input$Continuous_Independent_mean5, 
                         '\nSD (per group): ', input$Continuous_Independent5_SD, '\n')
   }
   
   if(isTruthy(input$name_Continuous_Independent6)) {
-    parameters = paste0(parameters, '\nContinuous independent variable 6: ', input$name_Continuous_Independent6,
+    parameters = paste0(parameters, 
+                        '\nContinuous independent variable 6: ', input$name_Continuous_Independent6,
                         '\nMean (per group): ', input$Continuous_Independent_mean6, 
                         '\nSD (per group): ', input$Continuous_Independent6_SD, '\n')
   }
   
   if(isTruthy(input$name_Continuous_Independent7)) {
-    parameters = paste0(parameters, '\nContinuous independent variable 7: ', input$name_Continuous_Independent7,
+    parameters = paste0(parameters, 
+                        '\nContinuous independent variable 7: ', input$name_Continuous_Independent7,
                         '\nMean (per group): ', input$Continuous_Independent_mean7, 
                         '\nSD (per group): ', input$Continuous_Independent7_SD, '\n')
   }
   
   if(isTruthy(input$name_Continuous_Independent8)) {
-    parameters = paste0(parameters, '\nContinuous independent variable 8: ', input$name_Continuous_Independent8,
+    parameters = paste0(parameters,
+                        '\nContinuous independent variable 8: ', input$name_Continuous_Independent8,
                         '\nMean (per group): ', input$Continuous_Independent_mean8, 
                         '\nSD (per group): ', input$Continuous_Independent4_SD, '\n')
   }
   
   if(isTruthy(input$name_WithinParticipant1)) {
-    parameters = paste0(parameters, '\nWithin-participant factor 1: ', input$name_WithinParticipant1, '\nLevels: ',
+    parameters = paste0(parameters, 
+                        '\n- Conditions tab -',
+                        '\nWithin-participant factor 1: ', input$name_WithinParticipant1, 
+                        '\nLevels: ',
                         paste(input$WithinParticipant1_Condition1, input$WithinParticipant1_Condition2, input$WithinParticipant1_Condition3,
                               input$WithinParticipant1_Condition4, input$WithinParticipant1_Condition5, input$WithinParticipant1_Condition6,
                               input$WithinParticipant1_Condition7, input$WithinParticipant1_Condition8, input$WithinParticipant1_Condition9,
@@ -3225,7 +3266,9 @@ parameters = reactive({
   }
   
   if(isTruthy(input$name_WithinParticipant2)) {
-    parameters = paste0(parameters, '\nWithin-participant factor 2: ', input$name_WithinParticipant2, '\nLevels: ',
+    parameters = paste0(parameters, 
+                        '\nWithin-participant factor 2: ', input$name_WithinParticipant2, 
+                        '\nLevels: ',
                         paste(input$WithinParticipant2_Condition1, input$WithinParticipant2_Condition2, input$WithinParticipant2_Condition3,
                               input$WithinParticipant2_Condition4, input$WithinParticipant2_Condition5, input$WithinParticipant2_Condition6,
                               input$WithinParticipant2_Condition7, input$WithinParticipant2_Condition8, input$WithinParticipant2_Condition9,
@@ -3235,7 +3278,9 @@ parameters = reactive({
   }
   
   if(isTruthy(input$name_WithinParticipant3)) {
-    parameters = paste0(parameters, '\nWithin-participant factor 3: ', input$name_WithinParticipant3, '\nLevels: ',
+    parameters = paste0(parameters,
+                        '\nWithin-participant factor 3: ', input$name_WithinParticipant3, 
+                        '\nLevels: ',
                         paste(input$WithinParticipant3_Condition1, input$WithinParticipant3_Condition2, input$WithinParticipant3_Condition3,
                               input$WithinParticipant3_Condition4, input$WithinParticipant3_Condition5, input$WithinParticipant3_Condition6,
                               input$WithinParticipant3_Condition7, input$WithinParticipant3_Condition8, input$WithinParticipant3_Condition9,
@@ -3244,123 +3289,170 @@ parameters = reactive({
                         '\n')
   }
   
+  if(isTRUE(input$include_Participant_column)) {
+    parameters = paste0(parameters, 
+                        '\n- Size (N) tab -',
+                        '\nBase ID column name: ', input$name_Participant_column,
+                        '\nMultiplication factor = ', input$multiply_N,
+                        '\n')
+  } else parameters = paste0(parameters, '\n- Size (N) tab -\nBase ID column: removed by unchecking the box\n')
+  
   if(isTRUE(input$include_Trial_column)) {
-    parameters = paste0(parameters, '\nExtra nested factor 1: included',
+    parameters = paste0(parameters, 
+                        '\n- Nested tab -',
+                        '\nExtra nested factor 1: included by checking the box',
                         '\nName: ', input$name_Trial_column,
-                        '\nNumber of levels: ', input$trial_N,
+                        '\nNumber of levels = ', input$trial_N,
                         '\n')
   }
   
   if(isTRUE(input$include_Extra_nested_column)) {
-    parameters = paste0(parameters, '\nExtra nested factor 2: included',
+    parameters = paste0(parameters,
+                        '\nExtra nested factor 2: included by checking the box',
                         '\nName: ', input$name_Extra_nested_column,
-                        '\nNumber of levels: ', input$Extra_nested_N,
+                        '\nNumber of levels = ', input$Extra_nested_N,
                         '\n')
   }
   
   if(isTruthy(input$name_Categorical_Dependent1)) {
-    parameters = paste0(parameters, '\nCategorical dependent variable 1: ', input$name_Categorical_Dependent1,
+    parameters = paste0(parameters, 
+                        '\n- Dependent tab -',
+                        '\nCategorical dependent variable 1: ', input$name_Categorical_Dependent1,
                         '\nLevels: ', input$levels_Categorical_Dependent1, '\nProbability [0, 1] (per cell): ', 
                         input$probability_Categorical_Dependent1, '\n')
   }
   
   if(isTruthy(input$name_Categorical_Dependent2)) {
-    parameters = paste0(parameters, '\nCategorical dependent variable 2: ', input$name_Categorical_Dependent2,
+    parameters = paste0(parameters, 
+                        '\nCategorical dependent variable 2: ', input$name_Categorical_Dependent2,
                         '\nLevels: ', input$levels_Categorical_Dependent2, '\nProbability [0, 1] (per cell): ', 
                         input$probability_Categorical_Dependent2, '\n')
   }
   
   if(isTruthy(input$name_Categorical_Dependent3)) {
-    parameters = paste0(parameters, '\nCategorical dependent variable 3: ', input$name_Categorical_Dependent3,
+    parameters = paste0(parameters,
+                        '\nCategorical dependent variable 3: ', input$name_Categorical_Dependent3,
                         '\nLevels: ', input$levels_Categorical_Dependent3, '\nProbability [0, 1] (per cell): ', 
                         input$probability_Categorical_Dependent3, '\n')
   }
   
   if(isTruthy(input$name_Categorical_Dependent4)) {
-    parameters = paste0(parameters, '\nCategorical dependent variable 4: ', input$name_Categorical_Dependent4,
+    parameters = paste0(parameters, 
+                        '\nCategorical dependent variable 4: ', input$name_Categorical_Dependent4,
                         '\nLevels: ', input$levels_Categorical_Dependent4, '\nProbability [0, 1] (per cell): ', 
                         input$probability_Categorical_Dependent4, '\n')
   }
   
   if(isTruthy(input$name_Categorical_Dependent5)) {
-    parameters = paste0(parameters, '\nCategorical dependent variable 5: ', input$name_Categorical_Dependent5,
+    parameters = paste0(parameters, 
+                        '\nCategorical dependent variable 5: ', input$name_Categorical_Dependent5,
                         '\nLevels: ', input$levels_Categorical_Dependent5, '\nProbability [0, 1] (per cell): ', 
                         input$probability_Categorical_Dependent5, '\n')
   }
   
   if(isTruthy(input$name_Categorical_Dependent6)) {
-    parameters = paste0(parameters, '\nCategorical dependent variable 6: ', input$name_Categorical_Dependent6,
+    parameters = paste0(parameters, 
+                        '\nCategorical dependent variable 6: ', input$name_Categorical_Dependent6,
                         '\nLevels: ', input$levels_Categorical_Dependent6, '\nProbability [0, 1] (per cell): ', 
                         input$probability_Categorical_Dependent6, '\n')
   }
   
   if(isTruthy(input$name_Categorical_Dependent7)) {
-    parameters = paste0(parameters, '\nCategorical dependent variable 7: ', input$name_Categorical_Dependent7,
+    parameters = paste0(parameters,
+                        '\nCategorical dependent variable 7: ', input$name_Categorical_Dependent7,
                         '\nLevels: ', input$levels_Categorical_Dependent7, '\nProbability [0, 1] (per cell): ', 
                         input$probability_Categorical_Dependent7, '\n')
   }
   
   if(isTruthy(input$name_Categorical_Dependent8)) {
-    parameters = paste0(parameters, '\nCategorical dependent variable 8: ', input$name_Categorical_Dependent8,
+    parameters = paste0(parameters,
+                        '\nCategorical dependent variable 8: ', input$name_Categorical_Dependent8,
                         '\nLevels: ', input$levels_Categorical_Dependent8, '\nProbability [0, 1] (per cell): ', 
                         input$probability_Categorical_Dependent8, '\n')
   }
   
   if(isTruthy(input$name_Continuous_Dependent1)) {
-    parameters = paste0(parameters, '\nContinuous dependent variable 1: ', input$name_Continuous_Dependent1,
+    parameters = paste0(parameters, 
+                        '\n- Dependent tab -',
+                        '\nContinuous dependent variable 1: ', input$name_Continuous_Dependent1,
                         '\nMean (per cell): ', input$Continuous_Dependent_mean1, 
                         '\nSD (per cell): ', input$Continuous_Dependent1_SD, '\n')
   }
   
   if(isTruthy(input$name_Continuous_Dependent2)) {
-    parameters = paste0(parameters, '\nContinuous dependent variable 2: ', input$name_Continuous_Dependent2,
+    parameters = paste0(parameters, 
+                        '\nContinuous dependent variable 2: ', input$name_Continuous_Dependent2,
                         '\nMean (per cell): ', input$Continuous_Dependent_mean2, 
                         '\nSD (per cell): ', input$Continuous_Dependent2_SD, '\n')
   }
   
   if(isTruthy(input$name_Continuous_Dependent3)) {
-    parameters = paste0(parameters, '\nContinuous dependent variable 3: ', input$name_Continuous_Dependent3,
+    parameters = paste0(parameters, 
+                        '\nContinuous dependent variable 3: ', input$name_Continuous_Dependent3,
                         '\nMean (per cell): ', input$Continuous_Dependent_mean3, 
                         '\nSD (per cell): ', input$Continuous_Dependent3_SD, '\n')
   }
   
   if(isTruthy(input$name_Continuous_Dependent4)) {
-    parameters = paste0(parameters, '\nContinuous dependent variable 4: ', input$name_Continuous_Dependent4,
+    parameters = paste0(parameters, 
+                        '\nContinuous dependent variable 4: ', input$name_Continuous_Dependent4,
                         '\nMean (per cell): ', input$Continuous_Dependent_mean4, 
                         '\nSD (per cell): ', input$Continuous_Dependent4_SD, '\n')
   }
   
   if(isTruthy(input$name_Continuous_Dependent5)) {
-    parameters = paste0(parameters, '\nContinuous dependent variable 5: ', input$name_Continuous_Dependent5,
+    parameters = paste0(parameters, 
+                        '\nContinuous dependent variable 5: ', input$name_Continuous_Dependent5,
                         '\nMean (per cell): ', input$Continuous_Dependent_mean5, 
                         '\nSD (per cell): ', input$Continuous_Dependent5_SD, '\n')
   }
   
   if(isTruthy(input$name_Continuous_Dependent6)) {
-    parameters = paste0(parameters, '\nContinuous dependent variable 6: ', input$name_Continuous_Dependent6,
+    parameters = paste0(parameters, 
+                        '\nContinuous dependent variable 6: ', input$name_Continuous_Dependent6,
                         '\nMean (per cell): ', input$Continuous_Dependent_mean6, 
                         '\nSD (per cell): ', input$Continuous_Dependent6_SD, '\n')
   }
   
   if(isTruthy(input$name_Continuous_Dependent7)) {
-    parameters = paste0(parameters, '\nContinuous dependent variable 7: ', input$name_Continuous_Dependent7,
+    parameters = paste0(parameters,
+                        '\nContinuous dependent variable 7: ', input$name_Continuous_Dependent7,
                         '\nMean (per cell): ', input$Continuous_Dependent_mean7, 
                         '\nSD (per cell): ', input$Continuous_Dependent7_SD, '\n')
   }
   
   if(isTruthy(input$name_Continuous_Dependent8)) {
-    parameters = paste0(parameters, '\nContinuous dependent variable 8: ', input$name_Continuous_Dependent8,
+    parameters = paste0(parameters,
+                        '\nContinuous dependent variable 8: ', input$name_Continuous_Dependent8,
                         '\nMean (per cell): ', input$Continuous_Dependent_mean8, 
                         '\nSD (per cell): ', input$Continuous_Dependent4_SD, '\n')
   }
   
-  parameters = paste0(parameters, '\nSample size (N) multiplication factor: ', input$multiply_N, '\n\n\n')
+  parameters = paste0(parameters, 
+                      '\n\nResulting data set\n',
+                      '------------------------------------------------------------\n',
+                      'Below are some properties of the data set, resulting from\n',
+                      'user-entered parameters and automatic computations.\n',
+                      '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n'
+  )
   
-  parameters
+  if(isTRUE(input$include_Participant_column)) {
+    parameters = paste0(parameters,
+                        'N (', input$name_Participant_column, ') = ', final_N(), 
+                        "\n^ Automatically based on number of factor levels\n",
+                        "times the multiplication factor shown above.\n\n")
+  }
+  
+  # Print parameters
+  paste0(parameters, 
+         'Number of rows = ', nrow(final_dataset()), '\n',
+         'Number of columns = ', length(final_dataset()), '\n',
+         'Number of cells (rows times columns) = ', nrow(final_dataset()) * length(final_dataset()), 
+         '\n\n\n')
   
 })
 
-# Enable download
+# Enable download of parameter list
 
 # Create the actual downloadLink
 output$parameters_download_link = renderUI({
@@ -3405,6 +3497,22 @@ Column {style = 'data-width: 100%; position: static; height: 1000px;'}
 final_dataset = reactive({
   
   final = dataset() %>%
+    
+    # Tally factor levels to cross them and keep the right number of cases
+    group_by(across(any_of(
+      dataset() %>% select_if(~is.factor(.) | is.character(.)) %>% names()
+    ))) %>% tally %>%
+    
+    # Add selected columns
+    merge(
+      dataset() %>% 
+        group_by(across(any_of(
+          dataset() %>% select_if(~is.factor(.) | is.character(.)) %>% names()
+        ))) %>% 
+        summarise(across(any_of(
+          dataset() %>% select_if(is.numeric) %>% names()
+        )))
+    ) %>%
     
     # Order columns in standard order
     select(any_of(c(
@@ -3605,7 +3713,7 @@ renderDT(
   datatable(final_dataset(), 
             extensions = c('Buttons'), class="nowrap compact cell-border", selection = 'none',
             options = list(order = list(1, 'asc'), dom = 'Bifrt', pageLength = nrow(final_dataset()), scroller = TRUE,
-                           buttons = list(list(extend = 'csv', text = HTML('<i class="fas fa-download"></i>&nbsp; Download data set (.csv)'),
+                           buttons = list(list(extend = 'csv', text = HTML('<i class="fas fa-download"></i>&nbsp; Download (.csv)'),
                                                filename = paste0('Data simulation using seed number ', input$seed, ' - retrieved on ',
                                                                  str_replace_all(format(Sys.time(), '%d-%b-%Y_%X-%Z'), ':', '-') %>%
                                                                    str_replace_all('\\ ', '-'), 
@@ -3623,4 +3731,3 @@ renderDT(
 )
 
 ```
-
