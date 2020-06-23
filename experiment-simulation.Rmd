@@ -246,7 +246,7 @@ $("#message").css({
 Column
 -----------------------------------------------------------------------
 
-### <span style='font-size:18px; color:#4D4F54;'> &nbsp; &nbsp; &nbsp; &nbsp;  Generate a pseudorandom data set to simulate an experiment [PRE-RELEASE].</span>
+### <span style='font-size:18px; color:#4D4F54;'> &nbsp; &nbsp; &nbsp; &nbsp;  Generate a pseudorandom data set to simulate an experiment.</span>
 
 <div style = "padding-top: 5px; padding-left: 60px; padding-right: 60px; background-color: #FEFEFE; font-size: 16px; line-height: 1.6;">
 
