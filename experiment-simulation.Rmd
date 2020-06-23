@@ -258,7 +258,7 @@ Column {style='padding-top:40px;'}
 
 This web application is suitable for educational and research contexts in the experimental sciences. It allows the creation of varied data sets with specified characteristics, such as categorical or continuous, between-group or within-participant variables. Each of these characteristics can be selected along the different tabs. In the penultimate tab, a custom summary of the current data set can be constructed. In the last tab, the list of parameters and the data set can be downloaded.
 
-Below, you can select the **number of decimals** to be kept in your continuous variables (if any).
+Below, you can select the **number of decimals** to be kept in the continuous variables (if you create any of those).
 
 ```{r}
 
@@ -284,8 +284,6 @@ numericInput('seed', NULL, sample(1:99999, 1), min = 1, step = 1, max = .Machine
 
 ```
 
-<!-- <br> -->
-
 <!-- ### Examples -->
 
 <!-- -- Feature not enabled yet -- -->
@@ -295,8 +293,6 @@ numericInput('seed', NULL, sample(1:99999, 1), min = 1, step = 1, max = .Machine
 <!-- selectInput('examples', NULL, c('None', 'Example 1', 'Example 2', 'Example 3')) -->
 
 <!-- ``` -->
-
-<br>
 
 ### Citing this app
 
@@ -312,7 +308,7 @@ Thank you to RStudio for the free hosting server used by this application, [shin
 
 ### References
 
-<div style = "text-indent:-1.5em; margin-left:1.5em; background-color:#FCFCFC;">
+<div style = "text-indent:-1.5em; margin-left:1.5em;">
 
 Chang, W., Cheng, J., Allaire, J., Xie, Y., & McPherson, J. (2015). shiny: Web Application Framework for R, R Package Version 1.4.0. Available at [http://CRAN.R-project.org/package=shiny](http://CRAN.R-project.org/package=shiny){target='_blank'}.
 
