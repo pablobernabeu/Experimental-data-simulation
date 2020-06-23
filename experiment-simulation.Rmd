@@ -1,6 +1,6 @@
 ---
 title: Simulation
-author: '<a href="https://github.com/pablobernabeu/Experiment-simulation-app/" target="_blank"><button class="button-version">v `r app_version = 0.1; app_version # update version number here`</button></a> &nbsp; <a href = "#section-size-n"><button class="button-samplesize"><span style = "color: #FCFF89;">`r reactive(try(if(isTRUE(input$include_Participant_column)){paste0("N = ", final_N())}, silent = TRUE) %>% gsub("\\Error.*", "", .))`</span></button></a>'
+author: '<a href="https://github.com/pablobernabeu/Experiment-simulation-app/" target="_blank"><button class="button-version">v `r app_version = 0.2; app_version # update version number here`</button></a> &nbsp; <a href = "#section-size-n"><button class="button-samplesize"><span style = "color: #FCFF89;">`r reactive(try(if(isTRUE(input$include_Participant_column)){paste0("N = ", final_N())}, silent = TRUE) %>% gsub("\\Error.*", "", .))`</span></button></a>'
 output:
   flexdashboard::flex_dashboard:
     theme: 'spacelab'
@@ -246,7 +246,7 @@ $("#message").css({
 Column
 -----------------------------------------------------------------------
 
-### <span style='font-size:18px; color:#4D4F54;'> &nbsp; &nbsp; &nbsp; &nbsp;  Generate a pseudorandom data set to simulate an experiment.</span>
+### <span style='font-size:18px; color:#4D4F54;'> &nbsp; &nbsp; &nbsp; &nbsp;  Generate a pseudorandom data set to simulate an experiment [PRE-RELEASE].</span>
 
 <div style = "padding-top: 5px; padding-left: 60px; padding-right: 60px; background-color: #FEFEFE; font-size: 16px; line-height: 1.6;">
 
