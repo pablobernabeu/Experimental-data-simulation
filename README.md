@@ -1,3 +1,3 @@
-# Web application for experimental data simulation
+# Web application for the simulation of experimental data
 ### Generate a pseudorandom data set to simulate an experiment.
 
