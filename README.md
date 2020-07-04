@@ -4,7 +4,7 @@
 
 This web application is suitable for education or research purposes in experimental sciences. It allows the **creation of varied data sets with specified elements, such as between-group or within-participant variables, that can be categorical or continuous.** These features can be selected inside the different tabs. In the penultimate tab, a custom summary of the current data set can be constructed. In the last tab, the list of parameters and the data set can be downloaded.
 
-<a href="https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/Screenshot.png"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://github.com/pablobernabeu/Experimental-data-simulation/raw/master/Screenshot.png" width="50%" /></a>
+<a href="https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/Screenshot.png"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://github.com/pablobernabeu/Experimental-data-simulation/raw/master/Screenshot.png" /></a>
 
 ### Reference
 
