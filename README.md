@@ -34,4 +34,4 @@ Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L. D. A., Fran&ccedil;o
 
 ### Contact
 
-To submit any questions or feedback, please post a [GitHub issue](https://github.com/pablobernabeu/Experiment-simulation-app/issues) or email Pablo Bernabeu at [p.bernabeu@lancaster.ac.uk](mailto:p.bernabeu@lancaster.ac.uk).
+To submit any questions or feedback, please post an [issue](https://github.com/pablobernabeu/Experiment-simulation-app/issues) or email Pablo Bernabeu at [p.bernabeu@lancaster.ac.uk](mailto:p.bernabeu@lancaster.ac.uk).
