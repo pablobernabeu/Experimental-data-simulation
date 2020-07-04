@@ -243,10 +243,10 @@ $("#message").css({
 <i class="fas fa-info-circle" aria-hidden="true"></i>&nbsp; Home {style="background-color: #FEFEFE; data-width: 100%; width: 900px; margin: 0 auto;"}
 =======================================================================
 
-Column {style='padding-top:40px;'}
+Column {style='padding-top:30px;'}
 -----------------------------------------------------------------------
 
-### <span style='font-size:18px;'> &nbsp; &nbsp; &nbsp; &nbsp;  **Generate a pseudorandom data set to simulate an experiment.**</span>
+### <span style='font-size:23px;'> &nbsp; &nbsp; &nbsp; &nbsp;  **Web application for the simulation of experimental data**</span>
 
 <div style = "padding-top: 5px; padding-left: 60px; padding-right: 60px; font-size: 16px; line-height: 1.6;">
 
@@ -256,7 +256,7 @@ Column {style='padding-top:40px;'}
 
 <div style = 'font-size: 20px; color: #614064; padding-top: 10px; padding-bottom: 10px;'><i class="fas fa-chalkboard-teacher fa-xs" aria-hidden="true"></i> <i class="fas fa-university fa-xs" aria-hidden="true"></i>&nbsp; Purposes </div>
 
-This web application is suitable for education or research purposes in experimental sciences. It allows the **creation of varied data sets with specified elements, such as between-group or within-participant variables, which can in turn be categorical or continuous.** These features can be selected inside the different tabs. In the penultimate tab, a custom summary of the current data set can be constructed. In the last tab, the list of parameters and the data set can be downloaded.
+This web application is suitable for education or research purposes in experimental sciences. It allows the **creation of varied data sets with specified elements, such as between-group or within-participant variables, that can be categorical or continuous.** These features can be selected inside the different tabs. In the penultimate tab, a custom summary of the current data set can be constructed. In the last tab, the list of parameters and the data set can be downloaded.
 
 Below, you can select the **number of decimals** to be kept in any continuous variables that you create.
 
