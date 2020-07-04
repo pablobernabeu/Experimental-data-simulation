@@ -28,7 +28,7 @@ Crump, M. J. C. (2017). Programming for Psychologists: Data Creation and Analysi
 
 R Core Team (2020). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL [https://www.R-project.org/](https://www.R-project.org/).
 
-Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L. D. A., Fran&ccedil;ois, R., ... & Kuhn, M. (2019). Welcome to the Tidyverse. *Journal of Open Source Software, 4*(43), 1686. [https://doi.org/10.21105/joss.01686](https://doi.org/10.21105/joss.01686).
+Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L. D. A., Fran&ccedil;ois, R., ... Kuhn, M. (2019). Welcome to the Tidyverse. *Journal of Open Source Software, 4*(43), 1686. [https://doi.org/10.21105/joss.01686](https://doi.org/10.21105/joss.01686).
 
 </div>
 
