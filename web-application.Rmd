@@ -1,6 +1,6 @@
 ---
 title: Simulation
-author: '<a href="https://github.com/pablobernabeu/Experiment-simulation-app/" target="_blank"><button class="button-version">v `r app_version = 0.2; app_version # update version number here`</button></a> &nbsp; <a href = "#section-size-n"><button class="button-samplesize"><span style = "color: #FCFF89;">`r reactive(try(if(isTRUE(input$include_Participant_column)){paste0("N = ", final_N())}, silent = TRUE) %>% gsub("\\Error.*", "", .))`</span></button></a>'
+author: '<a href="https://github.com/pablobernabeu/Experimental-data-simulation/" target="_blank"><button class="button-version">v `r app_version = read.delim("https://raw.githubusercontent.com/pablobernabeu/Experimental-data-simulation/master/version_number", header = FALSE)[1,1]; app_version  # Version number can be updated at https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/version_number`</button></a> &nbsp; <a href = "#section-size-n"><button class="button-samplesize"><span style = "color: #FCFF89;">`r reactive(try(if(isTRUE(input$include_Participant_column)){paste0("N = ", final_N())}, silent = TRUE) %>% gsub("\\Error.*", "", .))`</span></button></a>'
 output:
   flexdashboard::flex_dashboard:
     theme: 'spacelab'
@@ -152,7 +152,7 @@ visibility: hidden;
 }
 
 .shiny-output-error:after{
-content: 'Please resume or revise parameters.'; 
+content: 'Please wait or revise inputs.'; 
 visibility: visible; color: #377277; font-size: 14px;
 }
 
@@ -254,11 +254,11 @@ Column {style='padding-top:40px;'}
 <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="Attribution licence" style="color:#CEC7BF; font-size:13px;"> Licence &nbsp;<img style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/80x15.png" alt="Creative Commons License"></img> </a>
 </div>
 
-<span style = 'font-size: 20px; color: #614064; padding-bottom: 5px;'><i class="fas fa-chalkboard-teacher"></i> &nbsp; <i class="fas fa-university"></i>
+<div style = 'font-size: 20px; color: #614064; padding-top: 10px; padding-bottom: 10px;'><i class="fas fa-chalkboard-teacher fa-xs" aria-hidden="true"></i> <i class="fas fa-university fa-xs" aria-hidden="true"></i>&nbsp; Purposes </div>
 
-This web application is suitable for educational and research contexts in the experimental sciences. It allows the creation of varied data sets with specified characteristics, such as categorical or continuous, between-group or within-participant variables. Each of these characteristics can be selected along the different tabs. In the penultimate tab, a custom summary of the current data set can be constructed. In the last tab, the list of parameters and the data set can be downloaded.
+This web application is suitable for education or research purposes in experimental sciences. It allows the **creation of varied data sets with specified elements, such as between-group or within-participant variables, which can in turn be categorical or continuous.** These features can be selected inside the different tabs. In the penultimate tab, a custom summary of the current data set can be constructed. In the last tab, the list of parameters and the data set can be downloaded.
 
-Below, you can select the **number of decimals** to be kept in the continuous variables (if you create any of those).
+Below, you can select the **number of decimals** to be kept in any continuous variables that you create.
 
 ```{r}
 
@@ -270,17 +270,17 @@ numericInput('rounding', NULL, 3, min = 1, width = '60px')
 
 Reproducing a simulation requires three pieces of data: the seed number, the parameter list and the final data set. After creating the variables wanted, make sure to download the parameter list and the final data set in the [last tab](#dataset). The seed number will be part of the names of the downloaded files.
 
-A seed number is a code that allows the reproducibility of any data involving random generation. Please find your current seed number below, and feel free to note it down, or change it to any integer number up to Â±`r .Machine$integer.max`.
+A seed number is a code that allows the reproducibility of any data involving random generation. This applies to any variables created in the *Individuals* tab or in the *Dependent* tab. The number is shown below, where you can change it to any integer number up to Â±`r .Machine$integer.max`.
 
 ```{r}
 
 tags$style(type = 'text/css',
            '#seed.form-control.shiny-bound-input {padding-left:40px; padding-top:8px; padding-bottom:8px; font-size:150%; color:#206B90; letter-spacing:6px;}')
 
-numericInput('seed', NULL, sample(1:99999, 1), min = 1, step = 1, max = .Machine$integer.max)
+numericInput('seed', NULL, sample(1:99999, 1), step = 1, min = -.Machine$integer.max, max = .Machine$integer.max)
 
-# The seed from input$seed should now be set before 
-# any random sampling function, such as rnorm().
+# Coding note: The seed from input$seed should now be set right before any random sampling function, 
+# such as rnorm() or rbinom(), using set.seed(input$seed).
 
 ```
 
@@ -294,13 +294,13 @@ numericInput('seed', NULL, sample(1:99999, 1), min = 1, step = 1, max = .Machine
 
 <!-- ``` -->
 
-### Citing this app
+### Reference
 
-Bernabeu, P., & Lynott, D. (2020). Experiment simulation app (Version `r app_version`) [Web application]. [https://github.com/pablobernabeu/Experiment-simulation-app/](https://github.com/pablobernabeu/Experiment-simulation-app/){target='_blank'}.
+Bernabeu, P., & Lynott, D. (2020). Web application for the simulation of experimental data (Version `r app_version`). [https://github.com/pablobernabeu/Experimental-data-simulation/](https://github.com/pablobernabeu/Experimental-data-simulation/){target='_blank'}.
 
 ### Code
 
-This web application was developed in [R](https://www.r-project.org/about.html){target='_blank'} (R Core Team, 2020). The code is [available on Github](https://github.com/pablobernabeu/Experiment-simulation-app/blob/master/experiment-simulation.Rmd){target='_blank'}, where contributions may be made. The initial code for this application was influenced by Section 5.7 in Crump (2017; [*Simulating data for multi-factor designs*](https://crumplab.github.io/programmingforpsych/simulating-and-analyzing-data-in-r.html#simulating-data-for-multi-factor-designs){target='_blank'}). The R packages used included shiny (Chang, Cheng, Allaire, Xie, & McPherson, 2020) and Tidyverse (Wickham et al., 2019).
+This web application was developed in [R](https://www.r-project.org/about.html){target='_blank'} (R Core Team, 2020). The code is [available on Github](https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/web-application.Rmd){target='_blank'}, where contributions may be made. The initial code for this application was influenced by Section 5.7 in Crump (2017; [*Simulating data for multi-factor designs*](https://crumplab.github.io/programmingforpsych/simulating-and-analyzing-data-in-r.html#simulating-data-for-multi-factor-designs){target='_blank'}). The R packages used include Shiny (Chang, Cheng, Allaire, Xie, & McPherson, 2020) and Tidyverse (Wickham et al., 2019).
 
 ### Acknowledgements
 
@@ -322,7 +322,7 @@ Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L. D. A., Fran&ccedil;o
 
 ### Contact
 
-To submit any questions or feedback, please post a [GitHub issue](https://github.com/pablobernabeu/Experiment-simulation-app/issues){target='_blank'} or email Pablo Bernabeu at [p.bernabeu@lancaster.ac.uk](mailto:p.bernabeu@lancaster.ac.uk){target='_blank'}.
+To submit any questions or feedback, please post a [GitHub issue](https://github.com/pablobernabeu/Experimental-data-simulation/issues){target='_blank'} or email Pablo Bernabeu at [p.bernabeu@lancaster.ac.uk](mailto:p.bernabeu@lancaster.ac.uk){target='_blank'}.
 
 <br>
 <br>
@@ -1166,7 +1166,7 @@ textAreaInput(height = '45px', resize = 'vertical', 'WithinParticipant3_Conditio
 
 
 
-<i class="fas fa-plus"></i> Nested {style="background-color: #FCFCFC; data-width: 100%; width: 900px; margin: 0 auto;"}
+<i class="fas fa-plus" aria-hidden="true"></i> Nested {style="background-color: #FCFCFC; data-width: 100%; width: 900px; margin: 0 auto;"}
 =======================================================================
 
 Column {style="padding-left: 50px;"}
@@ -1231,8 +1231,6 @@ The factorial structure above should guide the setting of parameters in categori
 **Categorical: probability parameters.** To adjust the frequency of each level in each cell, multiple probability values may be entered, separated by commas, each corresponding to a cell. For instance, with a 2x2 design (four cells), the levels of a categorical dependent variable could be entered as 'correct, incorrect, unresponded', and the probabilities as $.2, .8, .4, .7$. This would mean that the most frequent level in Cells 1 to 4, respectively, would be 'correct', 'unresponded', 'incorrect', and 'unresponded'.
 
 **Continuous: means and standard deviations.** To adjust the means and standard deviations for each cell, multiple values may be entered, separated by commas, each corresponding to a cell. For instance, with a 2x2 design (four cells), the means could be entered as $34, 543, 657, 123$, and the standard deviations as $10, 20, 25, 5$.
-
-[<i class="fas fa-info-circle" aria-hidden="true"></i> Further guidelines and example](#home)
 
 </div>
 
@@ -3038,7 +3036,7 @@ renderDT(
   datatable(custom_summary(), 
             extensions = c('Buttons'), class="nowrap compact cell-border", selection = 'none',
             options = list(order = list(1, 'asc'), dom = 'Bifrt', pageLength = nrow(custom_summary()), scroller = TRUE,
-                           buttons = list(list(extend = 'csv', text = HTML('<i class="fas fa-download"></i>&nbsp; Download (.csv)'),
+                           buttons = list(list(extend = 'csv', text = HTML('<i class="fas fa-download" aria-hidden="true"></i>&nbsp; Download (.csv)'),
                                                filename = paste0('Custom summary of simulated data - retrieved on ',
                                                                  str_replace_all(format(Sys.time(), '%d-%b-%Y_%X-%Z'), ':', '-') %>%
                                                                    str_replace_all('\\ ', '-'), 
@@ -3061,10 +3059,10 @@ renderDT(
 
 
 
-Dataset &nbsp;<i class="fas fa-flag-checkered"></i>
+Dataset &nbsp;<i class="fas fa-flag-checkered" aria-hidden="true"></i>
 =======================================================================
 
-Column {style="position:static; min-width: 560px; max-width: 560px; min-height: 1000px;"}
+Column {style="position:static; min-width: 580px; max-width: 580px; min-height: 1000px;"}
 -----------------------------------------------------------------------
 
 ### **Parameters** (user input) {style='max-height: 70px;'}
@@ -3079,11 +3077,11 @@ parameters = reactive({
                       '------------------------------------------------------------\n',
                       'Please consider these parameters along with the data set.\n',
                       'Information and web application available at:\n',
-                      'https://github.com/pablobernabeu/Experiment-simulation-app/\n',
-                      '- Citation -\n',
-                      'Bernabeu, P., & Lynott, D. (2020). Experiment simulation app\n',
-                      '(Version ', app_version, ') [Web application].\n',
-                      'https://github.com/pablobernabeu/Experiment-simulation-app/.\n',
+                      'https://github.com/pablobernabeu/Experimental-data-simulation/\n',
+                      '- Reference -\n',
+                      'Bernabeu, P., & Lynott, D. (2020). Web application for the\n',
+                      'simulation of experimental data (Version ', app_version, ').\n',
+                      'https://github.com/pablobernabeu/Experimental-data-simulation/.\n',
                       '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n',
                       '- Home tab -\n',
                       'Seed number = ', input$seed, '\n',
@@ -3444,7 +3442,7 @@ parameters = reactive({
 
 # Create the actual downloadLink
 output$parameters_download_link = renderUI({
-  downloadLink('parameters_download', HTML('<i class="fas fa-download"></i>&nbsp; Download to ensure reproducibility'), 
+  downloadLink('parameters_download', HTML('<i class="fas fa-download" aria-hidden="true"></i>&nbsp; Download to ensure reproducibility'), 
                style = 'border-bottom:none !important; text-decoration: none !important; font-weight: normal !important;', 
                class = 'button-parameters-download')
 })
@@ -3701,7 +3699,7 @@ renderDT(
   datatable(final_dataset(), 
             extensions = c('Buttons'), class="nowrap compact cell-border", selection = 'none',
             options = list(order = list(1, 'asc'), dom = 'Bifrt', pageLength = nrow(final_dataset()), scroller = TRUE,
-                           buttons = list(list(extend = 'csv', text = HTML('<i class="fas fa-download"></i>&nbsp; Download (.csv)'),
+                           buttons = list(list(extend = 'csv', text = HTML('<i class="fas fa-download" aria-hidden="true"></i>&nbsp; Download (.csv)'),
                                                filename = paste0('Data simulation using seed number ', input$seed, ' - retrieved on ',
                                                                  str_replace_all(format(Sys.time(), '%d-%b-%Y_%X-%Z'), ':', '-') %>%
                                                                    str_replace_all('\\ ', '-'), 
