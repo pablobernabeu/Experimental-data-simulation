@@ -254,7 +254,7 @@ This web application is suitable for educational or research purposes in experim
 
 Screenshot of the *Dependent* tab ([view larger](https://github.com/pablobernabeu/Experimental-data-simulation/raw/master/Screenshot.png){target='_blank'})
 
-<img style="max-width: 800px; display: block; margin-left: auto; margin-right: auto; padding-bottom: 20px;" src="https://github.com/pablobernabeu/Experimental-data-simulation/raw/master/Screenshot.png" />
+<img style="max-width: 750px; display: block; margin-left: auto; margin-right: auto; padding-bottom: 20px;" src="https://github.com/pablobernabeu/Experimental-data-simulation/raw/master/Screenshot.png" />
 
 ### Rounding
 
@@ -665,7 +665,7 @@ renderDT({
 
 <br>
 
-<div style = 'padding-left: 40px; padding-right: 40px; padding-top: 20px; padding-bottom: 20px; background-color: #FEFEFE; font-size: 16px; line-height: 1.6;'>
+<div style = 'padding-left: 40px; padding-right: 40px; padding-top: 15px; padding-bottom: 20px; background-color: #FEFEFE; font-size: 16px; line-height: 1.6;'>
 
 The factorial structure above should guide the setting of parameters in this section. Each row corresponds to each combination of the groups.
 
@@ -1358,7 +1358,7 @@ renderDT({
 
 <br>
 
-<div style = 'padding-left: 40px; padding-right: 40px; padding-top: 20px; padding-bottom: 20px; background-color: #FEFEFE; font-size: 16px; line-height: 1.6;'>
+<div style = 'padding-left: 40px; padding-right: 40px; padding-top: 15px; padding-bottom: 20px; background-color: #FEFEFE; font-size: 16px; line-height: 1.6;'>
 
 The factorial structure above should guide the setting of parameters in this section. Each row corresponds to a *cell* in the current design.
 
@@ -3184,9 +3184,8 @@ renderDT(
             options = list(order = list(0, 'asc'), dom = 'Bifrt', pageLength = nrow(custom_summary()), scroller = TRUE,
                            buttons = list(list(extend = 'csv', text = HTML('<i class="fas fa-download" aria-hidden="true"></i>&nbsp; Download (.csv)'),
                                                filename = paste0('Custom summary of simulated data - retrieved on ',
-                                                                 str_replace_all(format(Sys.time(), '%d-%b-%Y_%X-%Z'), ':', '-') %>%
-                                                                   str_replace_all('\\ ', '-'), 
-                                                                 " -- find info in Pablo Bernabeu's GitHub repository Experiment-simulation-app"))))
+                                                                 str_replace_all(format(Sys.time(), '%d %b %Y at %X %Z'), ':', '-'), 
+                                                                 " (find info in Pablo Bernabeu's GitHub repository Experiment-simulation-app)"))))
   )
 )
 
@@ -3587,10 +3586,9 @@ output$parameters_download_link = renderUI({
 # Add download handling
 output$parameters_download = downloadHandler(
   filename = function() {
-    paste0('Parameter list (seed number ', input$seed, ') - retrieved on ',
-           str_replace_all(format(Sys.time(), '%d-%b-%Y_%X-%Z'), ':', '-') %>%
-             str_replace_all('\\ ', '-'), 
-           " -- find info in Pablo Bernabeu's GitHub repository Experiment-simulation-app.txt")
+    paste0('Parameter list retrieved on ',
+           str_replace_all(format(Sys.time(), '%d %b %Y at %X %Z'), ':', '-'), 
+           " (find info in Pablo Bernabeu's GitHub repository Experiment-simulation-app).txt")
   },
   content = function(file) { cat(parameters(), file = file) }
 )
@@ -3837,10 +3835,9 @@ renderDT(
             rownames = FALSE, extensions = c('Buttons'), class="nowrap compact cell-border", selection = 'none',
             options = list(order = list(0, 'asc'), dom = 'Bifrt', pageLength = nrow(final_dataset()), scroller = TRUE,
                            buttons = list(list(extend = 'csv', text = HTML('<i class="fas fa-download" aria-hidden="true"></i>&nbsp; Download (.csv)'),
-                                               filename = paste0('Data simulation using seed number ', input$seed, ' - retrieved on ',
-                                                                 str_replace_all(format(Sys.time(), '%d-%b-%Y_%X-%Z'), ':', '-') %>%
-                                                                   str_replace_all('\\ ', '-'), 
-                                                                 " -- find info in Pablo Bernabeu's GitHub repository Experiment-simulation-app"))))
+                                               filename = paste0('Data simulation using seed number ', input$seed, ', retrieved on ',
+                                                                 str_replace_all(format(Sys.time(), '%d %b %Y at %X %Z'), ':', '-'), 
+                                                                 " (find info in Pablo Bernabeu's GitHub repository Experiment-simulation-app)"))))
   )
 )
 
