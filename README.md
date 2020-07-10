@@ -2,7 +2,7 @@
 
 ### Purposes
 
-This web application is suitable for education or research purposes in experimental sciences. It allows the **creation of varied data sets with specified elements, such as between-group or within-participant variables, that can be categorical or continuous.** These features can be selected inside the different tabs. In the penultimate tab, a custom summary of the current data set can be constructed. In the last tab, the list of parameters and the data set can be downloaded.
+This web application is suitable for educational or research purposes in experimental sciences. It allows the **creation of varied data sets with specified structures, such as between-group or within-participant variables, that can be categorical or continuous.** These features can be selected along the different tabs. In the penultimate tab, a custom summary of the current data set can be constructed. In the last tab, the list of parameters and the data set can be downloaded.
 
 ### [Access web application](https://pablo-bernabeu.shinyapps.io/experimental-data-simulation/)
 
