@@ -1115,76 +1115,6 @@ levels_Categorical_Independent = reactive({
 ```
 
 
-<!-- Column -->
-<!-- ----------------------------------------------------------------------- -->
-
-<!-- ### Group structure to guide parameter setting -->
-
-<!-- ```{r} -->
-
-<!-- group_structure = reactive({ -->
-
-<!--   # Create grouping cluster -->
-<!--   structure = data.frame(Participant(), BetweenGroup1(), BetweenGroup2(), BetweenGroup3()) %>% -->
-
-<!--     # Count number of observations -->
-<!--     tally() -->
-
-<!--   # Remove any columns that weren't included by user -->
-
-<!--   if(isTruthy(input$name_BetweenGroup2) & !isTruthy(input$name_BetweenGroup3)) { -->
-<!--     structure = structure[, !(names(structure) == 'BetweenGroup3')] -->
-<!--   } -->
-
-<!--   if(isTruthy(input$name_BetweenGroup1) & !isTruthy(input$name_BetweenGroup2)) { -->
-<!--     structure = structure[, !(names(structure) %in% c('BetweenGroup3', 'BetweenGroup2'))] -->
-<!--   } -->
-
-<!--   if(!isTruthy(input$name_BetweenGroup1)) { -->
-<!--     structure = structure[, !(names(structure) %in% c('BetweenGroup3', 'BetweenGroup2', 'BetweenGroup1'))] -->
-<!--   } -->
-
-<!--   # Rename columns -->
-
-<!--   if(isTruthy(input$name_BetweenGroup1)) { -->
-<!--     names(structure)[names(structure)=="BetweenGroup1"] = input$name_BetweenGroup1 -->
-<!--   } -->
-
-<!--   if(isTruthy(input$name_BetweenGroup2)) { -->
-<!--     names(structure)[names(structure)=="BetweenGroup2"] = input$name_BetweenGroup2 -->
-<!--   } -->
-
-<!--   if(isTruthy(input$name_BetweenGroup3)) { -->
-<!--     names(structure)[names(structure)=="BetweenGroup3"] = input$name_BetweenGroup3 -->
-<!--   } -->
-
-<!--   # Remove NA-only columns -->
-<!--   structure = structure[, !map_lgl(structure, ~ all(is.na(.)))] -->
-
-<!--   structure -->
-
-<!-- }) -->
-
-
-<!-- renderDT({ -->
-<!--   datatable(group_structure(), class = 'nowrap compact cell-border', selection = 'none', -->
-<!--             options = list(order = list(1, 'asc'), dom = 'rt', scroller = TRUE, ordering = FALSE, -->
-<!--                            pageLength = nrow(group_structure())), -->
-<!--             # Fixed row names (source: https://stackoverflow.com/questions/55115183/r-dt-datatable-not-retaining-row-index-counter-column-after-selecting-new-page-w/55125758#55125758) -->
-<!--             callback = JS(c( -->
-<!--               "table.on('draw.dt', function(){", -->
-<!--               "  var PageInfo = table.page.info();", -->
-<!--               "  table.column(0, {page: 'current'}).nodes().each(function(cell,i){",  -->
-<!--               "    cell.innerHTML = i + 1 + PageInfo.start;", -->
-<!--               "  });", -->
-<!--               "})" -->
-<!--             ))) %>%  -->
-<!--     formatStyle(0, Color = '#595143', backgroundColor = '#EFF1F8') -->
-<!-- }) -->
-
-<!-- ``` -->
-
-
 Column
 -----------------------------------------------------------------------
 
@@ -3250,23 +3180,14 @@ custom_summary =
 
 renderDT(
   datatable(custom_summary(), 
-            extensions = c('Buttons'), class="nowrap compact cell-border", selection = 'none',
-            options = list(order = list(1, 'asc'), dom = 'Bifrt', pageLength = nrow(custom_summary()), scroller = TRUE,
+            rownames = FALSE, extensions = c('Buttons'), class="nowrap compact cell-border", selection = 'none',
+            options = list(order = list(0, 'asc'), dom = 'Bifrt', pageLength = nrow(custom_summary()), scroller = TRUE,
                            buttons = list(list(extend = 'csv', text = HTML('<i class="fas fa-download" aria-hidden="true"></i>&nbsp; Download (.csv)'),
                                                filename = paste0('Custom summary of simulated data - retrieved on ',
                                                                  str_replace_all(format(Sys.time(), '%d-%b-%Y_%X-%Z'), ':', '-') %>%
                                                                    str_replace_all('\\ ', '-'), 
-                                                                 " -- find info in Pablo Bernabeu's GitHub repository Experiment-simulation-app")))),
-            # Fixed row names (source: https://stackoverflow.com/questions/55115183/r-dt-datatable-not-retaining-row-index-counter-column-after-selecting-new-page-w/55125758#55125758)
-            callback = JS(c(
-              "table.on('draw.dt', function(){",
-              "  var PageInfo = table.page.info();",
-              "  table.column(0, {page: 'current'}).nodes().each(function(cell,i){", 
-              "    cell.innerHTML = i + 1 + PageInfo.start;",
-              "  });",
-              "})"
-            ))) %>% 
-    formatStyle(0, Color = '#595143', backgroundColor = '#EFF1F8')
+                                                                 " -- find info in Pablo Bernabeu's GitHub repository Experiment-simulation-app"))))
+  )
 )
 
 ```
@@ -3913,23 +3834,14 @@ final_dataset = reactive({
 
 renderDT(
   datatable(final_dataset(), 
-            extensions = c('Buttons'), class="nowrap compact cell-border", selection = 'none',
-            options = list(order = list(1, 'asc'), dom = 'Bifrt', pageLength = nrow(final_dataset()), scroller = TRUE,
+            rownames = FALSE, extensions = c('Buttons'), class="nowrap compact cell-border", selection = 'none',
+            options = list(order = list(0, 'asc'), dom = 'Bifrt', pageLength = nrow(final_dataset()), scroller = TRUE,
                            buttons = list(list(extend = 'csv', text = HTML('<i class="fas fa-download" aria-hidden="true"></i>&nbsp; Download (.csv)'),
                                                filename = paste0('Data simulation using seed number ', input$seed, ' - retrieved on ',
                                                                  str_replace_all(format(Sys.time(), '%d-%b-%Y_%X-%Z'), ':', '-') %>%
                                                                    str_replace_all('\\ ', '-'), 
-                                                                 " -- find info in Pablo Bernabeu's GitHub repository Experiment-simulation-app")))),
-            # Fixed row names (source: https://stackoverflow.com/questions/55115183/r-dt-datatable-not-retaining-row-index-counter-column-after-selecting-new-page-w/55125758#55125758)
-            callback = JS(c(
-              "table.on('draw.dt', function(){",
-              "  var PageInfo = table.page.info();",
-              "  table.column(0, {page: 'current'}).nodes().each(function(cell,i){", 
-              "    cell.innerHTML = i + 1 + PageInfo.start;",
-              "  });",
-              "})"
-            ))) %>% 
-    formatStyle(0, Color = '#595143', backgroundColor = '#EFF1F8')
+                                                                 " -- find info in Pablo Bernabeu's GitHub repository Experiment-simulation-app"))))
+  )
 )
 
 ```
