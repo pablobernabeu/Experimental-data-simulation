@@ -6,6 +6,7 @@ output:
     theme: 'spacelab'
     orientation: columns
     vertical_layout: scroll
+    favicon: https://raw.githubusercontent.com/pablobernabeu/Experimental-data-simulation/master/Royalty-free%20from%20www.needpix.com.png
 runtime: shiny
 ---
 
