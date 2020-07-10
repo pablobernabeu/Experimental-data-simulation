@@ -77,12 +77,6 @@ border-bottom: none !important;
 text-shadow: none !important;
 }
 
-<!-- Enable double sidebar -->
-.sidebar{
-float: right !important;
-justify-content: flex-end !important;
-}
-
 <!-- Fonts format -->
 
 body{ /* Normal  */
@@ -256,9 +250,15 @@ Column {style='padding-top:30px;'}
 
 <div style = 'font-size: 20px; color: #614064; padding-top: 10px; padding-bottom: 10px;'><i class="fas fa-chalkboard-teacher fa-xs" aria-hidden="true"></i> <i class="fas fa-university fa-xs" aria-hidden="true"></i>&nbsp; Purposes </div>
 
-This web application is suitable for education or research purposes in experimental sciences. It allows the **creation of varied data sets with specified elements, such as between-group or within-participant variables, that can be categorical or continuous.** These features can be selected inside the different tabs. In the penultimate tab, a custom summary of the current data set can be constructed. In the last tab, the list of parameters and the data set can be downloaded.
+This web application is suitable for educational or research purposes in experimental sciences. It allows the **creation of varied data sets with specified structures, such as between-group or within-participant variables, that can be categorical or continuous.** These features can be selected along the different tabs. In the penultimate tab, a custom summary of the current data set can be constructed. In the last tab, the list of parameters and the data set can be downloaded.
 
-Below, you can select the **number of decimals** to be kept in any continuous variables that you create.
+Screenshot of the *Dependent* tab ([view larger](https://github.com/pablobernabeu/Experimental-data-simulation/raw/master/Screenshot.png){target='_blank'})
+
+<img style="max-width: 800px; display: block; margin-left: auto; margin-right: auto; padding-bottom: 20px;" src="https://github.com/pablobernabeu/Experimental-data-simulation/raw/master/Screenshot.png" />
+
+### Rounding
+
+Below, you can select the **number of decimal places** to be kept in any continuous variables that you create.
 
 ```{r}
 
@@ -266,11 +266,13 @@ numericInput('rounding', NULL, 3, min = 1, width = '60px')
 
 ```
 
+<br>
+
 ### Ensuring reproducibility of simulated data
 
 Reproducing a simulation requires three pieces of data: the seed number, the parameter list and the final data set. After creating the variables wanted, make sure to download the parameter list and the final data set in the [last tab](#dataset). The seed number will be part of the names of the downloaded files.
 
-A seed number is a code that allows the reproducibility of any data involving random generation. This applies to any variables created in the *Individuals* tab or in the *Dependent* tab. The number is shown below, where you can change it to any integer number up to Â±`r .Machine$integer.max`.
+A seed number is a code that allows the reproducibility of any data involving random generation. This applies to any variables created in the *Individual* tab or in the *Dependent* tab. The number is shown below, where you can change it to any integer number up to Â±`r .Machine$integer.max`.
 
 ```{r}
 
@@ -284,23 +286,15 @@ numericInput('seed', NULL, sample(1:99999, 1), step = 1, min = -.Machine$integer
 
 ```
 
-<!-- ### Examples -->
-
-<!-- -- Feature not enabled yet -- -->
-
-<!-- ```{r} -->
-
-<!-- selectInput('examples', NULL, c('None', 'Example 1', 'Example 2', 'Example 3')) -->
-
-<!-- ``` -->
+<br>
 
 ### Reference
 
-Bernabeu, P., & Lynott, D. (2020). Web application for the simulation of experimental data (Version `r app_version`). [https://github.com/pablobernabeu/Experimental-data-simulation/](https://github.com/pablobernabeu/Experimental-data-simulation/){target='_blank'}.
+Bernabeu, P., & Lynott, D. (2020). Web application for the simulation of experimental data (Version `r app_version`). Retrieved from [https://github.com/pablobernabeu/Experimental-data-simulation/](https://github.com/pablobernabeu/Experimental-data-simulation/){target='_blank'}.
 
 ### Code
 
-This web application was developed in [R](https://www.r-project.org/about.html){target='_blank'} (R Core Team, 2020). The code is [available on Github](https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/web-application.Rmd){target='_blank'}, where contributions may be made. The initial code for this application was influenced by Section 5.7 in Crump (2017; [*Simulating data for multi-factor designs*](https://crumplab.github.io/programmingforpsych/simulating-and-analyzing-data-in-r.html#simulating-data-for-multi-factor-designs){target='_blank'}). The R packages used include Shiny (Chang, Cheng, Allaire, Xie, & McPherson, 2020) and Tidyverse (Wickham et al., 2019).
+This web application was developed in [R](https://www.r-project.org/about.html){target='_blank'} (R Core Team, 2020). The code is [available on Github](https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/web-application.Rmd){target='_blank'}, where contributions may be made. The initial code for this application was influenced by Section 5.7 in Crump (2017; [*Simulating data for multi-factor designs*](https://crumplab.github.io/programmingforpsych/simulating-and-analyzing-data-in-r.html#simulating-data-for-multi-factor-designs){target='_blank'}). The R packages used include Shiny (Chang, Cheng, Allaire, Xie, & McPherson, 2020), Tidyverse (Wickham et al., 2019) and DT (Xie, 2020).
 
 ### Acknowledgements
 
@@ -310,7 +304,7 @@ Thank you to RStudio for the free hosting server used by this application, [shin
 
 <div style = "text-indent:-1.5em; margin-left:1.5em;">
 
-Chang, W., Cheng, J., Allaire, J., Xie, Y., & McPherson, J. (2015). shiny: Web Application Framework for R, R Package Version 1.4.0. Available at [http://CRAN.R-project.org/package=shiny](http://CRAN.R-project.org/package=shiny){target='_blank'}.
+Chang, W., Cheng, J., Allaire, J., Xie, Y., & McPherson, J. (2020). shiny: Web Application Framework for R. R package version 1.4.0. Available at [http://CRAN.R-project.org/package=shiny](http://CRAN.R-project.org/package=shiny){target='_blank'}.
 
 Crump, M. J. C. (2017). Programming for Psychologists: Data Creation and Analysis (Version 1.1). [https://crumplab.github.io/programmingforpsych/](https://crumplab.github.io/programmingforpsych/){target='_blank'}.
 
@@ -318,11 +312,13 @@ R Core Team (2020). R: A language and environment for statistical computing. R F
 
 Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L. D. A., Fran&ccedil;ois, R., ... Kuhn, M. (2019). Welcome to the Tidyverse. *Journal of Open Source Software, 4*(43), 1686. [https://doi.org/10.21105/joss.01686](https://doi.org/10.21105/joss.01686){target='_blank'}.
 
+Xie, Y. (2020). DT: A Wrapper of the JavaScript Library "DataTables". R package version 0.14. Available at [https://CRAN.R-project.org/package=DT](https://CRAN.R-project.org/package=DT){target='_blank'}.
+
 </div>
 
 ### Contact
 
-To submit any questions or feedback, please post a [GitHub issue](https://github.com/pablobernabeu/Experimental-data-simulation/issues){target='_blank'} or email Pablo Bernabeu at [p.bernabeu@lancaster.ac.uk](mailto:p.bernabeu@lancaster.ac.uk){target='_blank'}.
+To submit any questions or feedback, please post a [GitHub issue](https://github.com/pablobernabeu/Experimental-data-simulation/issues){target='_blank'}, or email Pablo Bernabeu at [p.bernabeu@lancaster.ac.uk](mailto:p.bernabeu@lancaster.ac.uk){target='_blank'}.
 
 <br>
 <br>
@@ -341,117 +337,99 @@ Column
 
 ```{r}
 
-factorial_structure = reactive({
-  
-  # Create grouping cluster
-  structure = data.frame(Participant()) %>%
-    
-    # Create repeated rows for the within-participant repeated measures
-    expand(
-      nesting(
-        Participant(), 
-        BetweenGroup1(), BetweenGroup2(), BetweenGroup3()
-      ),
-      WithinParticipant1(), WithinParticipant2(), WithinParticipant3(),
-      Trial(), Extra_nested()
-    ) %>%
-    
-    # Order columns (various name versions need to be included)
-    select(any_of(c(
-      'BetweenGroup1', 'BetweenGroup2', 'BetweenGroup3',
-      'WithinParticipant1', 'WithinParticipant2', 'WithinParticipant3',
-      'Trial', 'Extra_nested'
-    ))) %>%
-    
-    # Gather
-    group_by(across(any_of(which(names(.) %in% 
-                                   c('BetweenGroup1', 'BetweenGroup2', 'BetweenGroup3',
-                                     'WithinParticipant1', 'WithinParticipant2', 'WithinParticipant3',
-                                     'Trial', 'Extra_nested'))))) %>%
-    
-    # Count number of observations
-    tally()
-  
-  # Remove any columns that weren't included by user
-  
-  if(isTruthy(input$name_BetweenGroup2) & !isTruthy(input$name_BetweenGroup3)) {
-    structure = structure[, !(names(structure) == 'BetweenGroup3')]
-  }
-  
-  if(isTruthy(input$name_BetweenGroup1) & !isTruthy(input$name_BetweenGroup2)) {
-    structure = structure[, !(names(structure) %in% c('BetweenGroup3', 'BetweenGroup2'))]
-  }
-  
-  if(!isTruthy(input$name_BetweenGroup1)) {
-    structure = structure[, !(names(structure) %in% c('BetweenGroup3', 'BetweenGroup2', 'BetweenGroup1'))]
-  }
-  
-  if(isTruthy(input$name_WithinParticipant1) & isTruthy(input$name_WithinParticipant2) & isTruthy(input$name_WithinParticipant3)) {
-    names(structure)[names(structure)=="WithinParticipant1"] = input$name_WithinParticipant1
-    names(structure)[names(structure)=="WithinParticipant2"] = input$name_WithinParticipant2
-    names(structure)[names(structure)=="WithinParticipant3"] = input$name_WithinParticipant3
-  }
-  
-  if(isTruthy(input$name_WithinParticipant2) & !isTruthy(input$name_WithinParticipant3)) {
-    structure = structure[, !(names(structure) == 'WithinParticipant3')]
-  }
-  
-  if(isTruthy(input$name_WithinParticipant1) & !isTruthy(input$name_WithinParticipant2)) {
-    structure = structure[, !(names(structure) %in% c('WithinParticipant3', 'WithinParticipant2'))]
-  }
-  
-  if(!isTruthy(input$name_WithinParticipant1)) {
-    structure = structure[, !(names(structure) %in% c('WithinParticipant3', 'WithinParticipant2', 'WithinParticipant1'))]
-  }
-  
-  if(isFALSE(input$include_Trial_column)) {
-    structure = structure[, !(names(structure) == 'Trial')]
-  }
-  
-  if(isFALSE(input$include_Extra_nested_column)) {
-    structure = structure[, !(names(structure) == 'Extra_nested')]
-  }
-  
-  # Rename columns
-  
-  if(isTruthy(input$name_BetweenGroup1)) {
-    names(structure)[names(structure)=="BetweenGroup1"] = input$name_BetweenGroup1
-  }
-  
-  if(isTruthy(input$name_BetweenGroup2)) {
-    names(structure)[names(structure)=="BetweenGroup2"] = input$name_BetweenGroup2
-  }
-  
-  if(isTruthy(input$name_BetweenGroup3)) {
-    names(structure)[names(structure)=="BetweenGroup3"] = input$name_BetweenGroup3
-  }
-  
-  if(isTruthy(input$name_WithinParticipant1)) {
-    names(structure)[names(structure)=="WithinParticipant1"] = input$name_WithinParticipant1
-  }
-  
-  if(isTruthy(input$name_WithinParticipant2)) {
-    names(structure)[names(structure)=="WithinParticipant2"] = input$name_WithinParticipant2
-  }
-  
-  if(isTruthy(input$name_WithinParticipant3)) {
-    names(structure)[names(structure)=="WithinParticipant3"] = input$name_WithinParticipant3
-  }
-  
-  if(isTRUE(input$include_Trial_column)) {
-    names(structure)[names(structure)=="Trial"] = input$name_Trial_column
-  }
-  
-  if(isTRUE(input$include_Extra_nested_column)) {
-    names(structure)[names(structure)=="Extra_nested"] = input$name_Extra_nested_column
-  }
-  
-  # Remove NA-only columns
-  structure = structure[, !map_lgl(structure, ~ all(is.na(.)))]
-  
-  structure
-  
-})
+factorial_structure = 
+  reactive({
+    final_dataset() %>% 
+      # Remove all columns except groups
+      select(-any_of(c(input$name_Participant_column,
+                       input$name_Categorical_Independent1, input$name_Categorical_Independent2,
+                       input$name_Categorical_Independent3, input$name_Categorical_Independent4,
+                       input$name_Categorical_Independent5, input$name_Categorical_Independent6,
+                       input$name_Categorical_Independent7, input$name_Categorical_Independent8,
+                       input$name_Continuous_Independent1, input$name_Continuous_Independent2,
+                       input$name_Continuous_Independent3, input$name_Continuous_Independent4,
+                       input$name_Continuous_Independent5, input$name_Continuous_Independent6,
+                       input$name_Continuous_Independent7, input$name_Continuous_Independent8, 
+                       input$name_Categorical_Dependent1, input$name_Categorical_Dependent2,
+                       input$name_Categorical_Dependent3, input$name_Categorical_Dependent4,
+                       input$name_Categorical_Dependent5, input$name_Categorical_Dependent6,
+                       input$name_Categorical_Dependent7, input$name_Categorical_Dependent8,
+                       input$name_Continuous_Dependent1, input$name_Continuous_Dependent2,
+                       input$name_Continuous_Dependent3, input$name_Continuous_Dependent4,
+                       input$name_Continuous_Dependent5, input$name_Continuous_Dependent6,
+                       input$name_Continuous_Dependent7, input$name_Continuous_Dependent8))) %>%
+      # This first bit displays number of observations per cell ('n')
+      group_by(across(any_of(
+        final_dataset() %>% select(-input$name_Participant_column) %>% 
+          select_if(~is.factor(.) | is.character(.)) %>% names()
+      ))) %>% tally %>%
+      # Add selected columns
+      merge(
+        final_dataset() %>% 
+          # Remove all columns except groups and those variables created inside this tab
+          select(-any_of(c(input$name_Participant_column, 
+                           input$name_Categorical_Independent1, input$name_Categorical_Independent2,
+                           input$name_Categorical_Independent3, input$name_Categorical_Independent4,
+                           input$name_Categorical_Independent5, input$name_Categorical_Independent6,
+                           input$name_Categorical_Independent7, input$name_Categorical_Independent8,
+                           input$name_Continuous_Independent1, input$name_Continuous_Independent2,
+                           input$name_Continuous_Independent3, input$name_Continuous_Independent4,
+                           input$name_Continuous_Independent5, input$name_Continuous_Independent6,
+                           input$name_Continuous_Independent7, input$name_Continuous_Independent8, 
+                           input$name_Categorical_Dependent1, input$name_Categorical_Dependent2,
+                           input$name_Categorical_Dependent3, input$name_Categorical_Dependent4,
+                           input$name_Categorical_Dependent5, input$name_Categorical_Dependent6,
+                           input$name_Categorical_Dependent7, input$name_Categorical_Dependent8,
+                           input$name_Continuous_Dependent1, input$name_Continuous_Dependent2,
+                           input$name_Continuous_Dependent3, input$name_Continuous_Dependent4,
+                           input$name_Continuous_Dependent5, input$name_Continuous_Dependent6,
+                           input$name_Continuous_Dependent7, input$name_Continuous_Dependent8))) %>%
+          group_by(across(any_of(
+            final_dataset() %>% 
+              select(-any_of(c(input$name_Participant_column, 
+                               input$name_Categorical_Independent1, input$name_Categorical_Independent2,
+                               input$name_Categorical_Independent3, input$name_Categorical_Independent4,
+                               input$name_Categorical_Independent5, input$name_Categorical_Independent6,
+                               input$name_Categorical_Independent7, input$name_Categorical_Independent8,
+                               input$name_Continuous_Independent1, input$name_Continuous_Independent2,
+                               input$name_Continuous_Independent3, input$name_Continuous_Independent4,
+                               input$name_Continuous_Independent5, input$name_Continuous_Independent6,
+                               input$name_Continuous_Independent7, input$name_Continuous_Independent8, 
+                               input$name_Categorical_Dependent1, input$name_Categorical_Dependent2,
+                               input$name_Categorical_Dependent3, input$name_Categorical_Dependent4,
+                               input$name_Categorical_Dependent5, input$name_Categorical_Dependent6,
+                               input$name_Categorical_Dependent7, input$name_Categorical_Dependent8,
+                               input$name_Continuous_Dependent1, input$name_Continuous_Dependent2,
+                               input$name_Continuous_Dependent3, input$name_Continuous_Dependent4,
+                               input$name_Continuous_Dependent5, input$name_Continuous_Dependent6,
+                               input$name_Continuous_Dependent7, input$name_Continuous_Dependent8))) %>% 
+              select_if(~is.factor(.) | is.character(.)) %>% names()
+          ))) %>% 
+          summarise(across(any_of(
+            final_dataset() %>% 
+              select(-any_of(c(input$name_Participant_column, 
+                               input$name_Categorical_Independent1, input$name_Categorical_Independent2,
+                               input$name_Categorical_Independent3, input$name_Categorical_Independent4,
+                               input$name_Categorical_Independent5, input$name_Categorical_Independent6,
+                               input$name_Categorical_Independent7, input$name_Categorical_Independent8,
+                               input$name_Continuous_Independent1, input$name_Continuous_Independent2,
+                               input$name_Continuous_Independent3, input$name_Continuous_Independent4,
+                               input$name_Continuous_Independent5, input$name_Continuous_Independent6,
+                               input$name_Continuous_Independent7, input$name_Continuous_Independent8, 
+                               input$name_Categorical_Dependent1, input$name_Categorical_Dependent2,
+                               input$name_Categorical_Dependent3, input$name_Categorical_Dependent4,
+                               input$name_Categorical_Dependent5, input$name_Categorical_Dependent6,
+                               input$name_Categorical_Dependent7, input$name_Categorical_Dependent8,
+                               input$name_Continuous_Dependent1, input$name_Continuous_Dependent2,
+                               input$name_Continuous_Dependent3, input$name_Continuous_Dependent4,
+                               input$name_Continuous_Dependent5, input$name_Continuous_Dependent6,
+                               input$name_Continuous_Dependent7, input$name_Continuous_Dependent8))) %>% 
+              select_if(is.numeric) %>% names()
+          ), list(Mean = mean, SD = sd))) %>% 
+          # round numeric variables
+          mutate(across(is.numeric, round, input$rounding))
+      )
+  })
 
 
 renderDT({
@@ -543,53 +521,279 @@ textAreaInput(height = '45px', resize = 'vertical', 'BetweenGroup3_Group10', NUL
 
 
 
-Individuals
+Individual
 =======================================================================
 
-Inputs {.sidebar style='padding-left: 70px; min-width: 500px; max-width: 500px; overflow: scroll; padding-right: 40px; margin-right: 140px;'}
+Column {style="max-width:700px"}
 -----------------------------------------------------------------------
+
+### **Groups structure to guide parameter setting**
+
+```{r}
+
+Individual_factorial_structure = 
+  reactive({
+    final_dataset() %>% 
+      # Remove all columns except groups
+      select(-any_of(c(input$name_Participant_column,
+                       input$name_Categorical_Independent1, input$name_Categorical_Independent2,
+                       input$name_Categorical_Independent3, input$name_Categorical_Independent4,
+                       input$name_Categorical_Independent5, input$name_Categorical_Independent6,
+                       input$name_Categorical_Independent7, input$name_Categorical_Independent8,
+                       input$name_Continuous_Independent1, input$name_Continuous_Independent2,
+                       input$name_Continuous_Independent3, input$name_Continuous_Independent4,
+                       input$name_Continuous_Independent5, input$name_Continuous_Independent6,
+                       input$name_Continuous_Independent7, input$name_Continuous_Independent8, 
+                       input$name_WithinParticipant1, input$name_WithinParticipant2,
+                       input$name_WithinParticipant3, input$name_WithinParticipant4,
+                       input$name_WithinParticipant5, input$name_WithinParticipant6,
+                       input$name_WithinParticipant7, input$name_WithinParticipant8,
+                       input$name_Trial_column, input$name_Extra_nested_column,
+                       input$name_Categorical_Dependent1, input$name_Categorical_Dependent2,
+                       input$name_Categorical_Dependent3, input$name_Categorical_Dependent4,
+                       input$name_Categorical_Dependent5, input$name_Categorical_Dependent6,
+                       input$name_Categorical_Dependent7, input$name_Categorical_Dependent8,
+                       input$name_Continuous_Dependent1, input$name_Continuous_Dependent2,
+                       input$name_Continuous_Dependent3, input$name_Continuous_Dependent4,
+                       input$name_Continuous_Dependent5, input$name_Continuous_Dependent6,
+                       input$name_Continuous_Dependent7, input$name_Continuous_Dependent8))) %>%
+      # This first bit displays number of observations per cell ('n')
+      group_by(across(any_of(
+        final_dataset() %>% select(-input$name_Participant_column) %>% 
+          select_if(~is.factor(.) | is.character(.)) %>% names()
+      ))) %>% tally %>%
+      # Add selected columns
+      merge(
+        final_dataset() %>% 
+          # Remove all columns except groups and those variables created inside this tab
+          select(-any_of(c(input$name_Participant_column, 
+                           input$name_Categorical_Independent1, input$name_Categorical_Independent2,
+                           input$name_Categorical_Independent3, input$name_Categorical_Independent4,
+                           input$name_Categorical_Independent5, input$name_Categorical_Independent6,
+                           input$name_Categorical_Independent7, input$name_Categorical_Independent8,
+                           input$name_Continuous_Independent1, input$name_Continuous_Independent2,
+                           input$name_Continuous_Independent3, input$name_Continuous_Independent4,
+                           input$name_Continuous_Independent5, input$name_Continuous_Independent6,
+                           input$name_Continuous_Independent7, input$name_Continuous_Independent8, 
+                           input$name_WithinParticipant1, input$name_WithinParticipant2,
+                           input$name_WithinParticipant3, input$name_WithinParticipant4,
+                           input$name_WithinParticipant5, input$name_WithinParticipant6,
+                           input$name_WithinParticipant7, input$name_WithinParticipant8,
+                           input$name_Trial_column, input$name_Extra_nested_column,
+                           input$name_Categorical_Dependent1, input$name_Categorical_Dependent2,
+                           input$name_Categorical_Dependent3, input$name_Categorical_Dependent4,
+                           input$name_Categorical_Dependent5, input$name_Categorical_Dependent6,
+                           input$name_Categorical_Dependent7, input$name_Categorical_Dependent8,
+                           input$name_Continuous_Dependent1, input$name_Continuous_Dependent2,
+                           input$name_Continuous_Dependent3, input$name_Continuous_Dependent4,
+                           input$name_Continuous_Dependent5, input$name_Continuous_Dependent6,
+                           input$name_Continuous_Dependent7, input$name_Continuous_Dependent8))) %>%
+          group_by(across(any_of(
+            final_dataset() %>% 
+              select(-any_of(c(input$name_Participant_column, 
+                               input$name_Categorical_Independent1, input$name_Categorical_Independent2,
+                               input$name_Categorical_Independent3, input$name_Categorical_Independent4,
+                               input$name_Categorical_Independent5, input$name_Categorical_Independent6,
+                               input$name_Categorical_Independent7, input$name_Categorical_Independent8,
+                               input$name_Continuous_Independent1, input$name_Continuous_Independent2,
+                               input$name_Continuous_Independent3, input$name_Continuous_Independent4,
+                               input$name_Continuous_Independent5, input$name_Continuous_Independent6,
+                               input$name_Continuous_Independent7, input$name_Continuous_Independent8, 
+                               input$name_WithinParticipant1, input$name_WithinParticipant2,
+                               input$name_WithinParticipant3, input$name_WithinParticipant4,
+                               input$name_WithinParticipant5, input$name_WithinParticipant6,
+                               input$name_WithinParticipant7, input$name_WithinParticipant8,
+                               input$name_Trial_column, input$name_Extra_nested_column,
+                               input$name_Categorical_Dependent1, input$name_Categorical_Dependent2,
+                               input$name_Categorical_Dependent3, input$name_Categorical_Dependent4,
+                               input$name_Categorical_Dependent5, input$name_Categorical_Dependent6,
+                               input$name_Categorical_Dependent7, input$name_Categorical_Dependent8,
+                               input$name_Continuous_Dependent1, input$name_Continuous_Dependent2,
+                               input$name_Continuous_Dependent3, input$name_Continuous_Dependent4,
+                               input$name_Continuous_Dependent5, input$name_Continuous_Dependent6,
+                               input$name_Continuous_Dependent7, input$name_Continuous_Dependent8))) %>% 
+              select_if(~is.factor(.) | is.character(.)) %>% names()
+          ))) %>% 
+          summarise(across(any_of(
+            final_dataset() %>% 
+              select(-any_of(c(input$name_Participant_column, 
+                               input$name_Categorical_Independent1, input$name_Categorical_Independent2,
+                               input$name_Categorical_Independent3, input$name_Categorical_Independent4,
+                               input$name_Categorical_Independent5, input$name_Categorical_Independent6,
+                               input$name_Categorical_Independent7, input$name_Categorical_Independent8,
+                               input$name_Continuous_Independent1, input$name_Continuous_Independent2,
+                               input$name_Continuous_Independent3, input$name_Continuous_Independent4,
+                               input$name_Continuous_Independent5, input$name_Continuous_Independent6,
+                               input$name_Continuous_Independent7, input$name_Continuous_Independent8, 
+                               input$name_WithinParticipant1, input$name_WithinParticipant2,
+                               input$name_WithinParticipant3, input$name_WithinParticipant4,
+                               input$name_WithinParticipant5, input$name_WithinParticipant6,
+                               input$name_WithinParticipant7, input$name_WithinParticipant8,
+                               input$name_Trial_column, input$name_Extra_nested_column,
+                               input$name_Categorical_Dependent1, input$name_Categorical_Dependent2,
+                               input$name_Categorical_Dependent3, input$name_Categorical_Dependent4,
+                               input$name_Categorical_Dependent5, input$name_Categorical_Dependent6,
+                               input$name_Categorical_Dependent7, input$name_Categorical_Dependent8,
+                               input$name_Continuous_Dependent1, input$name_Continuous_Dependent2,
+                               input$name_Continuous_Dependent3, input$name_Continuous_Dependent4,
+                               input$name_Continuous_Dependent5, input$name_Continuous_Dependent6,
+                               input$name_Continuous_Dependent7, input$name_Continuous_Dependent8))) %>% 
+              select_if(is.numeric) %>% names()
+          ), list(Mean = mean, SD = sd))) %>% 
+          # round numeric variables
+          mutate(across(is.numeric, round, input$rounding))
+      )
+  })
+
+renderDT({
+  datatable(Individual_factorial_structure(), class = 'nowrap compact cell-border', selection = 'none',
+            options = list(order = list(1, 'asc'), dom = 'rt', scroller = TRUE, ordering = FALSE,
+                           pageLength = nrow(Individual_factorial_structure())),
+            # Fixed row names (source: https://stackoverflow.com/questions/55115183/r-dt-datatable-not-retaining-row-index-counter-column-after-selecting-new-page-w/55125758#55125758)
+            callback = JS(c(
+              "table.on('draw.dt', function(){",
+              "  var PageInfo = table.page.info();",
+              "  table.column(0, {page: 'current'}).nodes().each(function(cell,i){", 
+              "    cell.innerHTML = i + 1 + PageInfo.start;",
+              "  });",
+              "})"
+            ))) %>% 
+    formatStyle(0, Color = '#595143', backgroundColor = '#EFF1F8')
+})
+
+```
+
+<br>
 
 <div style = 'padding-left: 40px; padding-right: 40px; padding-top: 20px; padding-bottom: 20px; background-color: #FEFEFE; font-size: 16px; line-height: 1.6;'>
 
-### Categorical variables
+The factorial structure above should guide the setting of parameters in this section. Each row corresponds to each combination of the groups.
 
-Where any groups exist (created in the Groups tab), to adjust the frequency of each level in the factors below per group, multiple probability values may be entered, separated by commas, each corresponding to a group. For instance, with four groups, the levels of a categorical independent variable could be entered as 'A, B, C', and the probabilities as $.2, .8, .4, .7$. This would mean that the most frequent level in Groups 1 to 4, respectively, would be A, C, B, and B.
+**Categorical variables.** Where any groups exist (created in the Groups tab), to adjust the frequency of each level in the factors below per group, multiple probability values may be entered, separated by commas, each corresponding to a group. For instance, with four groups, the levels of a categorical independent variable could be entered as 'A, B, C', and the probabilities as $.2, .8, .4, .7$. This would mean that the most frequent level in Groups 1 to 4, respectively, would be A, C, B, and B.
+
+**Continuous variables.** Where any groups exist (created in the Groups tab), to adjust the means and standard deviations for each group, multiple values may be entered, separated by commas, each corresponding to a group. For instance, with four groups, the means could be entered as $34, 543, 657, 123$, and the standard deviations as $10, 20, 25, 5$.
+
+The overall summary, including the individual variables, is shown below.
 
 </div>
+
+
+### **Summary including individual variables** ([expand](#summary))
+
+```{r}
+
+factorial_structure_with_individual_variables = 
+  reactive({
+    final_dataset() %>% 
+      # Remove all columns except groups and those variables created inside this tab
+      select(-any_of(c(input$name_Participant_column, 
+                       input$name_WithinParticipant1, input$name_WithinParticipant2,
+                       input$name_WithinParticipant3, input$name_WithinParticipant4,
+                       input$name_WithinParticipant5, input$name_WithinParticipant6,
+                       input$name_WithinParticipant7, input$name_WithinParticipant8,
+                       input$name_Trial_column, input$name_Extra_nested_column,
+                       input$name_Categorical_Dependent1, input$name_Categorical_Dependent2,
+                       input$name_Categorical_Dependent3, input$name_Categorical_Dependent4,
+                       input$name_Categorical_Dependent5, input$name_Categorical_Dependent6,
+                       input$name_Categorical_Dependent7, input$name_Categorical_Dependent8,
+                       input$name_Continuous_Dependent1, input$name_Continuous_Dependent2,
+                       input$name_Continuous_Dependent3, input$name_Continuous_Dependent4,
+                       input$name_Continuous_Dependent5, input$name_Continuous_Dependent6,
+                       input$name_Continuous_Dependent7, input$name_Continuous_Dependent8))) %>%
+      # This first bit displays number of observations per cell ('n')
+      group_by(across(any_of(
+        final_dataset() %>% select(-input$name_Participant_column) %>% 
+          select_if(~is.factor(.) | is.character(.)) %>% names()
+      ))) %>% tally %>%
+      # Add selected columns
+      merge(
+        final_dataset() %>% 
+          # Remove all columns except groups and those variables created inside this tab
+          select(-any_of(c(input$name_Participant_column, 
+                           input$name_WithinParticipant1, input$name_WithinParticipant2,
+                           input$name_WithinParticipant3, input$name_WithinParticipant4,
+                           input$name_WithinParticipant5, input$name_WithinParticipant6,
+                           input$name_WithinParticipant7, input$name_WithinParticipant8,
+                           input$name_Trial_column, input$name_Extra_nested_column,
+                           input$name_Categorical_Dependent1, input$name_Categorical_Dependent2,
+                           input$name_Categorical_Dependent3, input$name_Categorical_Dependent4,
+                           input$name_Categorical_Dependent5, input$name_Categorical_Dependent6,
+                           input$name_Categorical_Dependent7, input$name_Categorical_Dependent8,
+                           input$name_Continuous_Dependent1, input$name_Continuous_Dependent2,
+                           input$name_Continuous_Dependent3, input$name_Continuous_Dependent4,
+                           input$name_Continuous_Dependent5, input$name_Continuous_Dependent6,
+                           input$name_Continuous_Dependent7, input$name_Continuous_Dependent8))) %>%
+          group_by(across(any_of(
+            final_dataset() %>% 
+              select(-any_of(c(input$name_Participant_column, 
+                               input$name_WithinParticipant1, input$name_WithinParticipant2,
+                               input$name_WithinParticipant3, input$name_WithinParticipant4,
+                               input$name_WithinParticipant5, input$name_WithinParticipant6,
+                               input$name_WithinParticipant7, input$name_WithinParticipant8,
+                               input$name_Trial_column, input$name_Extra_nested_column,
+                               input$name_Categorical_Dependent1, input$name_Categorical_Dependent2,
+                               input$name_Categorical_Dependent3, input$name_Categorical_Dependent4,
+                               input$name_Categorical_Dependent5, input$name_Categorical_Dependent6,
+                               input$name_Categorical_Dependent7, input$name_Categorical_Dependent8,
+                               input$name_Continuous_Dependent1, input$name_Continuous_Dependent2,
+                               input$name_Continuous_Dependent3, input$name_Continuous_Dependent4,
+                               input$name_Continuous_Dependent5, input$name_Continuous_Dependent6,
+                               input$name_Continuous_Dependent7, input$name_Continuous_Dependent8))) %>% 
+              select_if(~is.factor(.) | is.character(.)) %>% names()
+          ))) %>% 
+          summarise(across(any_of(
+            final_dataset() %>% 
+              select(-any_of(c(input$name_Participant_column, 
+                               input$name_WithinParticipant1, input$name_WithinParticipant2,
+                               input$name_WithinParticipant3, input$name_WithinParticipant4,
+                               input$name_WithinParticipant5, input$name_WithinParticipant6,
+                               input$name_WithinParticipant7, input$name_WithinParticipant8,
+                               input$name_Trial_column, input$name_Extra_nested_column,
+                               input$name_Categorical_Dependent1, input$name_Categorical_Dependent2,
+                               input$name_Categorical_Dependent3, input$name_Categorical_Dependent4,
+                               input$name_Categorical_Dependent5, input$name_Categorical_Dependent6,
+                               input$name_Categorical_Dependent7, input$name_Categorical_Dependent8,
+                               input$name_Continuous_Dependent1, input$name_Continuous_Dependent2,
+                               input$name_Continuous_Dependent3, input$name_Continuous_Dependent4,
+                               input$name_Continuous_Dependent5, input$name_Continuous_Dependent6,
+                               input$name_Continuous_Dependent7, input$name_Continuous_Dependent8))) %>% 
+              select_if(is.numeric) %>% names()
+          ), list(Mean = mean, SD = sd))) %>% 
+          # round numeric variables
+          mutate(across(is.numeric, round, input$rounding))
+      )
+  })
+
+
+renderDT(
+  datatable(factorial_structure_with_individual_variables(), class = 'nowrap compact cell-border', selection = 'none',
+            options = list(order = list(1, 'asc'), dom = 'rt', scroller = TRUE, ordering = FALSE,
+                           pageLength = nrow(factorial_structure_with_individual_variables())),
+            # Fixed row names (source: https://stackoverflow.com/questions/55115183/r-dt-datatable-not-retaining-row-index-counter-column-after-selecting-new-page-w/55125758#55125758)
+            callback = JS(c(
+              "table.on('draw.dt', function(){",
+              "  var PageInfo = table.page.info();",
+              "  table.column(0, {page: 'current'}).nodes().each(function(cell,i){", 
+              "    cell.innerHTML = i + 1 + PageInfo.start;",
+              "  });",
+              "})"
+            ))) %>% 
+    formatStyle(0, Color = '#595143', backgroundColor = '#EFF1F8')
+)
+
+```
+
+
+Column
+-----------------------------------------------------------------------
 
 ### <span style='font-weight:bold; font-size:15px; color:#BF4000;'>Categorical 1</span>
 
 ```{r}
 
-renderUI({
-  # if(input$examples == 'None') {
-    tagList(
-      textAreaInput(height = '45px', resize = 'vertical', 'name_Categorical_Independent1', NULL, placeholder = 'Variable name'),
-      textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Independent1', NULL, placeholder = 'Levels'),
-      textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Independent1', NULL, placeholder = 'Relative probability [0, 1] (per group)')
-    )
-  # }
-  # else if(input$examples == 'Example 1') {
-  #   tagList(
-  #     textAreaInput(height = '45px', resize = 'vertical', 'name_Categorical_Independent1', NULL, value = 'Cat_Indiv_1'),
-  #     textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Independent1', NULL, value = 'A, B, C'),
-  #     textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Independent1', NULL, value = '.3')
-  #   )   
-  # } else if(input$examples == 'Example 2') {
-  #   tagList(
-  #     textAreaInput(height = '45px', resize = 'vertical', 'name_Categorical_Independent1', NULL, value = 'Cat_Indiv_2'),
-  #     textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Independent1', NULL, value = 'A, B, C'),
-  #     textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Independent1', NULL, value = '.3')
-  #   )   
-  # } else if(input$examples == 'Example 3') {
-  #   tagList(
-  #     textAreaInput(height = '45px', resize = 'vertical', 'name_Categorical_Independent1', NULL, value = 'Cat_Indiv_3'),
-  #     textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Independent1', NULL, value = 'A, B, C'),
-  #     textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Independent1', NULL, value = '.3')
-  #   )   
-  # }
-})
-
+textAreaInput(height = '45px', resize = 'vertical', 'name_Categorical_Independent1', NULL, placeholder = 'Variable name')
+textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Independent1', NULL, placeholder = 'Levels')
+textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Independent1', NULL, placeholder = 'Relative probability [0, 1] (per group)')
 
 reactive({
   if(isTruthy(input$probability_Categorical_Independent1)) {
@@ -605,12 +809,13 @@ reactive({
     levels_Categorical_Independent1 = eval(parse(text = paste0('c(', levels_Categorical_Independent1, ')')))
     Categorical_Independent1 = as.factor(Categorical_Independent1)
     levels(Categorical_Independent1) = levels_Categorical_Independent1
-    cat('\nProportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~\n')
+    cat('\nProportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
     Categorical_Independent1 %>% levels() %>% trimws() %>%
-      paste0(., ': ', (table(Categorical_Independent1) / sum(table(Categorical_Independent1)) * 100) %>%
-               round(digits = input$rounding), '%', collapse = '\n') %>%
+      paste0(., ': ', (table(Categorical_Independent1) / sum(table(Categorical_Independent1)) * 100) %>% 
+               round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
-    cat("\n\nNOTE: If any level has 0%, please slightly\nincrease sample size in the 'Size (N)' tab.")
+    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
+        "\nSee summary table for proportions per cell.\n_")
   }
 })
 
@@ -639,12 +844,13 @@ reactive({
     levels_Categorical_Independent2 = eval(parse(text = paste0('c(', levels_Categorical_Independent2, ')')))
     Categorical_Independent2 = as.factor(Categorical_Independent2)
     levels(Categorical_Independent2) = levels_Categorical_Independent2
-    cat('\nProportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~\n')
+    cat('\nProportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
     Categorical_Independent2 %>% levels() %>% trimws() %>%
       paste0(., ': ', (table(Categorical_Independent2) / sum(table(Categorical_Independent2)) * 100) %>% 
-               round(digits = input$rounding), '%', collapse = '\n') %>%
+               round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
-    cat("\n\nNOTE: If any level has 0%, please slightly\nincrease sample size in the 'Size (N)' tab.")
+    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
+        "\nSee summary table for proportions per cell.\n_")
   }
 })
 
@@ -673,12 +879,13 @@ reactive({
     levels_Categorical_Independent3 = eval(parse(text = paste0('c(', levels_Categorical_Independent3, ')')))
     Categorical_Independent3 = as.factor(Categorical_Independent3)
     levels(Categorical_Independent3) = levels_Categorical_Independent3
-    cat('\nProportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~\n')
+    cat('\nProportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
     Categorical_Independent3 %>% levels() %>% trimws() %>%
       paste0(., ': ', (table(Categorical_Independent3) / sum(table(Categorical_Independent3)) * 100) %>% 
-               round(digits = input$rounding), '%', collapse = '\n') %>%
+               round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
-    cat("\n\nNOTE: If any level has 0%, please slightly\nincrease sample size in the 'Size (N)' tab.")
+    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
+        "\nSee summary table for proportions per cell.\n_")
   }
 })
 
@@ -707,12 +914,13 @@ reactive({
     levels_Categorical_Independent4 = eval(parse(text = paste0('c(', levels_Categorical_Independent4, ')')))
     Categorical_Independent4 = as.factor(Categorical_Independent4)
     levels(Categorical_Independent4) = levels_Categorical_Independent4
-    cat('\nProportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~\n')
+    cat('\nProportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
     Categorical_Independent4 %>% levels() %>% trimws() %>%
       paste0(., ': ', (table(Categorical_Independent4) / sum(table(Categorical_Independent4)) * 100) %>% 
-               round(digits = input$rounding), '%', collapse = '\n') %>%
+               round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
-    cat("\n\nNOTE: If any level has 0%, please slightly\nincrease sample size in the 'Size (N)' tab.")
+    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
+        "\nSee summary table for proportions per cell.\n_")
   }
 })
 
@@ -741,12 +949,13 @@ reactive({
     levels_Categorical_Independent5 = eval(parse(text = paste0('c(', levels_Categorical_Independent5, ')')))
     Categorical_Independent5 = as.factor(Categorical_Independent5)
     levels(Categorical_Independent5) = levels_Categorical_Independent5
-    cat('\nProportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~\n')
+    cat('\nProportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
     Categorical_Independent5 %>% levels() %>% trimws() %>%
       paste0(., ': ', (table(Categorical_Independent5) / sum(table(Categorical_Independent5)) * 100) %>% 
-               round(digits = input$rounding), '%', collapse = '\n') %>%
+               round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
-    cat("\n\nNOTE: If any level has 0%, please slightly\nincrease sample size in the 'Size (N)' tab.")
+    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
+        "\nSee summary table for proportions per cell.\n_")
   }
 })
 
@@ -775,12 +984,13 @@ reactive({
     levels_Categorical_Independent6 = eval(parse(text = paste0('c(', levels_Categorical_Independent6, ')')))
     Categorical_Independent6 = as.factor(Categorical_Independent6)
     levels(Categorical_Independent6) = levels_Categorical_Independent6
-    cat('\nProportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~\n')
+    cat('\nProportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
     Categorical_Independent6 %>% levels() %>% trimws() %>%
       paste0(., ': ', (table(Categorical_Independent6) / sum(table(Categorical_Independent6)) * 100) %>% 
-               round(digits = input$rounding), '%', collapse = '\n') %>%
+               round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
-    cat("\n\nNOTE: If any level has 0%, please slightly\nincrease sample size in the 'Size (N)' tab.")
+    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
+        "\nSee summary table for proportions per cell.\n_")
   }
 })
 
@@ -809,12 +1019,13 @@ reactive({
     levels_Categorical_Independent7 = eval(parse(text = paste0('c(', levels_Categorical_Independent7, ')')))
     Categorical_Independent7 = as.factor(Categorical_Independent7)
     levels(Categorical_Independent7) = levels_Categorical_Independent7
-    cat('\nProportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~\n')
+    cat('\nProportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
     Categorical_Independent7 %>% levels() %>% trimws() %>%
       paste0(., ': ', (table(Categorical_Independent7) / sum(table(Categorical_Independent7)) * 100) %>% 
-               round(digits = input$rounding), '%', collapse = '\n') %>%
+               round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
-    cat("\n\nNOTE: If any level has 0%, please slightly\nincrease sample size in the 'Size (N)' tab.")
+    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
+        "\nSee summary table for proportions per cell.\n_")
   }
 })
 
@@ -843,12 +1054,13 @@ reactive({
     levels_Categorical_Independent8 = eval(parse(text = paste0('c(', levels_Categorical_Independent8, ')')))
     Categorical_Independent8 = as.factor(Categorical_Independent8)
     levels(Categorical_Independent8) = levels_Categorical_Independent8
-    cat('\nProportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~\n')
+    cat('\nProportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
     Categorical_Independent8 %>% levels() %>% trimws() %>%
       paste0(., ': ', (table(Categorical_Independent8) / sum(table(Categorical_Independent8)) * 100) %>% 
-               round(digits = input$rounding), '%', collapse = '\n') %>%
+               round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
-    cat("\n\nNOTE: If any level has 0%, please slightly\nincrease sample size in the 'Size (N)' tab.")
+    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
+        "\nSee summary table for proportions per cell.\n_")
   }
 })
 
@@ -973,16 +1185,8 @@ levels_Categorical_Independent = reactive({
 <!-- ``` -->
 
 
-Column {style='padding-left: 40px; margin-left: 230px;'}
+Column
 -----------------------------------------------------------------------
-
-<div style = 'padding-left: 40px; padding-right: 40px; padding-top: 20px; padding-bottom: 20px; background-color: #FEFEFE; font-size: 16px; line-height: 1.6; max-width: 600px;'>
-
-### Continuous variables
-
-Where any groups exist (created in the Groups tab), to adjust the means and standard deviations for each group, multiple values may be entered, separated by commas, each corresponding to a group. For instance, with four groups, the means could be entered as $34, 543, 657, 123$, and the standard deviations as $10, 20, 25, 5$.
-
-</div>
 
 ### <span style='font-weight:bold; font-size:15px; color:#781A74;'>Continuous 1</span>
 
@@ -1226,11 +1430,13 @@ renderDT({
 
 <div style = 'padding-left: 40px; padding-right: 40px; padding-top: 20px; padding-bottom: 20px; background-color: #FEFEFE; font-size: 16px; line-height: 1.6;'>
 
-The factorial structure above should guide the setting of parameters in categorical and continuous dependent variables. Each row in the table corresponds to a *cell* in the current design. The overall summary including the dependent variables may be seen further below.
+The factorial structure above should guide the setting of parameters in this section. Each row corresponds to a *cell* in the current design.
 
-**Categorical: probability parameters.** To adjust the frequency of each level in each cell, multiple probability values may be entered, separated by commas, each corresponding to a cell. For instance, with a 2x2 design (four cells), the levels of a categorical dependent variable could be entered as 'correct, incorrect, unresponded', and the probabilities as $.2, .8, .4, .7$. This would mean that the most frequent level in Cells 1 to 4, respectively, would be 'correct', 'unresponded', 'incorrect', and 'unresponded'.
+**Categorical variables.** To adjust the frequency of each level in each cell, multiple probability values may be entered, separated by commas, each corresponding to a cell. For instance, with a 2x2 design (four cells), the levels of a categorical dependent variable could be entered as 'correct, incorrect, unresponded', and the probabilities as $.2, .8, .4, .7$. This would mean that the most frequent level in Cells 1 to 4, respectively, would be 'correct', 'unresponded', 'incorrect', and 'unresponded'.
 
-**Continuous: means and standard deviations.** To adjust the means and standard deviations for each cell, multiple values may be entered, separated by commas, each corresponding to a cell. For instance, with a 2x2 design (four cells), the means could be entered as $34, 543, 657, 123$, and the standard deviations as $10, 20, 25, 5$.
+**Continuous variables.** To adjust the means and standard deviations for each cell, multiple values may be entered, separated by commas, each corresponding to a cell. For instance, with a 2x2 design (four cells), the means could be entered as $34, 543, 657, 123$, and the standard deviations as $10, 20, 25, 5$.
+
+The overall summary, including the dependent variables, is shown below.
 
 </div>
 
@@ -1285,7 +1491,7 @@ renderDT(
 
 
 
-Column {data-width = 100px}
+Column
 -----------------------------------------------------------------------
 
 ### <span style='font-weight:bold; font-size:15px; color:#BF4000;'>Categorical 1</span>
@@ -1317,12 +1523,13 @@ reactive({
     Categorical_Dependent1 = as.factor(Categorical_Dependent1)
     levels(Categorical_Dependent1) = levels_Categorical_Dependent1
     
-    cat('\nOverall proportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
+    cat('\nOverall proportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
     Categorical_Dependent1 %>% levels() %>% trimws() %>%
       paste0(., ': ', (table(Categorical_Dependent1) / sum(table(Categorical_Dependent1)) * 100) %>% 
-               round(digits = input$rounding), '%', collapse = '\n') %>%
-      str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% paste0(., '\n') %>% cat()
-    cat('\nSee summary table for\nproportions per cell.')
+               round(digits = 2), '%', collapse = '\n') %>%
+      str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
+    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
+        "\nSee summary table for proportions per cell.\n_")
     
   }
 })
@@ -1358,12 +1565,13 @@ reactive({
     Categorical_Dependent2 = as.factor(Categorical_Dependent2)
     levels(Categorical_Dependent2) = levels_Categorical_Dependent2
     
-    cat('\nOverall proportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
+    cat('\nOverall proportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
     Categorical_Dependent2 %>% levels() %>% trimws() %>%
       paste0(., ': ', (table(Categorical_Dependent2) / sum(table(Categorical_Dependent2)) * 100) %>% 
-               round(digits = input$rounding), '%', collapse = '\n') %>%
-      str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% paste0(., '\n') %>% cat()
-    cat('\nSee summary table for\nproportions per cell.')
+               round(digits = 2), '%', collapse = '\n') %>%
+      str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
+    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
+        "\nSee summary table for proportions per cell.\n_")
     
   }
 })
@@ -1399,12 +1607,13 @@ reactive({
     Categorical_Dependent3 = as.factor(Categorical_Dependent3)
     levels(Categorical_Dependent3) = levels_Categorical_Dependent3
     
-    cat('\nOverall proportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
+    cat('\nOverall proportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
     Categorical_Dependent3 %>% levels() %>% trimws() %>%
       paste0(., ': ', (table(Categorical_Dependent3) / sum(table(Categorical_Dependent3)) * 100) %>% 
-               round(digits = input$rounding), '%', collapse = '\n') %>%
-      str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% paste0(., '\n') %>% cat()
-    cat('\nSee summary table for\nproportions per cell.')
+               round(digits = 2), '%', collapse = '\n') %>%
+      str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
+    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
+        "\nSee summary table for proportions per cell.\n_")
     
   }
 })
@@ -1440,12 +1649,13 @@ reactive({
     Categorical_Dependent4 = as.factor(Categorical_Dependent4)
     levels(Categorical_Dependent4) = levels_Categorical_Dependent4
     
-    cat('\nOverall proportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
+    cat('\nOverall proportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
     Categorical_Dependent4 %>% levels() %>% trimws() %>%
       paste0(., ': ', (table(Categorical_Dependent4) / sum(table(Categorical_Dependent4)) * 100) %>% 
-               round(digits = input$rounding), '%', collapse = '\n') %>%
-      str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% paste0(., '\n') %>% cat()
-    cat('\nSee summary table for\nproportions per cell.')
+               round(digits = 2), '%', collapse = '\n') %>%
+      str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
+    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
+        "\nSee summary table for proportions per cell.\n_")
     
   }
 })
@@ -1481,12 +1691,13 @@ reactive({
     Categorical_Dependent5 = as.factor(Categorical_Dependent5)
     levels(Categorical_Dependent5) = levels_Categorical_Dependent5
     
-    cat('\nOverall proportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
+    cat('\nOverall proportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
     Categorical_Dependent5 %>% levels() %>% trimws() %>%
       paste0(., ': ', (table(Categorical_Dependent5) / sum(table(Categorical_Dependent5)) * 100) %>% 
-               round(digits = input$rounding), '%', collapse = '\n') %>%
-      str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% paste0(., '\n') %>% cat()
-    cat('\nSee summary table for\nproportions per cell.')
+               round(digits = 2), '%', collapse = '\n') %>%
+      str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
+    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
+        "\nSee summary table for proportions per cell.\n_")
     
   }
 })
@@ -1522,12 +1733,13 @@ reactive({
     Categorical_Dependent6 = as.factor(Categorical_Dependent6)
     levels(Categorical_Dependent6) = levels_Categorical_Dependent6
     
-    cat('\nOverall proportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
+    cat('\nOverall proportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
     Categorical_Dependent6 %>% levels() %>% trimws() %>%
       paste0(., ': ', (table(Categorical_Dependent6) / sum(table(Categorical_Dependent6)) * 100) %>% 
-               round(digits = input$rounding), '%', collapse = '\n') %>%
-      str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% paste0(., '\n') %>% cat()
-    cat('\nSee summary table for\nproportions per cell.')
+               round(digits = 2), '%', collapse = '\n') %>%
+      str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
+    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
+        "\nSee summary table for proportions per cell.\n_")
     
   }
 })
@@ -1563,12 +1775,13 @@ reactive({
     Categorical_Dependent7 = as.factor(Categorical_Dependent7)
     levels(Categorical_Dependent7) = levels_Categorical_Dependent7
     
-    cat('\nOverall proportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
+    cat('\nOverall proportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
     Categorical_Dependent7 %>% levels() %>% trimws() %>%
       paste0(., ': ', (table(Categorical_Dependent7) / sum(table(Categorical_Dependent7)) * 100) %>% 
-               round(digits = input$rounding), '%', collapse = '\n') %>%
-      str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% paste0(., '\n') %>% cat()
-    cat('\nSee summary table for\nproportions per cell.')
+               round(digits = 2), '%', collapse = '\n') %>%
+      str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
+    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
+        "\nSee summary table for proportions per cell.\n_")
     
   }
 })
@@ -1604,12 +1817,13 @@ reactive({
     Categorical_Dependent8 = as.factor(Categorical_Dependent8)
     levels(Categorical_Dependent8) = levels_Categorical_Dependent8
     
-    cat('\nOverall proportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
+    cat('\nOverall proportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
     Categorical_Dependent8 %>% levels() %>% trimws() %>%
       paste0(., ': ', (table(Categorical_Dependent8) / sum(table(Categorical_Dependent8)) * 100) %>% 
-               round(digits = input$rounding), '%', collapse = '\n') %>%
-      str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% paste0(., '\n') %>% cat()
-    cat('\nSee summary table for\nproportions per cell.')
+               round(digits = 2), '%', collapse = '\n') %>%
+      str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
+    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
+        "\nSee summary table for proportions per cell.\n_")
     
   }
 })
@@ -2914,7 +3128,7 @@ textAreaInput(height = '45px', resize = 'vertical', 'ID_labels', NULL,
 
 #### Code details
 
-The sample size is interlocked with the factorial structure of the data set. That is, if any groups are created in the Groups tab, participants will be evenly drawn from the total *N* (in contrast, groups created in the Individuals tab distribute the number of participants as the user indicates in the *Probability* field). For any within-participant factors, repeated measures are created by expanding the number of rows in the long-format data set ([last tab](#dataset)).
+The sample size is interlocked with the factorial structure of the data set. That is, if any groups are created in the Groups tab, participants will be evenly drawn from the total *N* (in contrast, groups created in the *Individual* tab distribute the number of participants as the user indicates in the *Probability* field). For any within-participant factors, repeated measures are created by expanding the number of rows in the long-format data set ([last tab](#dataset)).
 
 </div>
 
@@ -2929,6 +3143,8 @@ Inputs {.sidebar style='max-width: 600px; overflow: scroll; overflow-y: hidden; 
 ### {.no-title}
 
 <div style = 'padding-top: 20px; padding-right: 5px; padding-bottom: 10px;'>
+
+A custom summary of the data set can be constructed by entering specific variables in the fields below.
 
 ```{r}
 
@@ -3040,7 +3256,7 @@ renderDT(
                                                filename = paste0('Custom summary of simulated data - retrieved on ',
                                                                  str_replace_all(format(Sys.time(), '%d-%b-%Y_%X-%Z'), ':', '-') %>%
                                                                    str_replace_all('\\ ', '-'), 
-                                                                 ' -- find info on GitHub repository pablobernabeu-Experiment-simulation-app')))),
+                                                                 " -- find info in Pablo Bernabeu's GitHub repository Experiment-simulation-app")))),
             # Fixed row names (source: https://stackoverflow.com/questions/55115183/r-dt-datatable-not-retaining-row-index-counter-column-after-selecting-new-page-w/55125758#55125758)
             callback = JS(c(
               "table.on('draw.dt', function(){",
@@ -3080,7 +3296,7 @@ parameters = reactive({
                       'https://github.com/pablobernabeu/Experimental-data-simulation/\n',
                       '- Reference -\n',
                       'Bernabeu, P., & Lynott, D. (2020). Web application for the\n',
-                      'simulation of experimental data (Version ', app_version, ').\n',
+                      'simulation of experimental data (Version ', app_version, '). Retrieved from\n',
                       'https://github.com/pablobernabeu/Experimental-data-simulation/.\n',
                       '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n',
                       '- Home tab -\n',
@@ -3126,7 +3342,7 @@ parameters = reactive({
   
   if(isTruthy(input$name_Categorical_Independent1)) {
     parameters = paste0(parameters, 
-                        '\n- Individuals tab -',
+                        '\n- Individual tab -',
                         '\nCategorical independent variable 1: ', input$name_Categorical_Independent1,
                         '\nLevels: ', input$levels_Categorical_Independent1, '\nProbability [0, 1] (per group): ', 
                         input$probability_Categorical_Independent1, '\n')
@@ -3183,7 +3399,7 @@ parameters = reactive({
   
   if(isTruthy(input$name_Continuous_Independent1)) {
     parameters = paste0(parameters, 
-                        '\n- Individuals tab -',
+                        '\n- Individual tab -',
                         '\nContinuous independent variable 1: ', input$name_Continuous_Independent1,
                         '\nMean (per group): ', input$Continuous_Independent_mean1, 
                         '\nSD (per group): ', input$Continuous_Independent1_SD, '\n')
@@ -3453,7 +3669,7 @@ output$parameters_download = downloadHandler(
     paste0('Parameter list (seed number ', input$seed, ') - retrieved on ',
            str_replace_all(format(Sys.time(), '%d-%b-%Y_%X-%Z'), ':', '-') %>%
              str_replace_all('\\ ', '-'), 
-           ' -- find info on GitHub repository pablobernabeu-Experiment-simulation-app.txt')
+           " -- find info in Pablo Bernabeu's GitHub repository Experiment-simulation-app.txt")
   },
   content = function(file) { cat(parameters(), file = file) }
 )
@@ -3703,7 +3919,7 @@ renderDT(
                                                filename = paste0('Data simulation using seed number ', input$seed, ' - retrieved on ',
                                                                  str_replace_all(format(Sys.time(), '%d-%b-%Y_%X-%Z'), ':', '-') %>%
                                                                    str_replace_all('\\ ', '-'), 
-                                                                 ' -- find info on GitHub repository pablobernabeu-Experiment-simulation-app')))),
+                                                                 " -- find info in Pablo Bernabeu's GitHub repository Experiment-simulation-app")))),
             # Fixed row names (source: https://stackoverflow.com/questions/55115183/r-dt-datatable-not-retaining-row-index-counter-column-after-selecting-new-page-w/55125758#55125758)
             callback = JS(c(
               "table.on('draw.dt', function(){",
@@ -3717,3 +3933,4 @@ renderDT(
 )
 
 ```
+
