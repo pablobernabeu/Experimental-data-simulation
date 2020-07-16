@@ -8,6 +8,40 @@ This web application is suitable for educational and research purposes in experi
 
 <a href="https://github.com/pablobernabeu/Experimental-data-simulation/raw/master/Screenshot.png"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://github.com/pablobernabeu/Experimental-data-simulation/raw/master/Screenshot.png" /></a>
 
+### Development
+
+If you want to develop or use the application locally, this can be done easily with the included [Dockerfile](Dockerfile).
+First, build the container:
+
+```bash
+docker build -t experiment-shiny-app .
+```
+
+And then run the container, selecting a password for the interface and binding to port 8787 on your local machine.
+
+```bash
+$ docker run --interactive --rm -e PASSWORD=<MYPASSWORD> -p 8787:8787 --name experiment-shiny-app --volume $(pwd):/home/rstudio experiment-shiny-app
+[s6-init] making user provided files available at /var/run/s6/etc...exited 0.
+[s6-init] ensuring user provided files have correct perms...exited 0.
+[fix-attrs.d] applying ownership & permissions fixes...
+[fix-attrs.d] done.
+[cont-init.d] executing container initialization scripts...
+[cont-init.d] add: executing... 
+Nothing additional to add
+[cont-init.d] add: exited 0.
+[cont-init.d] userconf: executing... 
+[cont-init.d] userconf: exited 0.
+[cont-init.d] done.
+[services.d] starting services
+[services.d] done.
+```
+
+You can then open [127.0.0.1:8787](127.0.0.1:8787) to see the interface and login with username "rstudio" and
+your chosen password. You can then select the RmD file and click "Run Document" to generate the window for the application,
+shown below.
+
+![img/interface.png](img/interface.png)
+
 ### Reference
 
 Bernabeu, P., & Lynott, D. (2020). Web application for the simulation of experimental data (Version 0.2). Retrieved from [https://github.com/pablobernabeu/Experiment-simulation-app/](https://github.com/pablobernabeu/Experiment-simulation-app/).
