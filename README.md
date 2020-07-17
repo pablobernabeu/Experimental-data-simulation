@@ -10,7 +10,7 @@ This web application is suitable for educational and research purposes in experi
 
 ### Development
 
-If you want to develop or use the application locally, this can be done easily by opening the script [web-application.Rmd](https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/web-application.Rmd] in RStudio, then installing the packages suggested by RStudio, and running the application. 
+If you want to develop or use the application locally, this can be done easily by opening the script [web-application.Rmd](https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/web-application.Rmd) in RStudio, then installing the packages suggested by RStudio, and running the application. 
 
 You can also use the included [Dockerfile](Dockerfile). First, build the container:
 
