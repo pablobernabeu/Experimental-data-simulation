@@ -6,7 +6,11 @@ This open-source, R-based web application is suitable for educational and resear
 
 ### :link: &nbsp; The web application can be [launched here](https://pablo-bernabeu.shinyapps.io/experimental-data-simulation/).
 
+<br>
+
 <a href="https://github.com/pablobernabeu/Experimental-data-simulation/raw/master/Screenshot.png"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://github.com/pablobernabeu/Experimental-data-simulation/raw/master/Screenshot.png" /></a>
+
+<br>
 
 ### Development
 
