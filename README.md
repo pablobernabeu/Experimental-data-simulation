@@ -49,6 +49,8 @@ shown below.
 
 ![img/interface.png](img/interface.png)
 
+<br>
+
 ### Reference
 
 Bernabeu, P., & Lynott, D. (2020). Web application for the simulation of experimental data (Version 0.2). Retrieved from [https://github.com/pablobernabeu/Experiment-simulation-app/](https://github.com/pablobernabeu/Experiment-simulation-app/).
