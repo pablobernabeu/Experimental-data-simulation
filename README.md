@@ -40,7 +40,7 @@ Nothing additional to add
 ```
 
 You can then open [127.0.0.1:8787](127.0.0.1:8787) to see the interface and login with username "rstudio" and
-your chosen password. You can then select the RmD file and click "Run Document" to generate the window for the application,
+your chosen password. You can then select the Rmd file and click "Run Document" to generate the window for the application,
 shown below.
 
 ![img/interface.png](img/interface.png)
