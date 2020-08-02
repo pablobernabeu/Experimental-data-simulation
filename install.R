@@ -9,4 +9,3 @@ install.packages('purrr')
 install.packages('ngram')
 install.packages('shiny')
 install.packages('htmltools')
-install.packages('httr')  # testing if this package is required for the Binder repo
