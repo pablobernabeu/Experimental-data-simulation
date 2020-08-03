@@ -12,11 +12,17 @@ This open-source, R-based web application is suitable for educational and resear
 
 <br>
 
-### Development
+### Options for development and local use of the app
 
-If you want to develop or use the application locally, this can be done easily by opening the script [web-application.Rmd](https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/web-application.Rmd) in RStudio, then installing the packages suggested by RStudio, and running the application. 
+# Option A. Rmd script
 
-#### Dockerfile
+Open the script [web-application.Rmd](https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/web-application.Rmd) in RStudio, install the packages suggested by RStudio, and run the application. 
+
+#### Option B. Binder RStudio
+
+Access the [**Binder RStudio environment**](https://mybinder.org/v2/gh/pablobernabeu/Experimental-data-simulation/master?urlpath=rstudio).
+
+#### Option C. Dockerfile
 
 You can also use the included [Dockerfile](Dockerfolder/Dockerfile). First, build the container:
 
@@ -82,4 +88,3 @@ Xie, Y. (2020). DT: A Wrapper of the JavaScript Library "DataTables". R package 
 ### Contact
 
 To submit any questions or feedback, please post [an issue](https://github.com/pablobernabeu/Experimental-data-simulation/issues), or email Pablo Bernabeu at [p.bernabeu@lancaster.ac.uk](mailto:p.bernabeu@lancaster.ac.uk).
-
