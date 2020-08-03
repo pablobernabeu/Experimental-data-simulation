@@ -20,7 +20,7 @@ Open the script [web-application.Rmd](https://github.com/pablobernabeu/Experimen
 
 #### Option B. Binder RStudio
 
-Access the [**Binder RStudio environment**](https://mybinder.org/v2/gh/pablobernabeu/Experimental-data-simulation/master?urlpath=rstudio).
+Access the [Binder RStudio environment](https://mybinder.org/v2/gh/pablobernabeu/Experimental-data-simulation/master?urlpath=rstudio).
 
 #### Option C. Dockerfile
 
