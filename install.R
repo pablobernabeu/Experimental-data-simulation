@@ -1,5 +1,5 @@
 install.packages('rmarkdown')
-#install.packages('flexdashboard')
+install.packages('flexdashboard')
 #install.packages('knitr')
 #install.packages('dplyr')
 #install.packages('tidyr')
