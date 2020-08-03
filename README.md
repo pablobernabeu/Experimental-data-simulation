@@ -18,7 +18,7 @@ If you want to develop or use the application locally, this can be done easily b
 
 #### Dockerfile
 
-You can also use the included [Dockerfile](Dockerfile). First, build the container:
+You can also use the included [Dockerfile](Dockerfolder/Dockerfile). First, build the container:
 
 ```bash
 docker build -t experiment-shiny-app .
