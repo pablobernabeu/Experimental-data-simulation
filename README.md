@@ -24,7 +24,7 @@ Please access the [Binder RStudio environment](https://mybinder.org/v2/gh/pablob
 
 #### C) Using Dockerfile ([@vsoch's PR](https://github.com/pablobernabeu/Experimental-data-simulation/pull/1))
 
-Please use the included [Dockerfile](Dockerfolder/Dockerfile). First, build the container:
+A [Dockerfile](Dockerfolder/Dockerfile) has been provided. First, build the container:
 
 ```bash
 docker build -t experiment-shiny-app .
