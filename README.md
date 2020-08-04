@@ -4,13 +4,13 @@
 
 This open-source, R-based web application is suitable for educational and research purposes in experimental and quantitative sciences. It allows the **creation of varied data sets with specified structures, such as between-group and within-participant variables, that can be categorical or continuous.** These features can be selected along the different tabs. In the penultimate tab, a custom summary of the current data set can be constructed. In the last tab, the list of parameters and the data set can be downloaded.
 
-### :link: &nbsp; The web application can be [launched here](https://pablo-bernabeu.shinyapps.io/experimental-data-simulation/).
-
 <br>
 
 <a href="https://github.com/pablobernabeu/Experimental-data-simulation/raw/master/Screenshot.png"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://github.com/pablobernabeu/Experimental-data-simulation/raw/master/Screenshot.png" /></a>
 
 <br>
+
+### :globe_with_meridians: &nbsp; The web application can be [launched here](https://pablo-bernabeu.shinyapps.io/experimental-data-simulation/).
 
 ### Options for development and local use of the app
 
