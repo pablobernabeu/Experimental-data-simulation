@@ -53,9 +53,11 @@ You can then open [127.0.0.1:8787](127.0.0.1:8787) to see the interface and logi
 your chosen password. You can then select the Rmd file and click "Run Document" to generate the window for the application,
 shown below.
 
-<p align="center">
+<p style='margin-bottom:90px;' align="center">
 <img style='display: block; margin-left: auto; margin-right: auto;' src="img/interface.png" width='60%'>
 </p>
+
+<br>
 
 ### Reference
 
