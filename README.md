@@ -57,8 +57,6 @@ shown below.
 <img style='display: block; margin-left: auto; margin-right: auto;' src="img/interface.png" width='60%'>
 </p>
 
-<br>
-
 ### Reference
 
 Bernabeu, P., & Lynott, D. (2020). Web application for the simulation of experimental data (Version 0.2). Retrieved from [https://github.com/pablobernabeu/Experiment-simulation-app/](https://github.com/pablobernabeu/Experiment-simulation-app/).
