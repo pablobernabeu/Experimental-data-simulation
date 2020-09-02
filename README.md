@@ -16,11 +16,11 @@ This open-source, R-based web application is suitable for educational and resear
 
 #### A) Using Rmd script
 
-Please open the script [web-application.Rmd](https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/web-application.Rmd) in RStudio, install the packages suggested by RStudio, run the application by clicking on <kbd>▶️&nbsp; Run document</kbd> at the top left, or running `rmarkdown::run('web-application.Rmd')` in the console, and click on <kbd>Open in Browser</kbd> at the top right. 
+Please open the script [web-application.Rmd](https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/web-application.Rmd) in RStudio, install the packages suggested by RStudio, run the application by clicking on <kbd>▶️&nbsp; Run document</kbd> at the top left, or running `rmarkdown::run('web-application.Rmd')` in the console, and click on <kbd>Open in Browser</kbd> at the top left. 
 
 #### B) Using Binder RStudio
 
-Please access the [Binder RStudio environment](https://mybinder.org/v2/gh/pablobernabeu/Experimental-data-simulation/master?urlpath=rstudio), open the script 'web-application.Rmd' in the Files pane, and run the application by clicking on <kbd>▶️&nbsp; Run document</kbd> at the top left, or running `rmarkdown::run('web-application.Rmd')` in the console, and click on <kbd>Open in Browser</kbd> at the top right. 
+Please access the [Binder RStudio environment](https://mybinder.org/v2/gh/pablobernabeu/Experimental-data-simulation/master?urlpath=rstudio), open the script 'web-application.Rmd' in the Files pane, and run the application by clicking on <kbd>▶️&nbsp; Run document</kbd> at the top left, or running `rmarkdown::run('web-application.Rmd')` in the console, and click on <kbd>Open in Browser</kbd> at the top left. 
 
 #### C) Using Dockerfile ([@vsoch's pull request](https://github.com/pablobernabeu/Experimental-data-simulation/pull/1))
 
