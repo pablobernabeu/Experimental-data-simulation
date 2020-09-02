@@ -20,7 +20,7 @@ Please open the script [web-application.Rmd](https://github.com/pablobernabeu/Ex
 
 #### B) Using Binder RStudio
 
-Please access the [Binder RStudio environment](https://mybinder.org/v2/gh/pablobernabeu/Experimental-data-simulation/master?urlpath=rstudio), open the script 'web-application.Rmd' in the Files pane, and run the application by clicking on <kbd>▶️&nbsp; Run document</kbd> at the top left, or running `rmarkdown::run('web-application.Rmd')` in the console.
+Please access the [Binder RStudio environment](https://mybinder.org/v2/gh/pablobernabeu/Experimental-data-simulation/master?urlpath=rstudio), open the script 'web-application.Rmd' in the Files pane, and run the application by clicking on <kbd>▶️&nbsp; Run document</kbd> at the top left, or running `rmarkdown::run('web-application.Rmd')` in the console, and click on <kbd>Open in Browser</kbd> at the top right. 
 
 #### C) Using Dockerfile ([@vsoch's pull request](https://github.com/pablobernabeu/Experimental-data-simulation/pull/1))
 
