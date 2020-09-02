@@ -16,7 +16,7 @@ This open-source, R-based web application is suitable for educational and resear
 
 #### A) Using Rmd script
 
-Please open the script [web-application.Rmd](https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/web-application.Rmd) in RStudio, install the packages suggested by RStudio, and run the application by clicking on <kbd>▶️&nbsp; Run document</kbd> at the top left, or running `rmarkdown::run('web-application.Rmd')` in the console. 
+Please open the script [web-application.Rmd](https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/web-application.Rmd) in RStudio, install the packages suggested by RStudio, run the application by clicking on <kbd>▶️&nbsp; Run document</kbd> at the top left, or running `rmarkdown::run('web-application.Rmd')` in the console, and click on <kbd>Open in Browser</kbd> at the top right. 
 
 #### B) Using Binder RStudio
 
