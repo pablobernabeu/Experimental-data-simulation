@@ -16,11 +16,11 @@ This open-source, R-based web application is suitable for educational and resear
 
 #### A) Using Rmd script
 
-Please open the script [web-application.Rmd](https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/web-application.Rmd) in RStudio, install the packages suggested by RStudio, run the application by clicking on <kbd>▶️&nbsp; Run document</kbd> at the top left, or running `rmarkdown::run('web-application.Rmd')` in the console, and click on <kbd>Open in Browser</kbd> at the top left. 
+Please open the script [index.Rmd](https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/index.Rmd) in RStudio, install the packages suggested by RStudio, run the application by clicking on <kbd>▶️&nbsp; Run document</kbd> at the top left, or running `rmarkdown::run('index.Rmd')` in the console, and click on <kbd>Open in Browser</kbd> at the top left. 
 
 #### B) Using Binder RStudio
 
-Please access the [Binder RStudio environment](https://mybinder.org/v2/gh/pablobernabeu/Experimental-data-simulation/master?urlpath=rstudio), open the script 'web-application.Rmd' in the Files pane, and run the application by clicking on <kbd>▶️&nbsp; Run document</kbd> at the top left, or running `rmarkdown::run('web-application.Rmd')` in the console, and click on <kbd>Open in Browser</kbd> at the top left. 
+Please access the [Binder RStudio environment](https://mybinder.org/v2/gh/pablobernabeu/Experimental-data-simulation/master?urlpath=rstudio), open the script 'index.Rmd' in the Files pane, and run the application by clicking on <kbd>▶️&nbsp; Run document</kbd> at the top left, or running `rmarkdown::run('index.Rmd')` in the console, and click on <kbd>Open in Browser</kbd> at the top left. 
 
 #### C) Using Dockerfile ([@vsoch's pull request](https://github.com/pablobernabeu/Experimental-data-simulation/pull/1))
 
@@ -65,7 +65,7 @@ Bernabeu, P., & Lynott, D. (2020). Web application for the simulation of experim
 
 ### Code
 
-This web application was developed in [R](https://www.r-project.org/about.html) (R Core Team, 2020). The code is [available on Github](https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/web-application.Rmd), where contributions may be made. The initial code for this application was influenced by Section 5.7 in Crump (2017; [*Simulating data for multi-factor designs*](https://crumplab.github.io/programmingforpsych/simulating-and-analyzing-data-in-r.html#simulating-data-for-multi-factor-designs)). The R packages used include Shiny (Chang, Cheng, Allaire, Xie, & McPherson, 2020), Tidyverse (Wickham et al., 2019) and DT (Xie, 2020).
+This web application was developed in [R](https://www.r-project.org/about.html) (R Core Team, 2020). The code is [available on Github](https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/index.Rmd), where contributions may be made. The initial code for this application was influenced by Section 5.7 in Crump (2017; [*Simulating data for multi-factor designs*](https://crumplab.github.io/programmingforpsych/simulating-and-analyzing-data-in-r.html#simulating-data-for-multi-factor-designs)). The R packages used include Shiny (Chang, Cheng, Allaire, Xie, & McPherson, 2020), Tidyverse (Wickham et al., 2019) and DT (Xie, 2020).
 
 ### Acknowledgements
 
