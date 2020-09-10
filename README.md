@@ -18,7 +18,7 @@ Bernabeu, P., & Lynott, D. (2020). Web application for the simulation of experim
 
 ### Code
 
-This web application was developed in [R](https://www.r-project.org/about.html) (R Core Team, 2020). The code is [available on Github](https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/index.Rmd), where contributions may be made. The initial code for this application was influenced by Section 5.7 in Crump (2017; [*Simulating data for multi-factor designs*](https://crumplab.github.io/programmingforpsych/simulating-and-analyzing-data-in-r.html#simulating-data-for-multi-factor-designs)). The R packages used include Shiny (Chang, Cheng, Allaire, Xie, & McPherson, 2020), Tidyverse (Wickham et al., 2019) and DT (Xie, 2020).
+This web application was developed in [R](https://www.r-project.org/about.html) (R Core Team, 2020). The code is [available on Github](https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/index.Rmd), where contributions may be made. The initial code for this application was influenced by Section 5.7 ([*Simulating data for multi-factor designs*](https://crumplab.github.io/programmingforpsych/simulating-and-analyzing-data-in-r.html#simulating-data-for-multi-factor-designs)) in Crump (2017). The R packages used include Shiny (Chang, Cheng, Allaire, Xie, & McPherson, 2020), Tidyverse (Wickham et al., 2019) and DT (Xie, 2020).
 
 ### Options for development and local use of the app
 
