@@ -251,7 +251,7 @@ Column {style='padding-top:30px;'}
 
 <div style = 'font-size: 20px; color: #614064; padding-top: 10px; padding-bottom: 10px;'><i class="fas fa-chalkboard-teacher fa-xs" aria-hidden="true"></i> <i class="fas fa-university fa-xs" aria-hidden="true"></i>&nbsp; Purposes </div>
 
-This open-source, R-based web application is suitable for educational and research purposes in experimental and quantitative sciences. It allows the **creation of varied data sets with specified structures, such as between-group and within-participant variables, that can be categorical or continuous.** These features can be selected along the different tabs. In the penultimate tab, a custom summary of the current data set can be constructed. In the last tab, the list of parameters and the data set can be downloaded.
+This open-source, R-based web application is suitable for educational and research purposes in experimental and quantitative sciences. It allows the **creation of varied data sets with specified structures, such as between-group and within-participant variables, that can be categorical or continuous.** These features can be selected along the different tabs. In the penultimate tab, a custom summary of the current data set can be constructed. In the last tab, the list of parameters and the data set can be downloaded. The main benefits of this app include time-saving, as no programming is required, and flexibility in the control of parameters.
 
 Screenshot of the *Dependent* tab ([view larger](https://github.com/pablobernabeu/Experimental-data-simulation/raw/master/Screenshot.png){target='_blank'})
 
@@ -273,7 +273,7 @@ numericInput('rounding', NULL, 3, min = 1, width = '60px')
 
 Reproducing a simulation requires three pieces of data: the seed number, the parameter list and the final data set. After creating the variables wanted, make sure to download the parameter list and the final data set in the [last tab](#dataset). The seed number will be part of the names of the downloaded files.
 
-A seed number is a code that allows the reproducibility of any data involving random generation. This applies to any variables created in the *Individual* tab or in the *Dependent* tab. The number is shown below, where you can change it to any integer number up to Â±`r .Machine$integer.max`.
+A seed number is a code that allows the reproducibility of any data involving random generation. This applies to any variables created in the *Individual* tab or in the *Dependent* tab. The number is shown below, where you can change it to any integer number up to ±`r .Machine$integer.max`.
 
 ```{r}
 
@@ -282,8 +282,19 @@ tags$style(type = 'text/css',
 
 numericInput('seed', NULL, sample(1:99999, 1), step = 1, min = -.Machine$integer.max, max = .Machine$integer.max)
 
-# Coding note: The seed from input$seed should now be set right before any random sampling function, 
-# such as rnorm() or rbinom(), using set.seed(input$seed).
+
+## Important notes about the seed ##
+
+# The seed from input$seed must be set right before any random sampling function, such as rnorm() or rbinom(), 
+# using set.seed(input$seed). 
+
+# To avoid creating systematic patterns across variables, which would limit the use of having different 
+# variables (e.g., the correlations among continuous variables would be 1), each seed number must be in 
+# turn multiplied by a different number. These multiplication factors have been sequentially assigned, 
+# beginning from the Independent Categorical 2 variable (multiplication factor = 1) all the  way down to
+# the Dependent Continuous 8 variable (multiplication factor = 32). These numbers cannot be set using a 
+# function-based random number (e.g., using the 'sample()' function) because that would render the seed 
+# number useless, due to the crossing of random numbers.
 
 ```
 
@@ -295,7 +306,7 @@ Bernabeu, P., & Lynott, D. (2020). Web application for the simulation of experim
 
 ### Code
 
-This web application was developed in [R](https://www.r-project.org/about.html){target='_blank'} (R Core Team, 2020). The code is [available on Github](https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/web-application.Rmd){target='_blank'}, where contributions may be made. The initial code for this application was influenced by Section 5.7 in Crump (2017; [*Simulating data for multi-factor designs*](https://crumplab.github.io/programmingforpsych/simulating-and-analyzing-data-in-r.html#simulating-data-for-multi-factor-designs){target='_blank'}). The R packages used include Shiny (Chang, Cheng, Allaire, Xie, & McPherson, 2020), Tidyverse (Wickham et al., 2019) and DT (Xie, 2020).
+This web application was developed in [R](https://www.r-project.org/about.html){target='_blank'} (R Core Team, 2020). The code is [available on Github](https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/index.Rmd){target='_blank'}, where contributions may be made. The initial code for this application was influenced by Section 5.7 in Crump (2017; [*Simulating data for multi-factor designs*](https://crumplab.github.io/programmingforpsych/simulating-and-analyzing-data-in-r.html#simulating-data-for-multi-factor-designs){target='_blank'}). The R packages used include Shiny (Chang, Cheng, Allaire, Xie, & McPherson, 2020), Tidyverse (Wickham et al., 2019) and DT (Xie, 2020).
 
 ### Acknowledgements
 
@@ -668,13 +679,13 @@ renderDT({
 
 <div style = 'padding-left: 40px; padding-right: 40px; padding-top: 15px; padding-bottom: 20px; background-color: #FEFEFE; font-size: 16px; line-height: 1.6;'>
 
-The factorial structure above should guide the setting of parameters in this section. Each row corresponds to each combination of the groups.
+The parameters for the dependent variables may be set generally for the whole data set. However, the parameters may also be adjusted by group ([tab](#groups)), if any groups have been created. Where any groups exist, they will constitute a factorial structure that will be displayed in the table above. Each row corresponds to a *cell* in that structure.
 
-**Categorical variables.** Where any groups exist (created in the Groups tab), to adjust the frequency of each level in the factors below per group, multiple probability values may be entered, separated by commas, each corresponding to a group. For instance, with four groups, the levels of a categorical independent variable could be entered as 'A, B, C', and the probabilities as $.2, .8, .4, .7$. This would mean that the most frequent level in Groups 1 to 4, respectively, would be A, C, B, and B.
+**Categorical variables.** This is a pseudorandom variable. Thus, it differs from *Groups* in that the categories are assigned to each cell following a probability input entered by the user (programming detail: using `rbinom()`). This input can range from 0 to 1. Values toward 0 increase the proportions of levels entered first, and values toward 1 increase the levels entered last. Where any groups exist (created in the Groups tab), to adjust the frequency of each level in the factors below per group, multiple probability values may be entered, separated by commas, each corresponding to a group. For instance, with four groups, the levels of a categorical independent variable could be entered as 'A, B, C', and the probabilities as $.2, .8, .4, .7$. This would mean that the most frequent level in Groups 1 to 4, respectively, would be A, C, B, and B.
 
 **Continuous variables.** Where any groups exist (created in the Groups tab), to adjust the means and standard deviations for each group, multiple values may be entered, separated by commas, each corresponding to a group. For instance, with four groups, the means could be entered as $34, 543, 657, 123$, and the standard deviations as $10, 20, 25, 5$.
 
-The overall summary, including the individual variables, is shown below.
+Since both of these variables use randomising, the user's parameters will be more closely approached with larger samples ([adjust](#size-n)). The overall summary, including the dependent variables, is shown below.
 
 </div>
 
@@ -796,23 +807,14 @@ textAreaInput(height = '45px', resize = 'vertical', 'name_Categorical_Independen
 textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Independent1', NULL, placeholder = 'Levels')
 textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Independent1', NULL, placeholder = 'Relative probability [0, 1] (per group)')
 
+# The code below will display a summary of the variable designed by the user. 
+# Note that the variable is actually created and saved further below (see 'Create final data set').
+
 reactive({
   if(isTruthy(input$probability_Categorical_Independent1)) {
-    set.seed(input$seed)
-    Categorical_Independent1 = rbinom(final_N(),
-                                      # Below, count number of levels
-                                      # One unit has to be subtracted from the word count to make rbinom() accurate
-                                      ngram::wordcount(input$levels_Categorical_Independent1, sep = ',') - 1,
-                                      eval(parse(text = paste0('c(', input$probability_Categorical_Independent1, ')'))))
-    # Place quotes around each factor level
-    levels_Categorical_Independent1 = sapply(strsplit(input$levels_Categorical_Independent1, ',+'), function(x) toString(dQuote(x, FALSE)))
-    # Wrap levels in c()
-    levels_Categorical_Independent1 = eval(parse(text = paste0('c(', levels_Categorical_Independent1, ')')))
-    Categorical_Independent1 = as.factor(Categorical_Independent1)
-    levels(Categorical_Independent1) = levels_Categorical_Independent1
     cat('\nProportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
-    Categorical_Independent1 %>% levels() %>% trimws() %>%
-      paste0(., ': ', (table(Categorical_Independent1) / sum(table(Categorical_Independent1)) * 100) %>% 
+    Categorical_Independent1() %>% levels() %>% trimws() %>%
+      paste0(., ': ', (table(Categorical_Independent1()) / sum(table(Categorical_Independent1())) * 100) %>%
                round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
     cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
@@ -831,23 +833,14 @@ textAreaInput(height = '45px', resize = 'vertical', 'name_Categorical_Independen
 textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Independent2', NULL, placeholder = 'Levels')
 textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Independent2', NULL, placeholder = 'Relative probability [0, 1] (per group)')
 
+# The code below will display a summary of the variable designed by the user. 
+# Note that the variable is actually created and saved further below (see 'Create final data set').
+
 reactive({
   if(isTruthy(input$probability_Categorical_Independent2)) {
-    set.seed(input$seed)
-    Categorical_Independent2 = rbinom(final_N(),
-                                      # Below, count number of levels
-                                      # One unit has to be subtracted from the word count to make rbinom() accurate
-                                      ngram::wordcount(input$levels_Categorical_Independent2, sep = ',') - 1,
-                                      eval(parse(text = paste0('c(', input$probability_Categorical_Independent2, ')'))))
-    # Place quotes around each factor level
-    levels_Categorical_Independent2 = sapply(strsplit(input$levels_Categorical_Independent2, ',+'), function(x) toString(dQuote(x, FALSE)))
-    # Wrap levels in c()
-    levels_Categorical_Independent2 = eval(parse(text = paste0('c(', levels_Categorical_Independent2, ')')))
-    Categorical_Independent2 = as.factor(Categorical_Independent2)
-    levels(Categorical_Independent2) = levels_Categorical_Independent2
     cat('\nProportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
-    Categorical_Independent2 %>% levels() %>% trimws() %>%
-      paste0(., ': ', (table(Categorical_Independent2) / sum(table(Categorical_Independent2)) * 100) %>% 
+    Categorical_Independent2() %>% levels() %>% trimws() %>%
+      paste0(., ': ', (table(Categorical_Independent2()) / sum(table(Categorical_Independent2())) * 100) %>% 
                round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
     cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
@@ -866,23 +859,14 @@ textAreaInput(height = '45px', resize = 'vertical', 'name_Categorical_Independen
 textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Independent3', NULL, placeholder = 'Levels')
 textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Independent3', NULL, placeholder = 'Relative probability [0, 1] (per group)')
 
+# The code below will display a summary of the variable designed by the user. 
+# Note that the variable is actually created and saved further below (see 'Create final data set').
+
 reactive({
   if(isTruthy(input$probability_Categorical_Independent3)) {
-    set.seed(input$seed)
-    Categorical_Independent3 = rbinom(final_N(),
-                                      # Below, count number of levels
-                                      # One unit has to be subtracted from the word count to make rbinom() accurate
-                                      ngram::wordcount(input$levels_Categorical_Independent3, sep = ',') - 1,
-                                      eval(parse(text = paste0('c(', input$probability_Categorical_Independent3, ')'))))
-    # Place quotes around each factor level
-    levels_Categorical_Independent3 = sapply(strsplit(input$levels_Categorical_Independent3, ',+'), function(x) toString(dQuote(x, FALSE)))
-    # Wrap levels in c()
-    levels_Categorical_Independent3 = eval(parse(text = paste0('c(', levels_Categorical_Independent3, ')')))
-    Categorical_Independent3 = as.factor(Categorical_Independent3)
-    levels(Categorical_Independent3) = levels_Categorical_Independent3
     cat('\nProportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
-    Categorical_Independent3 %>% levels() %>% trimws() %>%
-      paste0(., ': ', (table(Categorical_Independent3) / sum(table(Categorical_Independent3)) * 100) %>% 
+    Categorical_Independent3() %>% levels() %>% trimws() %>%
+      paste0(., ': ', (table(Categorical_Independent3()) / sum(table(Categorical_Independent3())) * 100) %>% 
                round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
     cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
@@ -901,23 +885,14 @@ textAreaInput(height = '45px', resize = 'vertical', 'name_Categorical_Independen
 textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Independent4', NULL, placeholder = 'Levels')
 textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Independent4', NULL, placeholder = 'Relative probability [0, 1] (per group)')
 
+# The code below will display a summary of the variable designed by the user. 
+# Note that the variable is actually created and saved further below (see 'Create final data set').
+
 reactive({
   if(isTruthy(input$probability_Categorical_Independent4)) {
-    set.seed(input$seed)
-    Categorical_Independent4 = rbinom(final_N(),
-                                      # Below, count number of levels
-                                      # One unit has to be subtracted from the word count to make rbinom() accurate
-                                      ngram::wordcount(input$levels_Categorical_Independent4, sep = ',') - 1,
-                                      eval(parse(text = paste0('c(', input$probability_Categorical_Independent4, ')'))))
-    # Place quotes around each factor level
-    levels_Categorical_Independent4 = sapply(strsplit(input$levels_Categorical_Independent4, ',+'), function(x) toString(dQuote(x, FALSE)))
-    # Wrap levels in c()
-    levels_Categorical_Independent4 = eval(parse(text = paste0('c(', levels_Categorical_Independent4, ')')))
-    Categorical_Independent4 = as.factor(Categorical_Independent4)
-    levels(Categorical_Independent4) = levels_Categorical_Independent4
     cat('\nProportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
-    Categorical_Independent4 %>% levels() %>% trimws() %>%
-      paste0(., ': ', (table(Categorical_Independent4) / sum(table(Categorical_Independent4)) * 100) %>% 
+    Categorical_Independent4() %>% levels() %>% trimws() %>%
+      paste0(., ': ', (table(Categorical_Independent4()) / sum(table(Categorical_Independent4())) * 100) %>% 
                round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
     cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
@@ -936,23 +911,14 @@ textAreaInput(height = '45px', resize = 'vertical', 'name_Categorical_Independen
 textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Independent5', NULL, placeholder = 'Levels')
 textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Independent5', NULL, placeholder = 'Relative probability [0, 1] (per group)')
 
+# The code below will display a summary of the variable designed by the user. 
+# Note that the variable is actually created and saved further below (see 'Create final data set').
+
 reactive({
   if(isTruthy(input$probability_Categorical_Independent5)) {
-    set.seed(input$seed)
-    Categorical_Independent5 = rbinom(final_N(),
-                                      # Below, count number of levels
-                                      # One unit has to be subtracted from the word count to make rbinom() accurate
-                                      ngram::wordcount(input$levels_Categorical_Independent5, sep = ',') - 1,
-                                      eval(parse(text = paste0('c(', input$probability_Categorical_Independent5, ')'))))
-    # Place quotes around each factor level
-    levels_Categorical_Independent5 = sapply(strsplit(input$levels_Categorical_Independent5, ',+'), function(x) toString(dQuote(x, FALSE)))
-    # Wrap levels in c()
-    levels_Categorical_Independent5 = eval(parse(text = paste0('c(', levels_Categorical_Independent5, ')')))
-    Categorical_Independent5 = as.factor(Categorical_Independent5)
-    levels(Categorical_Independent5) = levels_Categorical_Independent5
     cat('\nProportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
-    Categorical_Independent5 %>% levels() %>% trimws() %>%
-      paste0(., ': ', (table(Categorical_Independent5) / sum(table(Categorical_Independent5)) * 100) %>% 
+    Categorical_Independent5() %>% levels() %>% trimws() %>%
+      paste0(., ': ', (table(Categorical_Independent5()) / sum(table(Categorical_Independent5())) * 100) %>% 
                round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
     cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
@@ -971,23 +937,14 @@ textAreaInput(height = '45px', resize = 'vertical', 'name_Categorical_Independen
 textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Independent6', NULL, placeholder = 'Levels')
 textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Independent6', NULL, placeholder = 'Relative probability [0, 1] (per group)')
 
+# The code below will display a summary of the variable designed by the user. 
+# Note that the variable is actually created and saved further below (see 'Create final data set').
+
 reactive({
   if(isTruthy(input$probability_Categorical_Independent6)) {
-    set.seed(input$seed)
-    Categorical_Independent6 = rbinom(final_N(),
-                                      # Below, count number of levels
-                                      # One unit has to be subtracted from the word count to make rbinom() accurate
-                                      ngram::wordcount(input$levels_Categorical_Independent6, sep = ',') - 1,
-                                      eval(parse(text = paste0('c(', input$probability_Categorical_Independent6, ')'))))
-    # Place quotes around each factor level
-    levels_Categorical_Independent6 = sapply(strsplit(input$levels_Categorical_Independent6, ',+'), function(x) toString(dQuote(x, FALSE)))
-    # Wrap levels in c()
-    levels_Categorical_Independent6 = eval(parse(text = paste0('c(', levels_Categorical_Independent6, ')')))
-    Categorical_Independent6 = as.factor(Categorical_Independent6)
-    levels(Categorical_Independent6) = levels_Categorical_Independent6
     cat('\nProportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
-    Categorical_Independent6 %>% levels() %>% trimws() %>%
-      paste0(., ': ', (table(Categorical_Independent6) / sum(table(Categorical_Independent6)) * 100) %>% 
+    Categorical_Independent6() %>% levels() %>% trimws() %>%
+      paste0(., ': ', (table(Categorical_Independent6()) / sum(table(Categorical_Independent6())) * 100) %>% 
                round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
     cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
@@ -1006,23 +963,14 @@ textAreaInput(height = '45px', resize = 'vertical', 'name_Categorical_Independen
 textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Independent7', NULL, placeholder = 'Levels')
 textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Independent7', NULL, placeholder = 'Relative probability [0, 1] (per group)')
 
+# The code below will display a summary of the variable designed by the user. 
+# Note that the variable is actually created and saved further below (see 'Create final data set').
+
 reactive({
   if(isTruthy(input$probability_Categorical_Independent7)) {
-    set.seed(input$seed)
-    Categorical_Independent7 = rbinom(final_N(),
-                                      # Below, count number of levels
-                                      # One unit has to be subtracted from the word count to make rbinom() accurate
-                                      ngram::wordcount(input$levels_Categorical_Independent7, sep = ',') - 1,
-                                      eval(parse(text = paste0('c(', input$probability_Categorical_Independent7, ')'))))
-    # Place quotes around each factor level
-    levels_Categorical_Independent7 = sapply(strsplit(input$levels_Categorical_Independent7, ',+'), function(x) toString(dQuote(x, FALSE)))
-    # Wrap levels in c()
-    levels_Categorical_Independent7 = eval(parse(text = paste0('c(', levels_Categorical_Independent7, ')')))
-    Categorical_Independent7 = as.factor(Categorical_Independent7)
-    levels(Categorical_Independent7) = levels_Categorical_Independent7
     cat('\nProportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
-    Categorical_Independent7 %>% levels() %>% trimws() %>%
-      paste0(., ': ', (table(Categorical_Independent7) / sum(table(Categorical_Independent7)) * 100) %>% 
+    Categorical_Independent7() %>% levels() %>% trimws() %>%
+      paste0(., ': ', (table(Categorical_Independent7()) / sum(table(Categorical_Independent7())) * 100) %>% 
                round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
     cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
@@ -1041,23 +989,14 @@ textAreaInput(height = '45px', resize = 'vertical', 'name_Categorical_Independen
 textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Independent8', NULL, placeholder = 'Levels')
 textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Independent8', NULL, placeholder = 'Relative probability [0, 1] (per group)')
 
+# The code below will display a summary of the variable designed by the user. 
+# Note that the variable is actually created and saved further below (see 'Create final data set').
+
 reactive({
   if(isTruthy(input$probability_Categorical_Independent8)) {
-    set.seed(input$seed)
-    Categorical_Independent8 = rbinom(final_N(),
-                                      # Below, count number of levels
-                                      # One unit has to be subtracted from the word count to make rbinom() accurate
-                                      ngram::wordcount(input$levels_Categorical_Independent8, sep = ',') - 1,
-                                      eval(parse(text = paste0('c(', input$probability_Categorical_Independent8, ')'))))
-    # Place quotes around each factor level
-    levels_Categorical_Independent8 = sapply(strsplit(input$levels_Categorical_Independent8, ',+'), function(x) toString(dQuote(x, FALSE)))
-    # Wrap levels in c()
-    levels_Categorical_Independent8 = eval(parse(text = paste0('c(', levels_Categorical_Independent8, ')')))
-    Categorical_Independent8 = as.factor(Categorical_Independent8)
-    levels(Categorical_Independent8) = levels_Categorical_Independent8
     cat('\nProportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
-    Categorical_Independent8 %>% levels() %>% trimws() %>%
-      paste0(., ': ', (table(Categorical_Independent8) / sum(table(Categorical_Independent8)) * 100) %>% 
+    Categorical_Independent8() %>% levels() %>% trimws() %>%
+      paste0(., ': ', (table(Categorical_Independent8()) / sum(table(Categorical_Independent8())) * 100) %>% 
                round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
     cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
@@ -1070,7 +1009,7 @@ reactive({
 
 ```{r}
 
-# Count total of Categorical_Independent levels
+# Count all Categorical_Independent levels
 levels_Categorical_Independent = reactive({
   
   if(length(levels(Categorical_Independent1())) < 2) { 
@@ -1361,13 +1300,13 @@ renderDT({
 
 <div style = 'padding-left: 40px; padding-right: 40px; padding-top: 15px; padding-bottom: 20px; background-color: #FEFEFE; font-size: 16px; line-height: 1.6;'>
 
-The factorial structure above should guide the setting of parameters in this section. Each row corresponds to a *cell* in the current design.
+The parameters for the dependent variables may be set generally for the whole data set. However, the parameters may also be adjusted by group ([tab](#groups)), condition ([tab](#conditions)), or other nested factors ([tab](#nested)), if any of those have been created. Where any such factors exist, they will constitute a factorial structure that will be displayed in the table above. Each row corresponds to a *cell* in that structure.
 
-**Categorical variables.** To adjust the frequency of each level in each cell, multiple probability values may be entered, separated by commas, each corresponding to a cell. For instance, with a 2x2 design (four cells), the levels of a categorical dependent variable could be entered as 'correct, incorrect, unresponded', and the probabilities as $.2, .8, .4, .7$. This would mean that the most frequent level in Cells 1 to 4, respectively, would be 'correct', 'unresponded', 'incorrect', and 'unresponded'.
+**Categorical variables.** This is a pseudorandom variable. Thus, it differs from *Groups* in that the categories are assigned to each cell following a probability input entered by the user (programming detail: using `rbinom()`). This input can range from 0 to 1. Values toward 0 increase the proportions of levels entered first, and values toward 1 increase the levels entered last. To adjust the frequency of each level in each cell of the design (see above), multiple probability values may be entered, separated by commas, each corresponding to a cell. For instance, with a 2x2 design (four cells), the levels of a categorical dependent variable could be entered as 'correct, incorrect, unresponded', and the probabilities as $.2, .8, .4, .7$. This would mean that the most frequent level in Cells 1 to 4, respectively, would be 'correct', 'unresponded', 'incorrect', and 'unresponded'.
 
 **Continuous variables.** To adjust the means and standard deviations for each cell, multiple values may be entered, separated by commas, each corresponding to a cell. For instance, with a 2x2 design (four cells), the means could be entered as $34, 543, 657, 123$, and the standard deviations as $10, 20, 25, 5$.
 
-The overall summary, including the dependent variables, is shown below.
+Since both of these variables use randomising, the user's parameters will be more closely approached with larger samples ([adjust](#size-n)). The overall summary, including the dependent variables, is shown below.
 
 </div>
 
@@ -1433,35 +1372,18 @@ textAreaInput(height = '45px', resize = 'vertical', 'name_Categorical_Dependent1
 textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Dependent1', NULL, placeholder = 'Levels')
 textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Dependent1', NULL, placeholder = 'Relative probability [0, 1] (per cell)')
 
+# The code below will display a summary of the variable designed by the user. 
+# Note that the variable is actually created and saved further below (see 'Create final data set').
+
 reactive({
-  
   if(isTruthy(input$probability_Categorical_Dependent1)) {
-    
-    set.seed(input$seed)
-    
-    Categorical_Dependent1 = rbinom(final_N(),
-                                    # Below, count number of levels
-                                    # One unit has to be subtracted from the word count to make rbinom() accurate
-                                    ngram::wordcount(input$levels_Categorical_Dependent1, sep = ',') - 1,
-                                    eval(parse(text = paste0('c(', input$probability_Categorical_Dependent1, ')'))))
-    
-    # Place quotes around each factor level
-    levels_Categorical_Dependent1 = sapply(strsplit(input$levels_Categorical_Dependent1, ',+'), function(x) toString(dQuote(x, FALSE)))
-    
-    # Wrap levels in c()
-    levels_Categorical_Dependent1 = eval(parse(text = paste0('c(', levels_Categorical_Dependent1, ')')))
-    
-    Categorical_Dependent1 = as.factor(Categorical_Dependent1)
-    levels(Categorical_Dependent1) = levels_Categorical_Dependent1
-    
     cat('\nOverall proportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
-    Categorical_Dependent1 %>% levels() %>% trimws() %>%
-      paste0(., ': ', (table(Categorical_Dependent1) / sum(table(Categorical_Dependent1)) * 100) %>% 
+    Categorical_Dependent1() %>% levels() %>% trimws() %>%
+      paste0(., ': ', (table(Categorical_Dependent1()) / sum(table(Categorical_Dependent1())) * 100) %>% 
                round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
     cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
         "\nSee summary table for proportions per cell.\n_")
-    
   }
 })
 
@@ -1475,35 +1397,18 @@ textAreaInput(height = '45px', resize = 'vertical', 'name_Categorical_Dependent2
 textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Dependent2', NULL, placeholder = 'Levels')
 textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Dependent2', NULL, placeholder = 'Relative probability [0, 1] (per cell)')
 
+# The code below will display a summary of the variable designed by the user. 
+# Note that the variable is actually created and saved further below (see 'Create final data set').
+
 reactive({
-  
   if(isTruthy(input$probability_Categorical_Dependent2)) {
-    
-    set.seed(input$seed)
-    
-    Categorical_Dependent2 = rbinom(final_N(),
-                                    # Below, count number of levels
-                                    # One unit has to be subtracted from the word count to make rbinom() accurate
-                                    ngram::wordcount(input$levels_Categorical_Dependent2, sep = ',') - 1,
-                                    eval(parse(text = paste0('c(', input$probability_Categorical_Dependent2, ')'))))
-    
-    # Place quotes around each factor level
-    levels_Categorical_Dependent2 = sapply(strsplit(input$levels_Categorical_Dependent2, ',+'), function(x) toString(dQuote(x, FALSE)))
-    
-    # Wrap levels in c()
-    levels_Categorical_Dependent2 = eval(parse(text = paste0('c(', levels_Categorical_Dependent2, ')')))
-    
-    Categorical_Dependent2 = as.factor(Categorical_Dependent2)
-    levels(Categorical_Dependent2) = levels_Categorical_Dependent2
-    
     cat('\nOverall proportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
-    Categorical_Dependent2 %>% levels() %>% trimws() %>%
-      paste0(., ': ', (table(Categorical_Dependent2) / sum(table(Categorical_Dependent2)) * 100) %>% 
+    Categorical_Dependent2() %>% levels() %>% trimws() %>%
+      paste0(., ': ', (table(Categorical_Dependent2()) / sum(table(Categorical_Dependent2())) * 100) %>% 
                round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
     cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
         "\nSee summary table for proportions per cell.\n_")
-    
   }
 })
 
@@ -1517,35 +1422,18 @@ textAreaInput(height = '45px', resize = 'vertical', 'name_Categorical_Dependent3
 textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Dependent3', NULL, placeholder = 'Levels')
 textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Dependent3', NULL, placeholder = 'Relative probability [0, 1] (per cell)')
 
+# The code below will display a summary of the variable designed by the user. 
+# Note that the variable is actually created and saved further below (see 'Create final data set').
+
 reactive({
-  
   if(isTruthy(input$probability_Categorical_Dependent3)) {
-    
-    set.seed(input$seed)
-    
-    Categorical_Dependent3 = rbinom(final_N(),
-                                    # Below, count number of levels
-                                    # One unit has to be subtracted from the word count to make rbinom() accurate
-                                    ngram::wordcount(input$levels_Categorical_Dependent3, sep = ',') - 1,
-                                    eval(parse(text = paste0('c(', input$probability_Categorical_Dependent3, ')'))))
-    
-    # Place quotes around each factor level
-    levels_Categorical_Dependent3 = sapply(strsplit(input$levels_Categorical_Dependent3, ',+'), function(x) toString(dQuote(x, FALSE)))
-    
-    # Wrap levels in c()
-    levels_Categorical_Dependent3 = eval(parse(text = paste0('c(', levels_Categorical_Dependent3, ')')))
-    
-    Categorical_Dependent3 = as.factor(Categorical_Dependent3)
-    levels(Categorical_Dependent3) = levels_Categorical_Dependent3
-    
     cat('\nOverall proportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
-    Categorical_Dependent3 %>% levels() %>% trimws() %>%
-      paste0(., ': ', (table(Categorical_Dependent3) / sum(table(Categorical_Dependent3)) * 100) %>% 
+    Categorical_Dependent3() %>% levels() %>% trimws() %>%
+      paste0(., ': ', (table(Categorical_Dependent3()) / sum(table(Categorical_Dependent3())) * 100) %>% 
                round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
     cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
         "\nSee summary table for proportions per cell.\n_")
-    
   }
 })
 
@@ -1559,35 +1447,18 @@ textAreaInput(height = '45px', resize = 'vertical', 'name_Categorical_Dependent4
 textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Dependent4', NULL, placeholder = 'Levels')
 textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Dependent4', NULL, placeholder = 'Relative probability [0, 1] (per cell)')
 
+# The code below will display a summary of the variable designed by the user. 
+# Note that the variable is actually created and saved further below (see 'Create final data set').
+
 reactive({
-  
   if(isTruthy(input$probability_Categorical_Dependent4)) {
-    
-    set.seed(input$seed)
-    
-    Categorical_Dependent4 = rbinom(final_N(),
-                                    # Below, count number of levels
-                                    # One unit has to be subtracted from the word count to make rbinom() accurate
-                                    ngram::wordcount(input$levels_Categorical_Dependent4, sep = ',') - 1,
-                                    eval(parse(text = paste0('c(', input$probability_Categorical_Dependent4, ')'))))
-    
-    # Place quotes around each factor level
-    levels_Categorical_Dependent4 = sapply(strsplit(input$levels_Categorical_Dependent4, ',+'), function(x) toString(dQuote(x, FALSE)))
-    
-    # Wrap levels in c()
-    levels_Categorical_Dependent4 = eval(parse(text = paste0('c(', levels_Categorical_Dependent4, ')')))
-    
-    Categorical_Dependent4 = as.factor(Categorical_Dependent4)
-    levels(Categorical_Dependent4) = levels_Categorical_Dependent4
-    
     cat('\nOverall proportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
-    Categorical_Dependent4 %>% levels() %>% trimws() %>%
-      paste0(., ': ', (table(Categorical_Dependent4) / sum(table(Categorical_Dependent4)) * 100) %>% 
+    Categorical_Dependent4() %>% levels() %>% trimws() %>%
+      paste0(., ': ', (table(Categorical_Dependent4()) / sum(table(Categorical_Dependent4())) * 100) %>% 
                round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
     cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
         "\nSee summary table for proportions per cell.\n_")
-    
   }
 })
 
@@ -1601,35 +1472,18 @@ textAreaInput(height = '45px', resize = 'vertical', 'name_Categorical_Dependent5
 textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Dependent5', NULL, placeholder = 'Levels')
 textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Dependent5', NULL, placeholder = 'Relative probability [0, 1] (per cell)')
 
+# The code below will display a summary of the variable designed by the user. 
+# Note that the variable is actually created and saved further below (see 'Create final data set').
+
 reactive({
-  
   if(isTruthy(input$probability_Categorical_Dependent5)) {
-    
-    set.seed(input$seed)
-    
-    Categorical_Dependent5 = rbinom(final_N(),
-                                    # Below, count number of levels
-                                    # One unit has to be subtracted from the word count to make rbinom() accurate
-                                    ngram::wordcount(input$levels_Categorical_Dependent5, sep = ',') - 1,
-                                    eval(parse(text = paste0('c(', input$probability_Categorical_Dependent5, ')'))))
-    
-    # Place quotes around each factor level
-    levels_Categorical_Dependent5 = sapply(strsplit(input$levels_Categorical_Dependent5, ',+'), function(x) toString(dQuote(x, FALSE)))
-    
-    # Wrap levels in c()
-    levels_Categorical_Dependent5 = eval(parse(text = paste0('c(', levels_Categorical_Dependent5, ')')))
-    
-    Categorical_Dependent5 = as.factor(Categorical_Dependent5)
-    levels(Categorical_Dependent5) = levels_Categorical_Dependent5
-    
     cat('\nOverall proportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
-    Categorical_Dependent5 %>% levels() %>% trimws() %>%
-      paste0(., ': ', (table(Categorical_Dependent5) / sum(table(Categorical_Dependent5)) * 100) %>% 
+    Categorical_Dependent5() %>% levels() %>% trimws() %>%
+      paste0(., ': ', (table(Categorical_Dependent5()) / sum(table(Categorical_Dependent5())) * 100) %>% 
                round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
     cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
         "\nSee summary table for proportions per cell.\n_")
-    
   }
 })
 
@@ -1643,35 +1497,18 @@ textAreaInput(height = '45px', resize = 'vertical', 'name_Categorical_Dependent6
 textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Dependent6', NULL, placeholder = 'Levels')
 textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Dependent6', NULL, placeholder = 'Relative probability [0, 1] (per cell)')
 
+# The code below will display a summary of the variable designed by the user. 
+# Note that the variable is actually created and saved further below (see 'Create final data set').
+
 reactive({
-  
   if(isTruthy(input$probability_Categorical_Dependent6)) {
-    
-    set.seed(input$seed)
-    
-    Categorical_Dependent6 = rbinom(final_N(),
-                                    # Below, count number of levels
-                                    # One unit has to be subtracted from the word count to make rbinom() accurate
-                                    ngram::wordcount(input$levels_Categorical_Dependent6, sep = ',') - 1,
-                                    eval(parse(text = paste0('c(', input$probability_Categorical_Dependent6, ')'))))
-    
-    # Place quotes around each factor level
-    levels_Categorical_Dependent6 = sapply(strsplit(input$levels_Categorical_Dependent6, ',+'), function(x) toString(dQuote(x, FALSE)))
-    
-    # Wrap levels in c()
-    levels_Categorical_Dependent6 = eval(parse(text = paste0('c(', levels_Categorical_Dependent6, ')')))
-    
-    Categorical_Dependent6 = as.factor(Categorical_Dependent6)
-    levels(Categorical_Dependent6) = levels_Categorical_Dependent6
-    
     cat('\nOverall proportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
-    Categorical_Dependent6 %>% levels() %>% trimws() %>%
-      paste0(., ': ', (table(Categorical_Dependent6) / sum(table(Categorical_Dependent6)) * 100) %>% 
+    Categorical_Dependent6() %>% levels() %>% trimws() %>%
+      paste0(., ': ', (table(Categorical_Dependent6()) / sum(table(Categorical_Dependent6())) * 100) %>% 
                round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
     cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
         "\nSee summary table for proportions per cell.\n_")
-    
   }
 })
 
@@ -1685,35 +1522,20 @@ textAreaInput(height = '45px', resize = 'vertical', 'name_Categorical_Dependent7
 textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Dependent7', NULL, placeholder = 'Levels')
 textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Dependent7', NULL, placeholder = 'Relative probability [0, 1] (per cell)')
 
+# The code below will display a summary of the variable designed by the user. 
+# Note that the variable is actually created and saved further below (see 'Create final data set').
+
 reactive({
-  
   if(isTruthy(input$probability_Categorical_Dependent7)) {
-    
-    set.seed(input$seed)
-    
-    Categorical_Dependent7 = rbinom(final_N(),
-                                    # Below, count number of levels
-                                    # One unit has to be subtracted from the word count to make rbinom() accurate
-                                    ngram::wordcount(input$levels_Categorical_Dependent7, sep = ',') - 1,
-                                    eval(parse(text = paste0('c(', input$probability_Categorical_Dependent7, ')'))))
-    
-    # Place quotes around each factor level
-    levels_Categorical_Dependent7 = sapply(strsplit(input$levels_Categorical_Dependent7, ',+'), function(x) toString(dQuote(x, FALSE)))
-    
-    # Wrap levels in c()
-    levels_Categorical_Dependent7 = eval(parse(text = paste0('c(', levels_Categorical_Dependent7, ')')))
-    
-    Categorical_Dependent7 = as.factor(Categorical_Dependent7)
-    levels(Categorical_Dependent7) = levels_Categorical_Dependent7
-    
+    # The code below will display a summary of the variable designed by the user. 
+    # Note that the variable is actually created and saved further below (see 'Create final data set').
     cat('\nOverall proportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
-    Categorical_Dependent7 %>% levels() %>% trimws() %>%
-      paste0(., ': ', (table(Categorical_Dependent7) / sum(table(Categorical_Dependent7)) * 100) %>% 
+    Categorical_Dependent7() %>% levels() %>% trimws() %>%
+      paste0(., ': ', (table(Categorical_Dependent7()) / sum(table(Categorical_Dependent7())) * 100) %>% 
                round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
     cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
         "\nSee summary table for proportions per cell.\n_")
-    
   }
 })
 
@@ -1727,35 +1549,18 @@ textAreaInput(height = '45px', resize = 'vertical', 'name_Categorical_Dependent8
 textAreaInput(height = '45px', resize = 'vertical', 'levels_Categorical_Dependent8', NULL, placeholder = 'Levels')
 textAreaInput(height = '45px', resize = 'vertical', 'probability_Categorical_Dependent8', NULL, placeholder = 'Relative probability [0, 1] (per cell)')
 
+# The code below will display a summary of the variable designed by the user. 
+# Note that the variable is actually created and saved further below (see 'Create final data set').
+
 reactive({
-  
   if(isTruthy(input$probability_Categorical_Dependent8)) {
-    
-    set.seed(input$seed)
-    
-    Categorical_Dependent8 = rbinom(final_N(),
-                                    # Below, count number of levels
-                                    # One unit has to be subtracted from the word count to make rbinom() accurate
-                                    ngram::wordcount(input$levels_Categorical_Dependent8, sep = ',') - 1,
-                                    eval(parse(text = paste0('c(', input$probability_Categorical_Dependent8, ')'))))
-    
-    # Place quotes around each factor level
-    levels_Categorical_Dependent8 = sapply(strsplit(input$levels_Categorical_Dependent8, ',+'), function(x) toString(dQuote(x, FALSE)))
-    
-    # Wrap levels in c()
-    levels_Categorical_Dependent8 = eval(parse(text = paste0('c(', levels_Categorical_Dependent8, ')')))
-    
-    Categorical_Dependent8 = as.factor(Categorical_Dependent8)
-    levels(Categorical_Dependent8) = levels_Categorical_Dependent8
-    
     cat('\nOverall proportion of each level\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
-    Categorical_Dependent8 %>% levels() %>% trimws() %>%
-      paste0(., ': ', (table(Categorical_Dependent8) / sum(table(Categorical_Dependent8)) * 100) %>% 
+    Categorical_Dependent8() %>% levels() %>% trimws() %>%
+      paste0(., ': ', (table(Categorical_Dependent8()) / sum(table(Categorical_Dependent8())) * 100) %>% 
                round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
     cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
         "\nSee summary table for proportions per cell.\n_")
-    
   }
 })
 
@@ -1973,12 +1778,12 @@ Categorical_Independent1 = reactive({
   if(isTruthy(input$probability_Categorical_Independent1)) {
     set.seed(input$seed)
     x = rbinom(final_N(),
-               # Below, count number of levels
-               # One unit has to be subtracted from the word count to make rbinom() accurate
+               # Below, count number of levels. One unit has to be subtracted from the word count to make rbinom() accurate.
                ngram::wordcount(input$levels_Categorical_Independent1, sep = ',') - 1,
                eval(parse(text = paste0('c(', input$probability_Categorical_Independent1, ')'))))
     # Place quotes around each factor level
     levels_Categorical_Independent1 = sapply(strsplit(input$levels_Categorical_Independent1, ',+'), function(x) toString(dQuote(x, FALSE)))
+    # Wrap levels in c()
     levels_Categorical_Independent1 = eval(parse(text = paste0('c(', levels_Categorical_Independent1, ')')))
     x = as.factor(x)
     levels(x) = levels_Categorical_Independent1
@@ -1988,14 +1793,14 @@ Categorical_Independent1 = reactive({
 
 Categorical_Independent2 = reactive({
   if(isTruthy(input$probability_Categorical_Independent2)) {
-    set.seed(input$seed)
+    set.seed(input$seed * 2)  # For explanation about this multiplication, see 'Important notes about the seed', above.
     x = rbinom(final_N(),
-               # Below, count number of levels
-               # One unit has to be subtracted from the word count to make rbinom() accurate
+               # Below, count number of levels. One unit has to be subtracted from the word count to make rbinom() accurate.
                ngram::wordcount(input$levels_Categorical_Independent2, sep = ',') - 1,
                eval(parse(text = paste0('c(', input$probability_Categorical_Independent2, ')'))))
     # Place quotes around each factor level
     levels_Categorical_Independent2 = sapply(strsplit(input$levels_Categorical_Independent2, ',+'), function(x) toString(dQuote(x, FALSE)))
+    # Wrap levels in c()
     levels_Categorical_Independent2 = eval(parse(text = paste0('c(', levels_Categorical_Independent2, ')')))
     x = as.factor(x)
     levels(x) = levels_Categorical_Independent2
@@ -2005,14 +1810,14 @@ Categorical_Independent2 = reactive({
 
 Categorical_Independent3 = reactive({
   if(isTruthy(input$probability_Categorical_Independent3)) {
-    set.seed(input$seed)
+    set.seed(input$seed * 3)  # For explanation about this multiplication, see 'Important notes about the seed', above.
     x = rbinom(final_N(),
-               # Below, count number of levels
-               # One unit has to be subtracted from the word count to make rbinom() accurate
+               # Below, count number of levels. One unit has to be subtracted from the word count to make rbinom() accurate.
                ngram::wordcount(input$levels_Categorical_Independent3, sep = ',') - 1,
                eval(parse(text = paste0('c(', input$probability_Categorical_Independent3, ')'))))
     # Place quotes around each factor level
     levels_Categorical_Independent3 = sapply(strsplit(input$levels_Categorical_Independent3, ',+'), function(x) toString(dQuote(x, FALSE)))
+    # Wrap levels in c()
     levels_Categorical_Independent3 = eval(parse(text = paste0('c(', levels_Categorical_Independent3, ')')))
     x = as.factor(x)
     levels(x) = levels_Categorical_Independent3
@@ -2022,14 +1827,14 @@ Categorical_Independent3 = reactive({
 
 Categorical_Independent4 = reactive({
   if(isTruthy(input$probability_Categorical_Independent4)) {
-    set.seed(input$seed)
+    set.seed(input$seed * 4)  # For explanation about this multiplication, see 'Important notes about the seed', above.
     x = rbinom(final_N(),
-               # Below, count number of levels
-               # One unit has to be subtracted from the word count to make rbinom() accurate
+               # Below, count number of levels. One unit has to be subtracted from the word count to make rbinom() accurate.
                ngram::wordcount(input$levels_Categorical_Independent4, sep = ',') - 1,
                eval(parse(text = paste0('c(', input$probability_Categorical_Independent4, ')'))))
     # Place quotes around each factor level
     levels_Categorical_Independent4 = sapply(strsplit(input$levels_Categorical_Independent4, ',+'), function(x) toString(dQuote(x, FALSE)))
+    # Wrap levels in c()
     levels_Categorical_Independent4 = eval(parse(text = paste0('c(', levels_Categorical_Independent4, ')')))
     x = as.factor(x)
     levels(x) = levels_Categorical_Independent4
@@ -2039,14 +1844,14 @@ Categorical_Independent4 = reactive({
 
 Categorical_Independent5 = reactive({
   if(isTruthy(input$probability_Categorical_Independent5)) {
-    set.seed(input$seed)
+    set.seed(input$seed * 5)  # For explanation about this multiplication, see 'Important notes about the seed', above.
     x = rbinom(final_N(),
-               # Below, count number of levels
-               # One unit has to be subtracted from the word count to make rbinom() accurate
+               # Below, count number of levels. One unit has to be subtracted from the word count to make rbinom() accurate.
                ngram::wordcount(input$levels_Categorical_Independent5, sep = ',') - 1,
                eval(parse(text = paste0('c(', input$probability_Categorical_Independent5, ')'))))
     # Place quotes around each factor level
     levels_Categorical_Independent5 = sapply(strsplit(input$levels_Categorical_Independent5, ',+'), function(x) toString(dQuote(x, FALSE)))
+    # Wrap levels in c()
     levels_Categorical_Independent5 = eval(parse(text = paste0('c(', levels_Categorical_Independent5, ')')))
     x = as.factor(x)
     levels(x) = levels_Categorical_Independent5
@@ -2056,14 +1861,14 @@ Categorical_Independent5 = reactive({
 
 Categorical_Independent6 = reactive({
   if(isTruthy(input$probability_Categorical_Independent6)) {
-    set.seed(input$seed)
+    set.seed(input$seed * 6)  # For explanation about this multiplication, see 'Important notes about the seed', above.
     x = rbinom(final_N(),
-               # Below, count number of levels
-               # One unit has to be subtracted from the word count to make rbinom() accurate
+               # Below, count number of levels. One unit has to be subtracted from the word count to make rbinom() accurate.
                ngram::wordcount(input$levels_Categorical_Independent6, sep = ',') - 1,
                eval(parse(text = paste0('c(', input$probability_Categorical_Independent6, ')'))))
     # Place quotes around each factor level
     levels_Categorical_Independent6 = sapply(strsplit(input$levels_Categorical_Independent6, ',+'), function(x) toString(dQuote(x, FALSE)))
+    # Wrap levels in c()
     levels_Categorical_Independent6 = eval(parse(text = paste0('c(', levels_Categorical_Independent6, ')')))
     x = as.factor(x)
     levels(x) = levels_Categorical_Independent6
@@ -2073,14 +1878,14 @@ Categorical_Independent6 = reactive({
 
 Categorical_Independent7 = reactive({
   if(isTruthy(input$probability_Categorical_Independent7)) {
-    set.seed(input$seed)
+    set.seed(input$seed * 7)  # For explanation about this multiplication, see 'Important notes about the seed', above.
     x = rbinom(final_N(),
-               # Below, count number of levels
-               # One unit has to be subtracted from the word count to make rbinom() accurate
+               # Below, count number of levels. One unit has to be subtracted from the word count to make rbinom() accurate.
                ngram::wordcount(input$levels_Categorical_Independent7, sep = ',') - 1,
                eval(parse(text = paste0('c(', input$probability_Categorical_Independent7, ')'))))
     # Place quotes around each factor level
     levels_Categorical_Independent7 = sapply(strsplit(input$levels_Categorical_Independent7, ',+'), function(x) toString(dQuote(x, FALSE)))
+    # Wrap levels in c()
     levels_Categorical_Independent7 = eval(parse(text = paste0('c(', levels_Categorical_Independent7, ')')))
     x = as.factor(x)
     levels(x) = levels_Categorical_Independent7
@@ -2090,14 +1895,14 @@ Categorical_Independent7 = reactive({
 
 Categorical_Independent8 = reactive({
   if(isTruthy(input$probability_Categorical_Independent8)) {
-    set.seed(input$seed)
+    set.seed(input$seed * 8)  # For explanation about this multiplication, see 'Important notes about the seed', above.
     x = rbinom(final_N(),
-               # Below, count number of levels
-               # One unit has to be subtracted from the word count to make rbinom() accurate
+               # Below, count number of levels. One unit has to be subtracted from the word count to make rbinom() accurate.
                ngram::wordcount(input$levels_Categorical_Independent8, sep = ',') - 1,
                eval(parse(text = paste0('c(', input$probability_Categorical_Independent8, ')'))))
     # Place quotes around each factor level
     levels_Categorical_Independent8 = sapply(strsplit(input$levels_Categorical_Independent8, ',+'), function(x) toString(dQuote(x, FALSE)))
+    # Wrap levels in c()
     levels_Categorical_Independent8 = eval(parse(text = paste0('c(', levels_Categorical_Independent8, ')')))
     x = as.factor(x)
     levels(x) = levels_Categorical_Independent8
@@ -2110,7 +1915,7 @@ Categorical_Independent8 = reactive({
 
 Continuous_Independent1 = reactive({
   if(isTruthy(input$name_Continuous_Independent1)) {
-    set.seed(input$seed)
+    set.seed(input$seed * 9)  # For explanation about this multiplication, see 'Important notes about the seed', above.
     rnorm(final_N(),
           mean = eval(parse(text = paste0('c(', input$Continuous_Independent1_mean, ')'))),
           sd = eval(parse(text = paste0('c(', input$Continuous_Independent1_SD, ')')))) %>% round(digits = input$rounding)
@@ -2119,7 +1924,7 @@ Continuous_Independent1 = reactive({
 
 Continuous_Independent2 = reactive({
   if(isTruthy(input$name_Continuous_Independent2)) {
-    set.seed(input$seed)
+    set.seed(input$seed * 10)  # For explanation about this multiplication, see 'Important notes about the seed', above.
     rnorm(final_N(),
           mean = eval(parse(text = paste0('c(', input$Continuous_Independent2_mean, ')'))),
           sd = eval(parse(text = paste0('c(', input$Continuous_Independent2_SD, ')')))) %>% round(digits = input$rounding)
@@ -2128,7 +1933,7 @@ Continuous_Independent2 = reactive({
 
 Continuous_Independent3 = reactive({
   if(isTruthy(input$name_Continuous_Independent3)) {
-    set.seed(input$seed)
+    set.seed(input$seed * 11)  # For explanation about this multiplication, see 'Important notes about the seed', above.
     rnorm(final_N(),
           mean = eval(parse(text = paste0('c(', input$Continuous_Independent3_mean, ')'))),
           sd = eval(parse(text = paste0('c(', input$Continuous_Independent3_SD, ')')))) %>% round(digits = input$rounding)
@@ -2137,7 +1942,7 @@ Continuous_Independent3 = reactive({
 
 Continuous_Independent4 = reactive({
   if(isTruthy(input$name_Continuous_Independent4)) {
-    set.seed(input$seed)
+    set.seed(input$seed * 12)  # For explanation about this multiplication, see 'Important notes about the seed', above.
     rnorm(final_N(),
           mean = eval(parse(text = paste0('c(', input$Continuous_Independent4_mean, ')'))),
           sd = eval(parse(text = paste0('c(', input$Continuous_Independent4_SD, ')')))) %>% round(digits = input$rounding)
@@ -2146,7 +1951,7 @@ Continuous_Independent4 = reactive({
 
 Continuous_Independent5 = reactive({
   if(isTruthy(input$name_Continuous_Independent5)) {
-    set.seed(input$seed)
+    set.seed(input$seed * 13)  # For explanation about this multiplication, see 'Important notes about the seed', above.
     rnorm(final_N(),
           mean = eval(parse(text = paste0('c(', input$Continuous_Independent5_mean, ')'))),
           sd = eval(parse(text = paste0('c(', input$Continuous_Independent5_SD, ')')))) %>% round(digits = input$rounding)
@@ -2155,7 +1960,7 @@ Continuous_Independent5 = reactive({
 
 Continuous_Independent6 = reactive({
   if(isTruthy(input$name_Continuous_Independent6)) {
-    set.seed(input$seed)
+    set.seed(input$seed * 14)  # For explanation about this multiplication, see 'Important notes about the seed', above.
     rnorm(final_N(),
           mean = eval(parse(text = paste0('c(', input$Continuous_Independent6_mean, ')'))),
           sd = eval(parse(text = paste0('c(', input$Continuous_Independent6_SD, ')')))) %>% round(digits = input$rounding)
@@ -2164,7 +1969,7 @@ Continuous_Independent6 = reactive({
 
 Continuous_Independent7 = reactive({
   if(isTruthy(input$name_Continuous_Independent7)) {
-    set.seed(input$seed)
+    set.seed(input$seed * 15)  # For explanation about this multiplication, see 'Important notes about the seed', above.
     rnorm(final_N(),
           mean = eval(parse(text = paste0('c(', input$Continuous_Independent7_mean, ')'))),
           sd = eval(parse(text = paste0('c(', input$Continuous_Independent7_SD, ')')))) %>% round(digits = input$rounding)
@@ -2173,7 +1978,7 @@ Continuous_Independent7 = reactive({
 
 Continuous_Independent8 = reactive({
   if(isTruthy(input$name_Continuous_Independent8)) {
-    set.seed(input$seed)
+    set.seed(input$seed * 16)  # For explanation about this multiplication, see 'Important notes about the seed', above.
     rnorm(final_N(),
           mean = eval(parse(text = paste0('c(', input$Continuous_Independent8_mean, ')'))),
           sd = eval(parse(text = paste0('c(', input$Continuous_Independent8_SD, ')')))) %>% round(digits = input$rounding)
@@ -2446,14 +2251,14 @@ WithinParticipant3 = reactive({
 
 Categorical_Dependent1 = reactive({
   if(isTruthy(input$probability_Categorical_Dependent1)) {
-    set.seed(input$seed)
+    set.seed(input$seed * 17)  # For explanation about this multiplication, see 'Important notes about the seed', above.
     x = rbinom(final_N(),
-               # Below, count number of levels
-               # One unit has to be subtracted from the word count to make rbinom() accurate
+               # Below, count number of levels. One unit has to be subtracted from the word count to make rbinom() accurate.
                ngram::wordcount(input$levels_Categorical_Dependent1, sep = ',') - 1,
                eval(parse(text = paste0('c(', input$probability_Categorical_Dependent1, ')'))))
     # Place quotes around each factor level
     levels_Categorical_Dependent1 = sapply(strsplit(input$levels_Categorical_Dependent1, ',+'), function(x) toString(dQuote(x, FALSE)))
+    # Wrap levels in c()
     levels_Categorical_Dependent1 = eval(parse(text = paste0('c(', levels_Categorical_Dependent1, ')')))
     x = as.factor(x)
     levels(x) = levels_Categorical_Dependent1
@@ -2463,14 +2268,14 @@ Categorical_Dependent1 = reactive({
 
 Categorical_Dependent2 = reactive({
   if(isTruthy(input$probability_Categorical_Dependent2)) {
-    set.seed(input$seed)
+    set.seed(input$seed * 18)  # For explanation about this multiplication, see 'Important notes about the seed', above.
     x = rbinom(final_N(),
-               # Below, count number of levels
-               # One unit has to be subtracted from the word count to make rbinom() accurate
+               # Below, count number of levels. One unit has to be subtracted from the word count to make rbinom() accurate.
                ngram::wordcount(input$levels_Categorical_Dependent2, sep = ',') - 1,
                eval(parse(text = paste0('c(', input$probability_Categorical_Dependent2, ')'))))
     # Place quotes around each factor level
     levels_Categorical_Dependent2 = sapply(strsplit(input$levels_Categorical_Dependent2, ',+'), function(x) toString(dQuote(x, FALSE)))
+    # Wrap levels in c()
     levels_Categorical_Dependent2 = eval(parse(text = paste0('c(', levels_Categorical_Dependent2, ')')))
     x = as.factor(x)
     levels(x) = levels_Categorical_Dependent2
@@ -2480,14 +2285,14 @@ Categorical_Dependent2 = reactive({
 
 Categorical_Dependent3 = reactive({
   if(isTruthy(input$probability_Categorical_Dependent3)) {
-    set.seed(input$seed)
+    set.seed(input$seed * 19)  # For explanation about this multiplication, see 'Important notes about the seed', above.
     x = rbinom(final_N(),
-               # Below, count number of levels
-               # One unit has to be subtracted from the word count to make rbinom() accurate
+               # Below, count number of levels. One unit has to be subtracted from the word count to make rbinom() accurate.
                ngram::wordcount(input$levels_Categorical_Dependent3, sep = ',') - 1,
                eval(parse(text = paste0('c(', input$probability_Categorical_Dependent3, ')'))))
     # Place quotes around each factor level
     levels_Categorical_Dependent3 = sapply(strsplit(input$levels_Categorical_Dependent3, ',+'), function(x) toString(dQuote(x, FALSE)))
+    # Wrap levels in c()
     levels_Categorical_Dependent3 = eval(parse(text = paste0('c(', levels_Categorical_Dependent3, ')')))
     x = as.factor(x)
     levels(x) = levels_Categorical_Dependent3
@@ -2497,14 +2302,14 @@ Categorical_Dependent3 = reactive({
 
 Categorical_Dependent4 = reactive({
   if(isTruthy(input$probability_Categorical_Dependent4)) {
-    set.seed(input$seed)
+    set.seed(input$seed * 20)  # For explanation about this multiplication, see 'Important notes about the seed', above.
     x = rbinom(final_N(),
-               # Below, count number of levels
-               # One unit has to be subtracted from the word count to make rbinom() accurate
+               # Below, count number of levels. One unit has to be subtracted from the word count to make rbinom() accurate.
                ngram::wordcount(input$levels_Categorical_Dependent4, sep = ',') - 1,
                eval(parse(text = paste0('c(', input$probability_Categorical_Dependent4, ')'))))
     # Place quotes around each factor level
     levels_Categorical_Dependent4 = sapply(strsplit(input$levels_Categorical_Dependent4, ',+'), function(x) toString(dQuote(x, FALSE)))
+    # Wrap levels in c()
     levels_Categorical_Dependent4 = eval(parse(text = paste0('c(', levels_Categorical_Dependent4, ')')))
     x = as.factor(x)
     levels(x) = levels_Categorical_Dependent4
@@ -2514,14 +2319,14 @@ Categorical_Dependent4 = reactive({
 
 Categorical_Dependent5 = reactive({
   if(isTruthy(input$probability_Categorical_Dependent5)) {
-    set.seed(input$seed)
+    set.seed(input$seed * 21)  # For explanation about this multiplication, see 'Important notes about the seed', above.
     x = rbinom(final_N(),
-               # Below, count number of levels
-               # One unit has to be subtracted from the word count to make rbinom() accurate
+               # Below, count number of levels. One unit has to be subtracted from the word count to make rbinom() accurate.
                ngram::wordcount(input$levels_Categorical_Dependent5, sep = ',') - 1,
                eval(parse(text = paste0('c(', input$probability_Categorical_Dependent5, ')'))))
     # Place quotes around each factor level
     levels_Categorical_Dependent5 = sapply(strsplit(input$levels_Categorical_Dependent5, ',+'), function(x) toString(dQuote(x, FALSE)))
+    # Wrap levels in c()
     levels_Categorical_Dependent5 = eval(parse(text = paste0('c(', levels_Categorical_Dependent5, ')')))
     x = as.factor(x)
     levels(x) = levels_Categorical_Dependent5
@@ -2531,14 +2336,14 @@ Categorical_Dependent5 = reactive({
 
 Categorical_Dependent6 = reactive({
   if(isTruthy(input$probability_Categorical_Dependent6)) {
-    set.seed(input$seed)
+    set.seed(input$seed * 22)  # For explanation about this multiplication, see 'Important notes about the seed', above.
     x = rbinom(final_N(),
-               # Below, count number of levels
-               # One unit has to be subtracted from the word count to make rbinom() accurate
+               # Below, count number of levels. One unit has to be subtracted from the word count to make rbinom() accurate.
                ngram::wordcount(input$levels_Categorical_Dependent6, sep = ',') - 1,
                eval(parse(text = paste0('c(', input$probability_Categorical_Dependent6, ')'))))
     # Place quotes around each factor level
     levels_Categorical_Dependent6 = sapply(strsplit(input$levels_Categorical_Dependent6, ',+'), function(x) toString(dQuote(x, FALSE)))
+    # Wrap levels in c()
     levels_Categorical_Dependent6 = eval(parse(text = paste0('c(', levels_Categorical_Dependent6, ')')))
     x = as.factor(x)
     levels(x) = levels_Categorical_Dependent6
@@ -2548,14 +2353,14 @@ Categorical_Dependent6 = reactive({
 
 Categorical_Dependent7 = reactive({
   if(isTruthy(input$probability_Categorical_Dependent7)) {
-    set.seed(input$seed)
+    set.seed(input$seed * 23)  # For explanation about this multiplication, see 'Important notes about the seed', above.
     x = rbinom(final_N(),
-               # Below, count number of levels
-               # One unit has to be subtracted from the word count to make rbinom() accurate
+               # Below, count number of levels. One unit has to be subtracted from the word count to make rbinom() accurate.
                ngram::wordcount(input$levels_Categorical_Dependent7, sep = ',') - 1,
                eval(parse(text = paste0('c(', input$probability_Categorical_Dependent7, ')'))))
     # Place quotes around each factor level
     levels_Categorical_Dependent7 = sapply(strsplit(input$levels_Categorical_Dependent7, ',+'), function(x) toString(dQuote(x, FALSE)))
+    # Wrap levels in c()
     levels_Categorical_Dependent7 = eval(parse(text = paste0('c(', levels_Categorical_Dependent7, ')')))
     x = as.factor(x)
     levels(x) = levels_Categorical_Dependent7
@@ -2565,14 +2370,14 @@ Categorical_Dependent7 = reactive({
 
 Categorical_Dependent8 = reactive({
   if(isTruthy(input$probability_Categorical_Dependent8)) {
-    set.seed(input$seed)
+    set.seed(input$seed * 24)  # For explanation about this multiplication, see 'Important notes about the seed', above.
     x = rbinom(final_N(),
-               # Below, count number of levels
-               # One unit has to be subtracted from the word count to make rbinom() accurate
+               # Below, count number of levels. One unit has to be subtracted from the word count to make rbinom() accurate.
                ngram::wordcount(input$levels_Categorical_Dependent8, sep = ',') - 1,
                eval(parse(text = paste0('c(', input$probability_Categorical_Dependent8, ')'))))
     # Place quotes around each factor level
     levels_Categorical_Dependent8 = sapply(strsplit(input$levels_Categorical_Dependent8, ',+'), function(x) toString(dQuote(x, FALSE)))
+    # Wrap levels in c()
     levels_Categorical_Dependent8 = eval(parse(text = paste0('c(', levels_Categorical_Dependent8, ')')))
     x = as.factor(x)
     levels(x) = levels_Categorical_Dependent8
@@ -2586,7 +2391,7 @@ Categorical_Dependent8 = reactive({
 
 Continuous_Dependent1 = reactive({
   if(isTruthy(input$name_Continuous_Dependent1)) {
-    set.seed(input$seed)
+    set.seed(input$seed * 25)  # For explanation about this multiplication, see 'Important notes about the seed', above.
     rnorm(final_N(),
           mean = eval(parse(text = paste0('c(', input$Continuous_Dependent_mean1, ')'))),
           sd = eval(parse(text = paste0('c(', input$Continuous_Dependent1_SD, ')')))) %>% round(digits = input$rounding)
@@ -2595,7 +2400,7 @@ Continuous_Dependent1 = reactive({
 
 Continuous_Dependent2 = reactive({
   if(isTruthy(input$name_Continuous_Dependent2)) {
-    set.seed(input$seed)
+    set.seed(input$seed * 26)  # For explanation about this multiplication, see 'Important notes about the seed', above.
     rnorm(final_N(),
           mean = eval(parse(text = paste0('c(', input$Continuous_Dependent_mean2, ')'))),
           sd = eval(parse(text = paste0('c(', input$Continuous_Dependent2_SD, ')')))) %>% round(digits = input$rounding)
@@ -2604,7 +2409,7 @@ Continuous_Dependent2 = reactive({
 
 Continuous_Dependent3 = reactive({
   if(isTruthy(input$name_Continuous_Dependent3)) {
-    set.seed(input$seed)
+    set.seed(input$seed * 27)  # For explanation about this multiplication, see 'Important notes about the seed', above.
     rnorm(final_N(),
           mean = eval(parse(text = paste0('c(', input$Continuous_Dependent_mean3, ')'))),
           sd = eval(parse(text = paste0('c(', input$Continuous_Dependent3_SD, ')')))) %>% round(digits = input$rounding)
@@ -2613,7 +2418,7 @@ Continuous_Dependent3 = reactive({
 
 Continuous_Dependent4 = reactive({
   if(isTruthy(input$name_Continuous_Dependent4)) {
-    set.seed(input$seed)
+    set.seed(input$seed * 28)  # For explanation about this multiplication, see 'Important notes about the seed', above.
     rnorm(final_N(),
           mean = eval(parse(text = paste0('c(', input$Continuous_Dependent_mean4, ')'))),
           sd = eval(parse(text = paste0('c(', input$Continuous_Dependent4_SD, ')')))) %>% round(digits = input$rounding)
@@ -2622,7 +2427,7 @@ Continuous_Dependent4 = reactive({
 
 Continuous_Dependent5 = reactive({
   if(isTruthy(input$name_Continuous_Dependent5)) {
-    set.seed(input$seed)
+    set.seed(input$seed * 29)  # For explanation about this multiplication, see 'Important notes about the seed', above.
     rnorm(final_N(),
           mean = eval(parse(text = paste0('c(', input$Continuous_Dependent_mean5, ')'))),
           sd = eval(parse(text = paste0('c(', input$Continuous_Dependent5_SD, ')')))) %>% round(digits = input$rounding)
@@ -2631,7 +2436,7 @@ Continuous_Dependent5 = reactive({
 
 Continuous_Dependent6 = reactive({
   if(isTruthy(input$name_Continuous_Dependent6)) {
-    set.seed(input$seed)
+    set.seed(input$seed * 30)  # For explanation about this multiplication, see 'Important notes about the seed', above.
     rnorm(final_N(),
           mean = eval(parse(text = paste0('c(', input$Continuous_Dependent_mean6, ')'))),
           sd = eval(parse(text = paste0('c(', input$Continuous_Dependent6_SD, ')')))) %>% round(digits = input$rounding)
@@ -2640,7 +2445,7 @@ Continuous_Dependent6 = reactive({
 
 Continuous_Dependent7 = reactive({
   if(isTruthy(input$name_Continuous_Dependent7)) {
-    set.seed(input$seed)
+    set.seed(input$seed * 31)  # For explanation about this multiplication, see 'Important notes about the seed', above.
     rnorm(final_N(),
           mean = eval(parse(text = paste0('c(', input$Continuous_Dependent_mean7, ')'))),
           sd = eval(parse(text = paste0('c(', input$Continuous_Dependent7_SD, ')')))) %>% round(digits = input$rounding)
@@ -2649,7 +2454,7 @@ Continuous_Dependent7 = reactive({
 
 Continuous_Dependent8 = reactive({
   if(isTruthy(input$name_Continuous_Dependent8)) {
-    set.seed(input$seed)
+    set.seed(input$seed * 32)  # For explanation about this multiplication, see 'Important notes about the seed', above.
     rnorm(final_N(),
           mean = eval(parse(text = paste0('c(', input$Continuous_Dependent_mean8, ')'))),
           sd = eval(parse(text = paste0('c(', input$Continuous_Dependent8_SD, ')')))) %>% round(digits = input$rounding)
@@ -3046,7 +2851,7 @@ checkboxInput('include_Participant_column', 'Include this column (un/check)', va
 
 ```
 
-Replace this column with names/categories (comma-separated). Delete to revert to numeric.
+Replace this column with names/categories (comma-separated). Delete to revert to a numeric variable.
 
 ```{r}
 
@@ -3220,13 +3025,13 @@ parameters = reactive({
                       'simulation of experimental data (Version ', app_version, '). Retrieved from\n',
                       'https://github.com/pablobernabeu/Experimental-data-simulation/.\n',
                       '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n',
-                      '- Home tab -\n',
-                      'Seed number = ', input$seed, '\n',
+                      '-- Home tab --\n',
+                      '\nSeed number = ', input$seed, '\n',
                       'Number of decimal places (rounding) = ', input$rounding, '\n')
   
   if(isTruthy(input$name_BetweenGroup1)) {
     parameters = paste0(parameters, 
-                        '\n- Groups tab -',
+                        '\n-- Groups tab --\n',
                         '\nBetween-group factor 1: ', input$name_BetweenGroup1, 
                         '\nLevels: ',
                         paste(input$BetweenGroup1_Group1, input$BetweenGroup1_Group2, input$BetweenGroup1_Group3,
@@ -3263,7 +3068,7 @@ parameters = reactive({
   
   if(isTruthy(input$name_Categorical_Independent1)) {
     parameters = paste0(parameters, 
-                        '\n- Individual tab -',
+                        '\n-- Individual tab --\n',
                         '\nCategorical independent variable 1: ', input$name_Categorical_Independent1,
                         '\nLevels: ', input$levels_Categorical_Independent1, '\nProbability [0, 1] (per group): ', 
                         input$probability_Categorical_Independent1, '\n')
@@ -3320,7 +3125,7 @@ parameters = reactive({
   
   if(isTruthy(input$name_Continuous_Independent1)) {
     parameters = paste0(parameters, 
-                        '\n- Individual tab -',
+                        '\n-- Individual tab --\n',
                         '\nContinuous independent variable 1: ', input$name_Continuous_Independent1,
                         '\nMean (per group): ', input$Continuous_Independent_mean1, 
                         '\nSD (per group): ', input$Continuous_Independent1_SD, '\n')
@@ -3377,7 +3182,7 @@ parameters = reactive({
   
   if(isTruthy(input$name_WithinParticipant1)) {
     parameters = paste0(parameters, 
-                        '\n- Conditions tab -',
+                        '\n-- Conditions tab --\n',
                         '\nWithin-participant factor 1: ', input$name_WithinParticipant1, 
                         '\nLevels: ',
                         paste(input$WithinParticipant1_Condition1, input$WithinParticipant1_Condition2, input$WithinParticipant1_Condition3,
@@ -3414,7 +3219,7 @@ parameters = reactive({
   
   if(isTRUE(input$include_Participant_column)) {
     parameters = paste0(parameters, 
-                        '\n- Size (N) tab -',
+                        '\n-- Size (N) tab --\n',
                         '\nBase ID column name: ', input$name_Participant_column,
                         '\nMultiplication factor = ', input$multiply_N,
                         '\n')
@@ -3422,7 +3227,7 @@ parameters = reactive({
   
   if(isTRUE(input$include_Trial_column)) {
     parameters = paste0(parameters, 
-                        '\n- Nested tab -',
+                        '\n-- Nested tab --\n',
                         '\nExtra nested factor 1: included by checking the box',
                         '\nName: ', input$name_Trial_column,
                         '\nNumber of levels = ', input$trial_N,
@@ -3439,7 +3244,7 @@ parameters = reactive({
   
   if(isTruthy(input$name_Categorical_Dependent1)) {
     parameters = paste0(parameters, 
-                        '\n- Dependent tab -',
+                        '\n-- Dependent tab --\n',
                         '\nCategorical dependent variable 1: ', input$name_Categorical_Dependent1,
                         '\nLevels: ', input$levels_Categorical_Dependent1, '\nProbability [0, 1] (per cell): ', 
                         input$probability_Categorical_Dependent1, '\n')
@@ -3496,7 +3301,7 @@ parameters = reactive({
   
   if(isTruthy(input$name_Continuous_Dependent1)) {
     parameters = paste0(parameters, 
-                        '\n- Dependent tab -',
+                        '\n-- Dependent tab --\n',
                         '\nContinuous dependent variable 1: ', input$name_Continuous_Dependent1,
                         '\nMean (per cell): ', input$Continuous_Dependent_mean1, 
                         '\nSD (per cell): ', input$Continuous_Dependent1_SD, '\n')
