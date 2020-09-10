@@ -10,6 +10,8 @@ This open-source, R-based web application is suitable for educational and resear
 
 <a href="https://github.com/pablobernabeu/Experimental-data-simulation/raw/master/Screenshot.png"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://github.com/pablobernabeu/Experimental-data-simulation/raw/master/Screenshot.png" /></a>
 
+<br>
+
 ### Reference
 
 Bernabeu, P., & Lynott, D. (2020). Web application for the simulation of experimental data (Version 0.2). Retrieved from [https://github.com/pablobernabeu/Experiment-simulation-app/](https://github.com/pablobernabeu/Experiment-simulation-app/).
