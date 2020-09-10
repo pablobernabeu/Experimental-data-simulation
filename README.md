@@ -10,7 +10,13 @@ This open-source, R-based web application is suitable for educational and resear
 
 <a href="https://github.com/pablobernabeu/Experimental-data-simulation/raw/master/Screenshot.png"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://github.com/pablobernabeu/Experimental-data-simulation/raw/master/Screenshot.png" /></a>
 
-<br>
+### Reference
+
+Bernabeu, P., & Lynott, D. (2020). Web application for the simulation of experimental data (Version 0.2). Retrieved from [https://github.com/pablobernabeu/Experiment-simulation-app/](https://github.com/pablobernabeu/Experiment-simulation-app/).
+
+### Code
+
+This web application was developed in [R](https://www.r-project.org/about.html) (R Core Team, 2020). The code is [available on Github](https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/index.Rmd), where contributions may be made. The initial code for this application was influenced by Section 5.7 in Crump (2017; [*Simulating data for multi-factor designs*](https://crumplab.github.io/programmingforpsych/simulating-and-analyzing-data-in-r.html#simulating-data-for-multi-factor-designs)). The R packages used include Shiny (Chang, Cheng, Allaire, Xie, & McPherson, 2020), Tidyverse (Wickham et al., 2019) and DT (Xie, 2020).
 
 ### Options for development and local use of the app
 
@@ -58,14 +64,6 @@ shown below.
 </p>
 
 <br>
-
-### Reference
-
-Bernabeu, P., & Lynott, D. (2020). Web application for the simulation of experimental data (Version 0.2). Retrieved from [https://github.com/pablobernabeu/Experiment-simulation-app/](https://github.com/pablobernabeu/Experiment-simulation-app/).
-
-### Code
-
-This web application was developed in [R](https://www.r-project.org/about.html) (R Core Team, 2020). The code is [available on Github](https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/index.Rmd), where contributions may be made. The initial code for this application was influenced by Section 5.7 in Crump (2017; [*Simulating data for multi-factor designs*](https://crumplab.github.io/programmingforpsych/simulating-and-analyzing-data-in-r.html#simulating-data-for-multi-factor-designs)). The R packages used include Shiny (Chang, Cheng, Allaire, Xie, & McPherson, 2020), Tidyverse (Wickham et al., 2019) and DT (Xie, 2020).
 
 ### Acknowledgements
 
