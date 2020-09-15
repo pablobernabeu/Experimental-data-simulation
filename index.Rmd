@@ -1,6 +1,6 @@
 ---
 title: Simulation
-author: '<a href="https://github.com/pablobernabeu/Experimental-data-simulation/" target="_blank"><button class="button-version">v `r app_version = read.delim("https://raw.githubusercontent.com/pablobernabeu/Experimental-data-simulation/master/version_number", header = FALSE)[1,1]; app_version  # Version number can be updated at https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/version_number`</button></a> &nbsp; <a href = "#section-size-n"><button class="button-samplesize"><span style = "color: #FCFF89;">`r reactive(try(if(isTRUE(input$include_Participant_column)){paste0("N = ", final_N())}, silent = TRUE) %>% gsub("\\Error.*", "", .))`</span></button></a>'
+author: '<font style="color: #FCF5F5; opacity:1"><a href="https://github.com/pablobernabeu/Experimental-data-simulation/" target="_blank"><button class="button-version">v `r app_version = read.delim("https://raw.githubusercontent.com/pablobernabeu/Experimental-data-simulation/master/version_number", header = FALSE)[1,1]; sprintf("%.1f", app_version)  # Version number can be updated at https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/version_number`</button></a></font>'
 output:
   flexdashboard::flex_dashboard:
     theme: 'spacelab'
@@ -155,8 +155,9 @@ visibility: visible; color: #377277; font-size: 14px;
 
 .button-version {
 background-color: #DEDFEE;
+opacity:0.3;
 border: none;
-color: #271111;
+color: #4B1010;
 padding: 0px 4px;
 text-align: center;
 text-decoration: none;
@@ -170,6 +171,7 @@ border-radius: 12px;
 .button-version:hover {
 background-color: #FCF5F5;
 color: #4B1010;
+opacity:1;
 }
 
 .button-samplesize {
@@ -251,9 +253,9 @@ Column {style='padding-top:30px;'}
 
 <div style = 'font-size: 20px; color: #614064; padding-top: 10px; padding-bottom: 10px;'><i class="fas fa-chalkboard-teacher fa-xs" aria-hidden="true"></i> <i class="fas fa-university fa-xs" aria-hidden="true"></i>&nbsp; Purposes </div>
 
-This open-source, R-based web application is suitable for educational and research purposes in experimental and quantitative sciences. It allows the **creation of varied data sets with specified structures, such as between-group and within-participant variables, that can be categorical or continuous.** These features can be selected along the different tabs. In the penultimate tab, a custom summary of the current data set can be constructed. In the last tab, the list of parameters and the data set can be downloaded. The main benefits of this app include time-saving, as no programming is required, and flexibility in the control of parameters.
+This open-source, R-based web application is suitable for educational and research purposes in experimental and quantitative sciences. It allows the **creation of varied data sets with specified structures, such as between-group and within-participant variables, that can be categorical or continuous.** These features can be selected along the different tabs. In the penultimate tab, a custom summary of the data set can be constructed. The data set is continuously updated and available in the last tab, where it can be downloaded, along with the list of parameters. The benefits of this application include time-saving and flexibility in the control of parameters.
 
-Screenshot of the *Dependent* tab ([view larger](https://github.com/pablobernabeu/Experimental-data-simulation/raw/master/Screenshot.png){target='_blank'})
+<div style='padding-top:8px; padding-bottom:11px; color:#665F5F;'> Screenshot of the *Dependent* tab ([view larger](https://github.com/pablobernabeu/Experimental-data-simulation/raw/master/Screenshot.png){target='_blank'}) </div>
 
 <img style="max-width: 750px; display: block; margin-left: auto; margin-right: auto; padding-bottom: 20px;" src="https://github.com/pablobernabeu/Experimental-data-simulation/raw/master/Screenshot.png" />
 
@@ -302,11 +304,11 @@ numericInput('seed', NULL, sample(1:99999, 1), step = 1, min = -.Machine$integer
 
 ### Reference
 
-Bernabeu, P., & Lynott, D. (2020). Web application for the simulation of experimental data (Version `r app_version`). Retrieved from [https://github.com/pablobernabeu/Experimental-data-simulation/](https://github.com/pablobernabeu/Experimental-data-simulation/){target='_blank'}.
+Bernabeu, P., & Lynott, D. (2020). Web application for the simulation of experimental data (Version `r sprintf("%.1f", app_version)`). Retrieved from [https://github.com/pablobernabeu/Experimental-data-simulation/](https://github.com/pablobernabeu/Experimental-data-simulation/){target='_blank'}.
 
 ### Code
 
-This web application was developed in [R](https://www.r-project.org/about.html){target='_blank'} (R Core Team, 2020). The code is [available on Github](https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/index.Rmd){target='_blank'}, where contributions may be made. The initial code for this application was influenced by Section 5.7 in Crump (2017; [*Simulating data for multi-factor designs*](https://crumplab.github.io/programmingforpsych/simulating-and-analyzing-data-in-r.html#simulating-data-for-multi-factor-designs){target='_blank'}). The R packages used include Shiny (Chang, Cheng, Allaire, Xie, & McPherson, 2020), Tidyverse (Wickham et al., 2019) and DT (Xie, 2020).
+This web application was developed in [R](https://www.r-project.org/about.html){target='_blank'} (R Core Team, 2020). The code is [available on Github](https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/index.Rmd){target='_blank'}, where contributions may be made. The initial code for this application was influenced by Section 5.7 ([*Simulating data for multi-factor designs*](https://crumplab.github.io/programmingforpsych/simulating-and-analyzing-data-in-r.html#simulating-data-for-multi-factor-designs){target='_blank'}) in Crump (2017). The R packages used include Shiny (Chang, Cheng, Allaire, Xie, & McPherson, 2020), Tidyverse (Wickham et al., 2019) and DT (Xie, 2020).
 
 ### Acknowledgements
 
@@ -685,7 +687,7 @@ The parameters for the dependent variables may be set generally for the whole da
 
 **Continuous variables.** Where any groups exist (created in the Groups tab), to adjust the means and standard deviations for each group, multiple values may be entered, separated by commas, each corresponding to a group. For instance, with four groups, the means could be entered as $34, 543, 657, 123$, and the standard deviations as $10, 20, 25, 5$.
 
-Since both of these variables use randomising, the user's parameters will be more closely approached with larger samples ([adjust](#size-n)). The overall summary, including the dependent variables, is shown below.
+Since both of these variables use randomising, the user's parameters will be more closely approached with larger samples ([adjust](#sample)). The overall summary, including the dependent variables, is shown below.
 
 </div>
 
@@ -1306,7 +1308,7 @@ The parameters for the dependent variables may be set generally for the whole da
 
 **Continuous variables.** To adjust the means and standard deviations for each cell, multiple values may be entered, separated by commas, each corresponding to a cell. For instance, with a 2x2 design (four cells), the means could be entered as $34, 543, 657, 123$, and the standard deviations as $10, 20, 25, 5$.
 
-Since both of these variables use randomising, the user's parameters will be more closely approached with larger samples ([adjust](#size-n)). The overall summary, including the dependent variables, is shown below.
+Since both of these variables use randomising, the user's parameters will be more closely approached with larger samples ([adjust](#sample)). The overall summary, including the dependent variables, is shown below.
 
 </div>
 
@@ -2827,27 +2829,31 @@ dataset = reactive({
 
 
 
-Size (*N*) {style="background-color: #FCFCFC; data-width: 100%; width: 900px; margin: 0 auto;"}
+Sample (*N* = `r reactive(try(if(isTRUE(input$include_Participant_column)){final_N()}, silent = TRUE) %>% gsub("\\Error.*", "", .))`) {#sample}
 =======================================================================
 
 Column
 ---
 
-### <span style='font-size:18px; color:#4D4F54;'> &nbsp; &nbsp; &nbsp; &nbsp;  Adjust sample size</span>
+### <span style='font-size:18px; color:#4D4F54;'> &nbsp; &nbsp; &nbsp; &nbsp; Parameters of the sample</span>
 
-<div style = "padding-top: 5px; padding-right: 60px; padding-bottom: 100px; padding-left: 60px; background-color: #FEFEFE; font-size: 16px; line-height: 1.6;">
-
-<h3 style='color:#2C6367'> Current sample size (*N*): `r reactive(final_N())` </h3>
-
-Adjust *N* by changing the multiplication factor below. Note that large samples may incur some processing time.
+<div style = "padding-top: 20px; padding-right: 60px; padding-bottom: 100px; padding-left: 60px; background-color: #FEFEFE; font-size: 16px; line-height: 1.6;">
 
 ```{r}
 
 textAreaInput(height = '45px', resize = 'vertical', 'name_Participant_column', 'Name of the base ID column', value = 'Participant')
 
-numericInput('multiply_N', NULL, 3, min = 1, width = '120px')
-
 checkboxInput('include_Participant_column', 'Include this column (un/check)', value = TRUE)
+
+```
+
+<h3 style='padding-top: 5px; color:#2C6367'> Current sample size (*N*): `r reactive(final_N())` </h3>
+
+Adjust *N* by changing the multiplication factor below. Note that large samples may incur some processing time.
+
+```{r}
+
+numericInput('multiply_N', NULL, 3, min = 1, width = '120px')
 
 ```
 
@@ -2862,7 +2868,7 @@ textAreaInput(height = '45px', resize = 'vertical', 'ID_labels', NULL,
 
 <br>
 
-#### Code details
+### Code details
 
 The sample size is interlocked with the factorial structure of the data set. That is, if any groups are created in the Groups tab, participants will be evenly drawn from the total *N* (in contrast, groups created in the *Individual* tab distribute the number of participants as the user indicates in the *Probability* field). For any within-participant factors, repeated measures are created by expanding the number of rows in the long-format data set ([last tab](#dataset)).
 
@@ -3022,7 +3028,7 @@ parameters = reactive({
                       'https://github.com/pablobernabeu/Experimental-data-simulation/\n',
                       '- Reference -\n',
                       'Bernabeu, P., & Lynott, D. (2020). Web application for the\n',
-                      'simulation of experimental data (Version ', app_version, '). Retrieved from\n',
+                      'simulation of experimental data (Version ', sprintf("%.1f", app_version), '). Retrieved from\n',
                       'https://github.com/pablobernabeu/Experimental-data-simulation/.\n',
                       '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n',
                       '-- Home tab --\n',
