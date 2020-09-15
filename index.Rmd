@@ -819,7 +819,7 @@ reactive({
       paste0(., ': ', (table(Categorical_Independent1()) / sum(table(Categorical_Independent1())) * 100) %>%
                round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
-    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
+    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the Sample tab.\n",
         "\nSee summary table for proportions per cell.\n_")
   }
 })
@@ -845,7 +845,7 @@ reactive({
       paste0(., ': ', (table(Categorical_Independent2()) / sum(table(Categorical_Independent2())) * 100) %>% 
                round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
-    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
+    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the Sample tab.\n",
         "\nSee summary table for proportions per cell.\n_")
   }
 })
@@ -871,7 +871,7 @@ reactive({
       paste0(., ': ', (table(Categorical_Independent3()) / sum(table(Categorical_Independent3())) * 100) %>% 
                round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
-    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
+    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the Sample tab.\n",
         "\nSee summary table for proportions per cell.\n_")
   }
 })
@@ -897,7 +897,7 @@ reactive({
       paste0(., ': ', (table(Categorical_Independent4()) / sum(table(Categorical_Independent4())) * 100) %>% 
                round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
-    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
+    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the Sample tab.\n",
         "\nSee summary table for proportions per cell.\n_")
   }
 })
@@ -923,7 +923,7 @@ reactive({
       paste0(., ': ', (table(Categorical_Independent5()) / sum(table(Categorical_Independent5())) * 100) %>% 
                round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
-    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
+    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the Sample tab.\n",
         "\nSee summary table for proportions per cell.\n_")
   }
 })
@@ -949,7 +949,7 @@ reactive({
       paste0(., ': ', (table(Categorical_Independent6()) / sum(table(Categorical_Independent6())) * 100) %>% 
                round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
-    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
+    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the Sample tab.\n",
         "\nSee summary table for proportions per cell.\n_")
   }
 })
@@ -975,7 +975,7 @@ reactive({
       paste0(., ': ', (table(Categorical_Independent7()) / sum(table(Categorical_Independent7())) * 100) %>% 
                round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
-    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
+    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the Sample tab.\n",
         "\nSee summary table for proportions per cell.\n_")
   }
 })
@@ -1001,7 +1001,7 @@ reactive({
       paste0(., ': ', (table(Categorical_Independent8()) / sum(table(Categorical_Independent8())) * 100) %>% 
                round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
-    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
+    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the Sample tab.\n",
         "\nSee summary table for proportions per cell.\n_")
   }
 })
@@ -1384,7 +1384,7 @@ reactive({
       paste0(., ': ', (table(Categorical_Dependent1()) / sum(table(Categorical_Dependent1())) * 100) %>% 
                round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
-    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
+    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the Sample tab.\n",
         "\nSee summary table for proportions per cell.\n_")
   }
 })
@@ -1409,7 +1409,7 @@ reactive({
       paste0(., ': ', (table(Categorical_Dependent2()) / sum(table(Categorical_Dependent2())) * 100) %>% 
                round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
-    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
+    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the Sample tab.\n",
         "\nSee summary table for proportions per cell.\n_")
   }
 })
@@ -1434,7 +1434,7 @@ reactive({
       paste0(., ': ', (table(Categorical_Dependent3()) / sum(table(Categorical_Dependent3())) * 100) %>% 
                round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
-    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
+    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the Sample tab.\n",
         "\nSee summary table for proportions per cell.\n_")
   }
 })
@@ -1459,7 +1459,7 @@ reactive({
       paste0(., ': ', (table(Categorical_Dependent4()) / sum(table(Categorical_Dependent4())) * 100) %>% 
                round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
-    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
+    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the Sample tab.\n",
         "\nSee summary table for proportions per cell.\n_")
   }
 })
@@ -1484,7 +1484,7 @@ reactive({
       paste0(., ': ', (table(Categorical_Dependent5()) / sum(table(Categorical_Dependent5())) * 100) %>% 
                round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
-    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
+    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the Sample tab.\n",
         "\nSee summary table for proportions per cell.\n_")
   }
 })
@@ -1509,7 +1509,7 @@ reactive({
       paste0(., ': ', (table(Categorical_Dependent6()) / sum(table(Categorical_Dependent6())) * 100) %>% 
                round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
-    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
+    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the Sample tab.\n",
         "\nSee summary table for proportions per cell.\n_")
   }
 })
@@ -1536,7 +1536,7 @@ reactive({
       paste0(., ': ', (table(Categorical_Dependent7()) / sum(table(Categorical_Dependent7())) * 100) %>% 
                round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
-    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
+    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the Sample tab.\n",
         "\nSee summary table for proportions per cell.\n_")
   }
 })
@@ -1561,7 +1561,7 @@ reactive({
       paste0(., ': ', (table(Categorical_Dependent8()) / sum(table(Categorical_Dependent8())) * 100) %>% 
                round(digits = 2), '%', collapse = '\n') %>%
       str_replace_all(', ', ',') %>% str_replace_all(' ,', ',') %>% cat()
-    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the 'Size (N)' tab.\n",
+    cat("\n\nNOTE: If any level has 0%, please increase\nsample size slightly in the Sample tab.\n",
         "\nSee summary table for proportions per cell.\n_")
   }
 })
@@ -2847,9 +2847,9 @@ checkboxInput('include_Participant_column', 'Include this column (un/check)', va
 
 ```
 
-<h3 style='padding-top: 5px; color:#2C6367'> Current sample size (*N*): `r reactive(final_N())` </h3>
+<h3 style='padding-top: 5px; color:#2C6367'> Current sample size (*N*) = `r reactive(final_N())` </h3>
 
-Adjust *N* by changing the multiplication factor below. Note that large samples may incur some processing time.
+Adjust *N* by changing the multiplication factor below (see updated number above). Note that large samples may incur some processing time.
 
 ```{r}
 
@@ -3225,11 +3225,11 @@ parameters = reactive({
   
   if(isTRUE(input$include_Participant_column)) {
     parameters = paste0(parameters, 
-                        '\n-- Size (N) tab --\n',
+                        '\n-- Sample tab --\n',
                         '\nBase ID column name: ', input$name_Participant_column,
                         '\nMultiplication factor = ', input$multiply_N,
                         '\n')
-  } else parameters = paste0(parameters, '\n- Size (N) tab -\nBase ID column: removed by unchecking the box\n')
+  } else parameters = paste0(parameters, '\n- Sample tab -\nBase ID column: removed by unchecking the box\n')
   
   if(isTRUE(input$include_Trial_column)) {
     parameters = paste0(parameters, 
