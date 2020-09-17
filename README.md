@@ -2,7 +2,7 @@
 
 ### Purposes
 
-This open-source, R-based web application is suitable for educational and research purposes in experimental and quantitative sciences. It allows the **creation of varied data sets with specified structures, such as between-group and within-participant variables, that can be categorical or continuous.** These parameters can be set throughout the various tabs listed at the top. In the last tab, the dataset can be downloaded, along with the list of parameters. The benefits of this application include time-saving and flexibility.
+This open-source, R-based web application is suitable for educational and research purposes in experimental and quantitative sciences. It allows the **creation of varied data sets with specified structures, such as between-group and within-participant variables, that can be categorical or continuous.** These parameters can be set throughout the various tabs from the top menu. In the last tab, the dataset can be downloaded. The benefits of this application include time-saving and flexibility in the control of parameters.
 
 ### :globe_with_meridians: &nbsp; The web application can be [launched here](https://pablo-bernabeu.shinyapps.io/experimental-data-simulation/).
 
