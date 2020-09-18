@@ -147,7 +147,7 @@ visibility: hidden;
 }
 
 .shiny-output-error:after{
-content: 'Please wait or revise inputs.'; 
+content: 'Awaiting appropriate inputs or loading data.';
 visibility: visible; color: #377277; font-size: 14px;
 }
 
@@ -307,7 +307,7 @@ Bernabeu, P., & Lynott, D. (2020). Web application for the simulation of experim
 
 ### Code
 
-This web application was developed in [R](https://www.r-project.org/about.html){target='_blank'} (R Core Team, 2020). The code is [available on Github](https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/index.Rmd){target='_blank'}, where contributions may be made. The initial code for this application was influenced by Section 5.7 ([*Simulating data for multi-factor designs*](https://crumplab.github.io/programmingforpsych/simulating-and-analyzing-data-in-r.html#simulating-data-for-multi-factor-designs){target='_blank'}) in Crump (2017). The R packages used include 'dplyr' (Wickham, François, Henry, & Müller, 2018), 'DT' (Xie, 2020), 'flexdashboard' (Iannone, Allaire, & Borges, 2020), 'shiny' (Chang, Cheng, Allaire, Xie, & McPherson, 2020), and 'stringr' (Wickham, 2019).
+This web application was developed in [R](https://www.r-project.org/about.html){target='_blank'} (R Core Team, 2020). The code is [available on Github](https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/index.Rmd){target='_blank'}, where contributions may be made. The initial code for this application was influenced by Section 5.7 ([*Simulating data for multi-factor designs*](https://crumplab.github.io/programmingforpsych/simulating-and-analyzing-data-in-r.html#simulating-data-for-multi-factor-designs){target='_blank'}) in Crump (2017). The R packages used include 'dplyr' (Wickham, François, Henry, & Müller, 2018), 'DT' (Xie, 2020), 'flexdashboard' (Iannone, Allaire, & Borges, 2020), 'shiny' (Chang, Cheng, Allaire, Xie, & McPherson, 2020) and 'stringr' (Wickham, 2019).
 
 ### Acknowledgements
 
@@ -321,13 +321,13 @@ Chang, W., Cheng, J., Allaire, J., Xie, Y., & McPherson, J. (2020). shiny: Web A
 
 Crump, M. J. C. (2017). Programming for Psychologists: Data Creation and Analysis (Version 1.1). [https://crumplab.github.io/programmingforpsych/](https://crumplab.github.io/programmingforpsych/){target='_blank'}.
 
-Iannone, R., Allaire, J. J., & Borges, B. (2020). Flexdashboard: R Markdown Format for Flexible Dashboards. http://rmarkdown.rstudio.com/flexdashboard.
+Iannone, R., Allaire, J. J., & Borges, B. (2020). Flexdashboard: R Markdown Format for Flexible Dashboards. [http://rmarkdown.rstudio.com/flexdashboard](http://rmarkdown.rstudio.com/flexdashboard){target='_blank'}.
 
 R Core Team (2020). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL [https://www.R-project.org/](https://www.R-project.org/){target='_blank'}.
 
-Wickham, H. (2019). stringr: Simple, Consistent Wrappers for Common String Operations. R package version 1.4.0. https://CRAN.R-project.org/package=stringr
+Wickham, H. (2019). stringr: Simple, Consistent Wrappers for Common String Operations. R package version 1.4.0. [https://CRAN.R-project.org/package=stringr](https://CRAN.R-project.org/package=stringr){target='_blank'}.
 
-Wickham, H., François, R., Henry, L., & Müller, K. (2018). dplyr: A Grammar of Data Manipulation. R package version 0.7.6. https://CRAN.R-project.org/package=dplyr.
+Wickham, H., François, R., Henry, L., & Müller, K. (2018). dplyr: A Grammar of Data Manipulation. R package version 0.7.6. [https://CRAN.R-project.org/package=dplyr](https://CRAN.R-project.org/package=dplyr){target='_blank'}.
 
 Xie, Y. (2020). DT: A Wrapper of the JavaScript Library "DataTables". R package version 0.14. Available at [https://CRAN.R-project.org/package=DT](https://CRAN.R-project.org/package=DT){target='_blank'}.
 
