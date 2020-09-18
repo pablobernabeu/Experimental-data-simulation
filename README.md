@@ -18,7 +18,7 @@ Bernabeu, P., & Lynott, D. (2020). Web application for the simulation of experim
 
 ### Code
 
-This web application was developed in [R](https://www.r-project.org/about.html) (R Core Team, 2020). The code is [available on Github](https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/index.Rmd), where contributions may be made. The initial code for this application was influenced by Section 5.7 ([*Simulating data for multi-factor designs*](https://crumplab.github.io/programmingforpsych/simulating-and-analyzing-data-in-r.html#simulating-data-for-multi-factor-designs)) in Crump (2017). The R packages used include Shiny (Chang, Cheng, Allaire, Xie, & McPherson, 2020), Tidyverse (Wickham et al., 2019) and DT (Xie, 2020).
+This web application was developed in [R](https://www.r-project.org/about.html) (R Core Team, 2020). The code is [available on Github](https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/index.Rmd), where contributions may be made. The initial code for this application was influenced by Section 5.7 ([*Simulating data for multi-factor designs*](https://crumplab.github.io/programmingforpsych/simulating-and-analyzing-data-in-r.html#simulating-data-for-multi-factor-designs)) in Crump (2017). The R packages used include 'dplyr' (Wickham, François, Henry, & Müller, 2018), 'DT' (Xie, 2020), 'flexdashboard' (Iannone, Allaire, & Borges, 2020), 'shiny' (Chang, Cheng, Allaire, Xie, & McPherson, 2020) and 'stringr' (Wickham, 2019).
 
 ### Options for development and local use of the app
 
@@ -79,9 +79,13 @@ Chang, W., Cheng, J., Allaire, J., Xie, Y., & McPherson, J. (2020). shiny: Web A
 
 Crump, M. J. C. (2017). Programming for Psychologists: Data Creation and Analysis (Version 1.1). [https://crumplab.github.io/programmingforpsych/](https://crumplab.github.io/programmingforpsych/).
 
+Iannone, R., Allaire, J. J., & Borges, B. (2020). Flexdashboard: R Markdown Format for Flexible Dashboards. [http://rmarkdown.rstudio.com/flexdashboard](http://rmarkdown.rstudio.com/flexdashboard).
+
 R Core Team (2020). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL [https://www.R-project.org/](https://www.R-project.org/).
 
-Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L. D. A., Fran&ccedil;ois, R., ... Kuhn, M. (2019). Welcome to the Tidyverse. *Journal of Open Source Software, 4*(43), 1686. [https://doi.org/10.21105/joss.01686](https://doi.org/10.21105/joss.01686).
+Wickham, H. (2019). stringr: Simple, Consistent Wrappers for Common String Operations. R package version 1.4.0. [https://CRAN.R-project.org/package=stringr](https://CRAN.R-project.org/package=stringr).
+
+Wickham, H., François, R., Henry, L., & Müller, K. (2018). dplyr: A Grammar of Data Manipulation. R package version 0.7.6. [https://CRAN.R-project.org/package=dplyr](https://CRAN.R-project.org/package=dplyr).
 
 Xie, Y. (2020). DT: A Wrapper of the JavaScript Library "DataTables". R package version 0.14. Available at [https://CRAN.R-project.org/package=DT](https://CRAN.R-project.org/package=DT).
 
