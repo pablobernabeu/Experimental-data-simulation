@@ -3000,7 +3000,7 @@ renderDT(
                            buttons = list(list(extend = 'csv', text = HTML('<i class="fas fa-download" aria-hidden="true"></i>&nbsp; Download (.csv)'),
                                                filename = paste0('Custom summary of simulated data - retrieved on ',
                                                                  str_replace_all(format(Sys.time(), '%d %b %Y at %X %Z'), ':', '.'), 
-                                                                 " (find info in Pablo Bernabeu's GitHub repository Experiment-simulation-app)"))))
+                                                                 " (find info in Pablo Bernabeu's GitHub repository Experimental-data-simulation)"))))
   )
 )
 
@@ -3403,7 +3403,7 @@ output$parameters_download = downloadHandler(
   filename = function() {
     paste0('Parameter list retrieved on ',
            str_replace_all(format(Sys.time(), '%d %b %Y at %X %Z'), ':', '.'), 
-           " (find info in Pablo Bernabeu's GitHub repository Experiment-simulation-app).txt")
+           " (find info in Pablo Bernabeu's GitHub repository Experimental-data-simulation).txt")
   },
   content = function(file) { cat(parameters(), file = file) }
 )
@@ -3652,7 +3652,7 @@ renderDT(
                            buttons = list(list(extend = 'csv', text = HTML('<i class="fas fa-download" aria-hidden="true"></i>&nbsp; Download (.csv)'),
                                                filename = paste0('Data simulation using seed number ', input$seed, ', retrieved on ',
                                                                  str_replace_all(format(Sys.time(), '%d %b %Y at %X %Z'), ':', '.'), 
-                                                                 " (find info in Pablo Bernabeu's GitHub repository Experiment-simulation-app)"))))
+                                                                 " (find info in Pablo Bernabeu's GitHub repository Experimental-data-simulation)"))))
   )
 )
 
