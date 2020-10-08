@@ -62,7 +62,7 @@ your chosen password. You can then select the Rmd file and click "Run Document" 
 shown below.
 
 <p style='margin-bottom:90px;' align="center">
-<img style='display: block; margin-left: auto; margin-right: auto;' src="img/interface.png" width='60%'>
+<img style='display: block; margin-left: auto; margin-right: auto;' src="img/interface.png" width='40%'>
 </p>
 
 <br>
