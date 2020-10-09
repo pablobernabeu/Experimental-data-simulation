@@ -36,47 +36,56 @@ knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, error = FA
 
 <!-- Tabs format -->
 
-/* inactive tab */
+/* tab, general */
 ul.nav.navbar-nav.navbar-left  a {
-color: white !important;
-background-color: none !important;
-border-bottom: none !important;
+color: white;
+background-color: none;
+border-bottom: none;
 }
 
-/* inactive tab hovered over */
+/* tab hovered over */
 ul.nav.navbar-nav.navbar-left  a:hover {
-color: white !important;
-background-color: #34507D !important;
-border-bottom: none !important;
-text-shadow: none !important;
+color: white;
+background-color: #34507D;
+border-bottom: none;
+text-shadow: none;
 }
 
 /* active tab */
 ul.nav.navbar-nav.navbar-left  li.active  a {
-color: white !important;
-font-weight: bold !important;
-background-color: #5472A3 !important;
-border-bottom: none !important;
-text-shadow: none !important;
-}
-
-/* visited links in active tabs */
-ul.nav.navbar-nav.navbar-left  li.active  a:visited {
-color: white !important;
-font-weight: bold !important;
-background-color: #5472A3 !important;
-border-bottom: none !important;
-text-shadow: none !important;
+color: white;
+font-weight: bold;
+background-color: #5472A3;
+border-bottom: 3px solid;
+text-shadow: none;
 }
 
 /* visited links in inactive tabs */
 ul.nav.navbar-nav.navbar-left  a:visited {
-color: white !important;
-font-weight: bold !important;
-background-color: #5472A3 !important;
-border-bottom: none !important;
-text-shadow: none !important;
+color: white;
+font-weight: bold;
+background-color: #5472A3;
+border-bottom: none;
+text-shadow: none;
 }
+
+/* 'Data set' tab, general */
+#navbar > ul.nav.navbar-nav.navbar-left > li:nth-child(9) > a {
+font-weight: bold;
+}
+
+/* 'Data set' tab, hovered over */
+#navbar > ul.nav.navbar-nav.navbar-left > li:nth-child(9) > a:hover {
+color: black;
+background-color: #F0DFD0;
+}
+
+/* 'Data set' tab, active */
+#navbar > ul.nav.navbar-nav.navbar-left > li:nth-child(9).active > a {
+color: black;
+background-color: #F0DFD0;
+}
+
 
 <!-- Fonts format -->
 
@@ -2997,7 +3006,7 @@ renderDT(
   datatable(custom_summary(), 
             rownames = FALSE, extensions = c('Buttons'), class="nowrap compact cell-border", selection = 'none',
             options = list(order = list(0, 'asc'), dom = 'Bifrt', pageLength = nrow(custom_summary()), scroller = TRUE,
-                           buttons = list(list(extend = 'csv', text = HTML('<i class="fas fa-download" aria-hidden="true"></i>&nbsp; Download (.csv)'),
+                           buttons = list(list(extend = 'csv', text = HTML('<i class="fas fa-download" aria-hidden="true"></i>&nbsp; Click to download summary (.csv)'),
                                                filename = paste0('Custom summary of simulated data - retrieved on ',
                                                                  str_replace_all(format(Sys.time(), '%d %b %Y at %X %Z'), ':', '.'), 
                                                                  " (find info in Pablo Bernabeu's GitHub repository Experimental-data-simulation)"))))
@@ -3010,13 +3019,13 @@ renderDT(
 
 
 
-Dataset &nbsp;<i class="fas fa-flag-checkered" aria-hidden="true"></i>
+Data set &nbsp;<i class="fas fa-flag-checkered" aria-hidden="true"></i>
 =======================================================================
 
 Column {style="position:static; min-width: 580px; max-width: 580px; min-height: 1000px;"}
 -----------------------------------------------------------------------
 
-### **Parameters** (user input) {style='max-height: 70px;'}
+### **Parameters** to ensure reproducibility of the simulated data {style='max-height: 70px;'}
 
 ```{r}
 
@@ -3393,7 +3402,7 @@ parameters = reactive({
 
 # Create the actual downloadLink
 output$parameters_download_link = renderUI({
-  downloadLink('parameters_download', HTML('<i class="fas fa-download" aria-hidden="true"></i>&nbsp; Download to ensure reproducibility'), 
+  downloadLink('parameters_download', HTML('<i class="fas fa-download" aria-hidden="true"></i>&nbsp; Click to download'), 
                style = 'border-bottom:none !important; text-decoration: none !important; font-weight: normal !important;', 
                class = 'button-parameters-download')
 })
@@ -3649,7 +3658,7 @@ renderDT(
   datatable(final_dataset(), 
             rownames = FALSE, extensions = c('Buttons'), class="nowrap compact cell-border", selection = 'none',
             options = list(order = list(0, 'asc'), dom = 'Bifrt', pageLength = nrow(final_dataset()), scroller = TRUE,
-                           buttons = list(list(extend = 'csv', text = HTML('<i class="fas fa-download" aria-hidden="true"></i>&nbsp; Download (.csv)'),
+                           buttons = list(list(extend = 'csv', text = HTML('<i class="fas fa-download" aria-hidden="true"></i>&nbsp; Click to download (.csv)'),
                                                filename = paste0('Data simulation using seed number ', input$seed, ', retrieved on ',
                                                                  str_replace_all(format(Sys.time(), '%d %b %Y at %X %Z'), ':', '.'), 
                                                                  " (find info in Pablo Bernabeu's GitHub repository Experimental-data-simulation)"))))
