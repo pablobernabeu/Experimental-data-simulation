@@ -24,15 +24,32 @@ This web application was developed in [R](https://www.r-project.org/about.html) 
 
 ### Options for development and local use of the app
 
-#### A) Using Rmd script
+#### Option A) Using local R/RStudio or [RStudio Cloud project](https://rstudio.cloud/project/1739958) or [Binder environment](https://mybinder.org/v2/gh/pablobernabeu/Experimental-data-simulation/master?urlpath=rstudio)
 
-Please open the script [index.Rmd](https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/index.Rmd) in RStudio, install the packages suggested by RStudio, run the application by clicking on <kbd>▶️&nbsp; Run document</kbd> at the top left, or by running `rmarkdown::run('index.Rmd')` in the console, and finally click on <kbd>Open in Browser</kbd> at the top left. 
+1. [Not necessary if using the Binder environment.] Install the packages in the versions used in the [latest release of this application](https://github.com/pablobernabeu/Experimental-data-simulation/releases).
 
-#### B) Using RStudio Cloud
+```
+install.packages('devtools')
+library(devtools)
+install_version('dplyr', '1.0.2', 'http://cran.us.r-project.org')
+install_version('DT', '0.15', 'http://cran.us.r-project.org')
+install_version('flexdashboard', '0.5.2', 'http://cran.us.r-project.org')
+install_version('htmltools', '0.5.0', 'http://cran.us.r-project.org')
+install_version('knitr', '1.30', 'http://cran.us.r-project.org')
+install_version('ngram', '3.0.4', 'http://cran.us.r-project.org')
+install_version('purrr', '0.3.4', 'http://cran.us.r-project.org')
+install_version('shiny', '1.5.0', 'http://cran.us.r-project.org')
+install_version('stringr', '1.4.0', 'http://cran.us.r-project.org')
+install_version('tidyr', '1.1.2', 'http://cran.us.r-project.org')
+```
 
-Please access the [RStudio Cloud project](https://rstudio.cloud/project/1739958), open the script 'index.Rmd' in the Files pane, run the application by clicking on <kbd>▶️&nbsp; Run document</kbd> at the top left, or by running `rmarkdown::run('index.Rmd')` in the console, and finally click on <kbd>Open in Browser</kbd> at the top left. 
+2. Open the [index.Rmd](https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/index.Rmd) script.
 
-#### C) Using Dockerfile ([@vsoch's pull request](https://github.com/pablobernabeu/Experimental-data-simulation/pull/1))
+3. Run the application by clicking on <kbd>▶️&nbsp; Run document</kbd> at the top left, or by running `rmarkdown::run('index.Rmd')` in the console.
+
+4. Click on <kbd>Open in Browser</kbd> at the top left.
+
+#### Option B) Using Dockerfile ([@vsoch's pull request](https://github.com/pablobernabeu/Experimental-data-simulation/pull/1))
 
 A [Dockerfile](Dockerfolder/Dockerfile) has been provided. First, build the container:
 
