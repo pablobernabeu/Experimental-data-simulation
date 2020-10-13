@@ -24,7 +24,7 @@ This web application was developed in [R](https://www.r-project.org/about.html) 
 
 ### Options for development and local use of the app
 
-#### Option A) Using local R/RStudio or [RStudio Cloud project](https://rstudio.cloud/project/1739958) or [Binder environment](https://mybinder.org/v2/gh/pablobernabeu/Experimental-data-simulation/master?urlpath=rstudio)
+#### Option A) Using local R/RStudio or [RStudio Cloud project](https://rstudio.cloud/project/1739958) or [RStudio Binder environment](https://mybinder.org/v2/gh/pablobernabeu/Experimental-data-simulation/master?urlpath=rstudio)
 
 1. [Not necessary if using the Binder environment.] Install the packages in the versions used in the [latest release of this application](https://github.com/pablobernabeu/Experimental-data-simulation/releases).
 
