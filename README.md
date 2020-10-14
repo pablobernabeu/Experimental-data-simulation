@@ -8,7 +8,7 @@ This open-source, R-based web application is suitable for educational and resear
 
 General guidelines include the following:
 
-- **In the names of variables**, it's recommended only to use alphanumeric characters, while underscore signs can be used to separate characters or words (e.g., *variable_name*). Different names should be used for each variable.
+- **In the names of variables**, it's recommended only to use alphanumeric characters and underscore signs. The latter can be used to separate characters or words (e.g., *variable_name*). Different names should be used for each variable.
 
 - **In the levels of categorical variables**, alphanumeric, special characters and spaces are allowed.
 
