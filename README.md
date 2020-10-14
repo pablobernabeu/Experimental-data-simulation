@@ -2,7 +2,21 @@
 
 ### Purposes
 
-This open-source, R-based web application is suitable for educational and research purposes in experimental and quantitative sciences. It allows the **creation of varied data sets with specified structures, such as between-group and within-participant variables, that can be categorical or continuous.** These parameters can be set throughout the various tabs from the top menu. In the last tab, the data set can be downloaded. The benefits of this application include time-saving and flexibility in the control of parameters.
+This open-source, R-based web application is suitable for educational and research purposes in experimental and quantitative sciences. It allows the **creation of varied data sets with specified structures, such as between-group and within-participant variables, that can be categorical or continuous.** These parameters can be set throughout the various tabs (sections) from the top menu. In the last tab, the data set can be downloaded. The benefits of this application include time-saving and flexibility in the control of parameters.
+
+### Guidelines
+
+General guidelines include the following:
+
+- **In the names of variables**, it's recommended only to use alphanumeric characters, while underscore signs can be used to separate characters or words (e.g., *variable_name*). Different names should be used for each variable.
+
+- **In the levels of categorical variables**, alphanumeric, special characters and spaces are allowed.
+
+- **In numeric fields** (e.g., 'Mean', 'Standard deviation', 'Relative probability [0, 1]'), only numbers and decimal points are allowed.
+
+- **As the data set increases**, so does the processing time.
+
+More specific guidelines are available in each section.
 
 ## :globe_with_meridians: &nbsp; The web application can be [launched here](https://pablo-bernabeu.shinyapps.io/experimental-data-simulation/).
 
@@ -24,9 +38,9 @@ This web application was developed in [R](https://www.r-project.org/about.html) 
 
 ### Options for development and local use of the app
 
-#### Option A) Using local R/RStudio or [RStudio Cloud project](https://rstudio.cloud/project/1739958) or [RStudio Binder environment](https://mybinder.org/v2/gh/pablobernabeu/Experimental-data-simulation/master?urlpath=rstudio)
+#### Option A) Using local R/RStudio or [RStudio Cloud project](https://rstudio.cloud/project/1739958)
 
-1. [Not necessary if using the Binder environment.] Install the packages in the versions used in the [latest release of this application](https://github.com/pablobernabeu/Experimental-data-simulation/releases).
+1. Install the packages in the versions used in the [latest release of this application](https://github.com/pablobernabeu/Experimental-data-simulation/releases).
 
     ```
     install.packages('devtools')
