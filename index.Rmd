@@ -297,7 +297,7 @@ numericInput('rounding', NULL, 3, min = 1, width = '60px')
 
 ### Ensuring reproducibility of simulated data
 
-Reproducing a simulation requires three pieces of data: the seed number, the parameter list and the final data set. After creating the variables wanted, make sure to download the parameter list and the final data set in the [last tab](#dataset). The seed number will be part of the names of the downloaded files.
+Reproducing a simulation requires three pieces of data: the seed number, the parameter list and the final data set. After creating the variables wanted, make sure to download the parameter list and the final data set in the [last tab](#data-set). The seed number will be part of the names of the downloaded files.
 
 A seed number is a code that allows the reproducibility of any data involving random generation. This applies to any variables created in the *Individual* tab or in the *Dependent* tab. The number is shown below, where you can change it to any integer number up to ±`r .Machine$integer.max`.
 
@@ -3006,7 +3006,7 @@ Adjust *N* by changing the multiplication factor below (see updated number above
 
 ```{r}
 
-numericInput('multiply_N', NULL, 3, min = 1, width = '120px')
+numericInput('multiply_N', NULL, 3, min = 1, width = '170px')
 
 ```
 
@@ -3023,7 +3023,7 @@ textAreaInput(height = '45px', resize = 'vertical', 'ID_labels', NULL,
 
 ### Code details
 
-The sample size is interlocked with the factorial structure of the data set. That is, if any groups are created in the Groups tab, participants will be evenly drawn from the total *N* (in contrast, groups created in the *Individual* tab distribute the number of participants as the user indicates in the *Probability* field). For any within-participant factors, repeated measures are created by expanding the number of rows in the long-format data set ([last tab](#dataset)).
+The sample size is interlocked with the factorial structure of the data set. That is, if any groups are created in the Groups tab, participants will be evenly drawn from the total *N* (in contrast, groups created in the *Individual* tab distribute the number of participants as the user indicates in the *Probability* field). For any within-participant factors, repeated measures are created by expanding the number of rows in the long-format data set ([last tab](#data-set)).
 
 </div>
 
