@@ -40,7 +40,7 @@ This web application was developed in [R](https://www.r-project.org/about.html) 
 
 #### Option A) Using local R/RStudio or [RStudio Cloud project](https://rstudio.cloud/project/1739958)
 
-1. [In RStudio Cloud, this step can usually be skipped.] Install the packages in the versions used in the [latest release of this application](https://github.com/pablobernabeu/Experimental-data-simulation/releases).
+1. [In RStudio Cloud, this step can usually be skipped.] Install the packages in the versions used in the [latest release of this application](https://github.com/pablobernabeu/Experimental-data-simulation/releases), by running:
 
     ```
     install.packages('devtools')
