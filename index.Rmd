@@ -153,11 +153,13 @@ color: #2D5054;
 /* Change error messages */
 .shiny-output-error{
 visibility: hidden;
+padding-bottom: 10px;
 }
 
 .shiny-output-error:after{
 content: 'Awaiting appropriate inputs or loading data.';
 visibility: visible; color: #377277; font-size: 14px;
+padding-bottom: 20px; margin-bottom: 20px;
 }
 
 /* Format buttons */
@@ -261,7 +263,21 @@ Column {style='padding-top:30px;'}
 
 <div style = 'font-size: 20px; color: #614064; padding-top: 10px; padding-bottom: 10px;'><i class="fas fa-chalkboard-teacher fa-xs" aria-hidden="true"></i> <i class="fas fa-university fa-xs" aria-hidden="true"></i>&nbsp; Purposes </div>
 
-This open-source, R-based web application is suitable for educational and research purposes in experimental and quantitative sciences. It allows the **creation of varied data sets with specified structures, such as between-group and within-participant variables, that can be categorical or continuous.** These parameters can be set throughout the various tabs from the top menu. In the last tab, the data set can be downloaded. The benefits of this application include time-saving and flexibility in the control of parameters.
+This open-source, R-based web application is suitable for educational and research purposes in experimental and quantitative sciences. It allows the **creation of varied data sets with specified structures, such as between-group and within-participant variables, that can be categorical or continuous.** These parameters can be set throughout the various tabs (sections) from the top menu. In the last tab, the data set can be downloaded. The benefits of this application include time-saving and flexibility in the control of parameters.
+
+### Guidelines
+
+General guidelines include the following:
+
+- **In the names of variables**, it's recommended only to use alphanumeric characters and underscore signs. The latter can be used to separate characters or words (e.g., *variable_name*). Different names should be used for each variable.
+
+- **In the levels of categorical variables**, alphanumeric, special characters and spaces are allowed.
+
+- **In numeric fields** (e.g., 'Mean', 'Standard deviation', 'Relative probability [0, 1]'), only numbers and decimal points are allowed.
+
+- **As the data set increases**, so does the processing time.
+
+More specific guidelines are available in each section.
 
 <div style='padding-top:8px; padding-bottom:11px; color:#665F5F;'> Screenshot of the *Dependent* tab ([view larger](https://github.com/pablobernabeu/Experimental-data-simulation/raw/master/Screenshot.png){target='_blank'}) </div>
 
@@ -291,7 +307,6 @@ tags$style(type = 'text/css',
            '#seed.form-control.shiny-bound-input {padding-left:40px; padding-top:8px; padding-bottom:8px; font-size:150%; color:#206B90; letter-spacing:6px;}')
 
 numericInput('seed', NULL, sample(1:99999, 1), step = 1, min = -.Machine$integer.max, max = .Machine$integer.max)
-
 
 ## Important notes about the seed ##
 
@@ -3584,8 +3599,7 @@ final_dataset = reactive({
   # Select the columns that are especially relevant now
   selected_columns = 
     dataset() %>% 
-    group_by(across(where(~is.factor(.) | is.character(.)))) # %>% 
-  # select(across(where(is.numeric)))
+    group_by(across(where(~is.factor(.) | is.character(.))))
   
   # Merge
   final = merge(final, selected_columns)
