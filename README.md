@@ -18,7 +18,7 @@ General guidelines include the following:
 
 More specific guidelines are available in each section.
 
-## :globe_with_meridians: &nbsp; The web application can be [launched here](https://pablo-bernabeu.shinyapps.io/experimental-data-simulation/).
+## :globe_with_meridians: &nbsp; The web application can be [launched here](https://pablo-bernabeu.shinyapps.io/experimental-data-simulation/) or [here](https://mybinder.org/v2/gh/pablobernabeu/Experimental-data-simulation/master?urlpath=shiny).
 
 <br>
 
@@ -38,9 +38,9 @@ This web application was developed in [R](https://www.r-project.org/about.html) 
 
 ### Options for development and local use of the app
 
-#### Option A) Using local R/RStudio or [RStudio Cloud project](https://rstudio.cloud/project/1739958)
+#### Option A) Using local R/RStudio or [RStudio Cloud project](https://rstudio.cloud/project/1739958) or [Binder RStudio environment](https://mybinder.org/v2/gh/pablobernabeu/Experimental-data-simulation/master?urlpath=rstudio)
 
-1. [In RStudio Cloud, this step can usually be skipped.] Install the packages in the versions used in the [latest release of this application](https://github.com/pablobernabeu/Experimental-data-simulation/releases), by running:
+1. [Step only necessary in R/RStudio Cloud] Install the packages in the versions used in the [latest release of this application](https://github.com/pablobernabeu/Experimental-data-simulation/releases), by running:
 
     ```
     install.packages('devtools')
