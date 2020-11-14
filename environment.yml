@@ -1,0 +1,15 @@
+channels:
+  - conda-forge
+dependencies:
+  - r-base=4.0.3
+  - r-rmarkdown
+  - r-flexdashboard
+  - r-knitr
+  - r-dplyr
+  - r-tidyr
+  - r-DT
+  - r-stringr
+  - r-purrr
+  - r-ngram
+  - r-shiny
+  - r-htmltools
