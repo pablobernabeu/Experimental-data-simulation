@@ -327,7 +327,7 @@ numericInput('seed', NULL, sample(1:99999, 1), step = 1, min = -.Machine$integer
 
 ### Reference
 
-Bernabeu, P., & Lynott, D. (2020). Web application for the simulation of experimental data (Version `r sprintf("%.1f", app_version)`). Retrieved from [https://github.com/pablobernabeu/Experimental-data-simulation/](https://github.com/pablobernabeu/Experimental-data-simulation/){target='_blank'}.
+Bernabeu, P., & Lynott, D. (2020). *Web application for the simulation of experimental data* (Version `r sprintf("%.1f", app_version)`). [https://github.com/pablobernabeu/Experimental-data-simulation/](https://github.com/pablobernabeu/Experimental-data-simulation/){target='_blank'}
 
 ### Code
 
@@ -739,7 +739,7 @@ Since both of these variables use randomisation, the user's parameters will be m
 </div>
 
 
-### **Summary including individual variables** ([larger summary](#summary))
+### **Summary including any individual variables** ([more summary options](#summary))
 
 ```{r}
 
@@ -1464,35 +1464,47 @@ Since both of these variables use randomisation, the user's parameters will be m
 </div>
 
 
-### **General summary including dependent variables** ([larger summary](#summary))
+### **General summary of data set** ([more summary options](#summary))
 
 ```{r}
 
-Dependent_tab_summary = 
+Dependent_tab_summary =
   
-  # If no continuous variables entered
   reactive({
-    x = final_dataset() %>% 
-      # Remove base ID column (i.e., Participant)
-      select(-input$name_Participant_column) %>%
-      # This first bit displays number of observations per cell ('n')
-      group_by(across(any_of(
-        final_dataset() %>% select(-input$name_Participant_column) %>% select_if(~is.factor(.) | is.character(.)) %>% names()
-      ))) %>% tally %>%
-      # Merge the previous basic structure with the columns that are relevant now
-      merge(
-        final_dataset() %>% 
-          # Remove base ID column (i.e., Participant)
-          select(-input$name_Participant_column) %>% 
-          group_by(across(any_of(
-            final_dataset() %>% select(-input$name_Participant_column) %>% select_if(~is.factor(.) | is.character(.)) %>% names()
-          ))) %>% 
-          summarise(across(any_of(
-            final_dataset() %>% select(-input$name_Participant_column) %>% select_if(is.numeric) %>% names()
-          ), list(Mean = mean, SD = sd))) %>% 
-          # Round off numeric variables
-          mutate(across(where(is.numeric), round, input$rounding))
-      ) 
+    
+    # If no numeric variables present
+    if(final_dataset() %>% select(-input$name_Participant_column) %>% select_if(is.numeric) %>% ncol == 0) {
+      x = final_dataset() %>%
+        # Remove base ID column (i.e., Participant)
+        select(-input$name_Participant_column) %>%
+        # This first bit displays number of observations per cell ('n')
+        group_by(across(any_of(
+          final_dataset() %>% select(-input$name_Participant_column) %>% select_if(~is.factor(.) | is.character(.)) %>% names()
+        ))) %>% tally
+      
+    } else {  # If any continuous variables present
+      x = final_dataset() %>%
+        # Remove base ID column (i.e., Participant)
+        select(-input$name_Participant_column) %>%
+        # This first bit displays number of observations per cell ('n')
+        group_by(across(any_of(
+          final_dataset() %>% select(-input$name_Participant_column) %>% select_if(~is.factor(.) | is.character(.)) %>% names()
+        ))) %>% tally %>%
+        # Merge the previous basic structure with the columns that are relevant now
+        merge(
+          final_dataset() %>%
+            # Remove base ID column (i.e., Participant)
+            select(-input$name_Participant_column) %>%
+            group_by(across(any_of(
+              final_dataset() %>% select(-input$name_Participant_column) %>% select_if(~is.factor(.) | is.character(.)) %>% names()
+            ))) %>%
+            summarise(across(any_of(
+              final_dataset() %>% select(-input$name_Participant_column) %>% select_if(is.numeric) %>% names()
+            ), list(Mean = mean, SD = sd))) %>%
+            # Round off numeric variables
+            mutate(across(where(is.numeric), round, input$rounding))
+        )
+    }
   })
 
 
@@ -1504,11 +1516,11 @@ renderDT(
             callback = JS(c(
               "table.on('draw.dt', function(){",
               "  var PageInfo = table.page.info();",
-              "  table.column(0, {page: 'current'}).nodes().each(function(cell,i){", 
+              "  table.column(0, {page: 'current'}).nodes().each(function(cell,i){",
               "    cell.innerHTML = i + 1 + PageInfo.start;",
               "  });",
               "})"
-            ))) %>% 
+            ))) %>%
     formatStyle(0, Color = '#595143', backgroundColor = '#EFF1F8')
 )
 
@@ -3188,8 +3200,8 @@ parameters = reactive({
                       'https://github.com/pablobernabeu/Experimental-data-simulation/\n',
                       '- Reference -\n',
                       'Bernabeu, P., & Lynott, D. (2020). Web application for the\n',
-                      'simulation of experimental data (Version ', sprintf("%.1f", app_version), '). Retrieved from\n',
-                      'https://github.com/pablobernabeu/Experimental-data-simulation/.\n',
+                      'simulation of experimental data (Version ', sprintf("%.1f", app_version), ') [Computer software].\n',
+                      'https://github.com/pablobernabeu/Experimental-data-simulation/\n',
                       '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n',
                       '-- Home tab --\n',
                       '\nSeed number = ', input$seed, '\n',
