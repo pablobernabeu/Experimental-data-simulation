@@ -18,7 +18,7 @@ General guidelines include the following:
 
 More specific guidelines are available in each section.
 
-## :globe_with_meridians: &nbsp; The web application can be [launched here](https://pablo-bernabeu.shinyapps.io/experimental-data-simulation/) or [here](https://mybinder.org/v2/gh/pablobernabeu/Experimental-data-simulation/master?urlpath=shiny).
+## :globe_with_meridians:&nbsp; The web application can be [launched here](https://pablo-bernabeu.shinyapps.io/experimental-data-simulation/) or [here](https://mybinder.org/v2/gh/pablobernabeu/Experimental-data-simulation/master?urlpath=shiny).
 
 <br>
 
