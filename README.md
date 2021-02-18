@@ -30,7 +30,7 @@ More specific guidelines are available in each section.
 
 ### Reference
 
-Bernabeu, P., & Lynott, D. (2020). *Web application for the simulation of experimental data* (Version 1.2). [https://github.com/pablobernabeu/Experiment-simulation-app/](https://github.com/pablobernabeu/Experiment-simulation-app/)
+Bernabeu, P., & Lynott, D. (2020). *Web application for the simulation of experimental data* (Version 1.3). [https://github.com/pablobernabeu/Experiment-simulation-app/](https://github.com/pablobernabeu/Experiment-simulation-app/)
 
 ### Code
 
