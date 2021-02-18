@@ -40,28 +40,11 @@ This web application was developed in [R](https://www.r-project.org/about.html) 
 
 #### Option A) Using local R/RStudio or [RStudio Cloud project](https://rstudio.cloud/project/1739958) or [Binder RStudio environment](https://mybinder.org/v2/gh/pablobernabeu/Experimental-data-simulation/master?urlpath=rstudio)
 
-1. [Step only necessary in R/RStudio Cloud] Install the packages in the versions used in the [latest release of this application](https://github.com/pablobernabeu/Experimental-data-simulation/releases), by running:
+1. Open the [index.Rmd](https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/index.Rmd) script and install any packages suggested.
 
-    ```
-    install.packages('devtools')
-    library(devtools)
-    install_version('dplyr', '1.0.2', 'http://cran.us.r-project.org')
-    install_version('DT', '0.15', 'http://cran.us.r-project.org')
-    install_version('flexdashboard', '0.5.2', 'http://cran.us.r-project.org')
-    install_version('htmltools', '0.5.0', 'http://cran.us.r-project.org')
-    install_version('knitr', '1.30', 'http://cran.us.r-project.org')
-    install_version('ngram', '3.0.4', 'http://cran.us.r-project.org')
-    install_version('purrr', '0.3.4', 'http://cran.us.r-project.org')
-    install_version('shiny', '1.5.0', 'http://cran.us.r-project.org')
-    install_version('stringr', '1.4.0', 'http://cran.us.r-project.org')
-    install_version('tidyr', '1.1.2', 'http://cran.us.r-project.org')
-    ```
+2. Run the application by clicking on <kbd>▶️&nbsp; Run document</kbd> at the top left, or by running `rmarkdown::run('index.Rmd')` in the console.
 
-2. Open the [index.Rmd](https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/index.Rmd) script.
-
-3. Run the application by clicking on <kbd>▶️&nbsp; Run document</kbd> at the top left, or by running `rmarkdown::run('index.Rmd')` in the console.
-
-4. Click on <kbd>Open in Browser</kbd> at the top left.
+3. Click on <kbd>Open in Browser</kbd> at the top left.
 
 #### Option B) Using Dockerfile ([@vsoch's pull request](https://github.com/pablobernabeu/Experimental-data-simulation/pull/1))
 
