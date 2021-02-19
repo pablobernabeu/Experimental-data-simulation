@@ -265,7 +265,7 @@ Column {style='padding-top:30px;'}
 
 This open-source, R-based web application is suitable for educational and research purposes in experimental and quantitative sciences. It allows the **creation of varied data sets with specified structures, such as between-group and within-participant variables, that can be categorical or continuous.** These parameters can be set throughout the various tabs (sections) from the top menu. In the last tab, the data set can be downloaded. The benefits of this application include time-saving and flexibility in the control of parameters.
 
-### Guidelines
+<h3>Guidelines</h3>
 
 General guidelines include the following:
 
@@ -283,7 +283,7 @@ More specific guidelines are available in each section.
 
 <img style="max-width: 750px; display: block; margin-left: auto; margin-right: auto; padding-bottom: 20px;" src="https://github.com/pablobernabeu/Experimental-data-simulation/raw/master/Screenshot.png" />
 
-### Rounding
+<h3>Rounding</h3>
 
 Below, you can select the **number of decimal places** to be kept in any continuous variables that you create.
 
@@ -295,7 +295,7 @@ numericInput('rounding', NULL, 3, min = 1, width = '60px')
 
 <br>
 
-### Ensuring reproducibility of simulated data
+<h3>Ensuring reproducibility of simulated data</h3>
 
 Reproducing a simulation requires three pieces of data: the seed number, the parameter list and the final data set. After creating the variables wanted, make sure to download the parameter list and the final data set in the [last tab](#data-set). The seed number will be part of the names of the downloaded files.
 
@@ -325,21 +325,21 @@ numericInput('seed', NULL, sample(1:99999, 1), step = 1, min = -.Machine$integer
 
 <br>
 
-### Reference
+<h3>Reference</h3>
 
 Bernabeu, P., & Lynott, D. (2020). *Web application for the simulation of experimental data* (Version `r sprintf("%.1f", app_version)`). [https://github.com/pablobernabeu/Experimental-data-simulation/](https://github.com/pablobernabeu/Experimental-data-simulation/){target='_blank'}
 
-### Code
+<h3>Code</h3>
 
 This web application was developed in [R](https://www.r-project.org/about.html){target='_blank'} (R Core Team, 2020). The code is [available on Github](https://github.com/pablobernabeu/Experimental-data-simulation){target='_blank'}, where contributions may be made. The initial code for this application was influenced by Section 5.7 ([*Simulating data for multi-factor designs*](https://crumplab.github.io/programmingforpsych/simulating-and-analyzing-data-in-r.html#simulating-data-for-multi-factor-designs){target='_blank'}) in Crump (2017). The R packages used include 'dplyr' (Wickham, François, Henry, & Müller, 2018), 'DT' (Xie, 2020), 'flexdashboard' (Iannone, Allaire, & Borges, 2020), 'shiny' (Chang, Cheng, Allaire, Xie, & McPherson, 2020) and 'stringr' (Wickham, 2019).
 
 <br>
 
-### Acknowledgements
+<h3>Acknowledgements</h3>
 
 Thank you to RStudio for the free hosting server used by this application, [shinyapps.io](https://www.shinyapps.io/){target='_blank'}.
 
-### References
+<h3>References</h3>
 
 <div style = "text-indent:-1.5em; margin-left:1.5em;">
 
@@ -359,7 +359,7 @@ Xie, Y. (2020). DT: A Wrapper of the JavaScript Library "DataTables". R package 
 
 </div>
 
-### Contact
+<h3>Contact</h3>
 
 To submit any questions or feedback, please post a [GitHub issue](https://github.com/pablobernabeu/Experimental-data-simulation/issues){target='_blank'}, or email Pablo Bernabeu at [p.bernabeu@lancaster.ac.uk](mailto:p.bernabeu@lancaster.ac.uk){target='_blank'}.
 
@@ -513,7 +513,7 @@ renderDT({
 ```
 
 
-Column
+Column {style="margin-top:20px"}
 -----------------------------------------------------------------------
 
 ### <span style='font-weight:bold; font-size:15px; color:#0E6D00;'>Between-group 1</span>
@@ -536,7 +536,7 @@ textAreaInput(height = '45px', resize = 'vertical', 'BetweenGroup1_Group10', NUL
 ```
 
 
-Column
+Column {style="margin-top:20px"}
 -----------------------------------------------------------------------
 
 ### <span style='font-weight:bold; font-size:15px; color:#001AB3;'>Between-group 2</span>
@@ -559,7 +559,7 @@ textAreaInput(height = '45px', resize = 'vertical', 'BetweenGroup2_Group10', NUL
 ```
 
 
-Column
+Column {style="margin-top:20px"}
 -----------------------------------------------------------------------
 
 ### <span style='font-weight:bold; font-size:15px; color:#B32600;'>Between-group 3</span>
@@ -586,7 +586,7 @@ textAreaInput(height = '45px', resize = 'vertical', 'BetweenGroup3_Group10', NUL
 Individual
 =======================================================================
 
-Column {style="margin-top:20px; max-width:700px"}
+Column {style="margin-top:20px; padding-top:10px; max-width:700px"}
 -----------------------------------------------------------------------
 
 ### <span style='font-size:18px; color:#4D4F54;'> &nbsp; &nbsp; &nbsp; &nbsp; **Groups structure to guide parameter setting**</span>
@@ -849,7 +849,7 @@ renderDT(
 ```
 
 
-Column
+Column {style="margin-top:30px"}
 -----------------------------------------------------------------------
 
 ### <span style='font-weight:bold; font-size:15px; color:#BF4000;'>Categorical 1</span>
@@ -1108,7 +1108,7 @@ levels_Categorical_Independent = reactive({
 ```
 
 
-Column
+Column {style="margin-top:30px"}
 -----------------------------------------------------------------------
 
 ### <span style='font-weight:bold; font-size:15px; color:#781A74;'>Continuous 1</span>
@@ -1321,7 +1321,7 @@ renderDT({
 ```
 
 
-Column
+Column {style="margin-top:20px"}
 -----------------------------------------------------------------------
 
 ### <span style='font-weight:bold; font-size:15px; color:#0E6D00;'>Within-participant 1</span>
@@ -1344,7 +1344,7 @@ textAreaInput(height = '45px', resize = 'vertical', 'WithinParticipant1_Conditio
 ```
 
 
-Column
+Column {style="margin-top:20px"}
 -----------------------------------------------------------------------
 
 ### <span style='font-weight:bold; font-size:15px; color:#001AB3;'>Within-participant 2</span>
@@ -1367,7 +1367,7 @@ textAreaInput(height = '45px', resize = 'vertical', 'WithinParticipant2_Conditio
 ```
 
 
-Column
+Column {style="margin-top:20px"}
 -----------------------------------------------------------------------
 
 ### <span style='font-weight:bold; font-size:15px; color:#B32600;'>Within-participant 3</span>
@@ -1422,7 +1422,7 @@ numericInput('Extra_nested_N', 'Number of levels', 2, min = 1)
 Dependent
 =======================================================================
 
-Column {style="margin-top:20px; max-width:700px"}
+Column {style="margin-top:20px; padding-top:10px; max-width:700px"}
 -----------------------------------------------------------------------
 
 ### <span style='font-size:18px; color:#4D4F54;'> &nbsp; &nbsp; &nbsp; &nbsp; **Factorial structure to guide parameter setting**</span>
@@ -1528,7 +1528,7 @@ renderDT(
 
 
 
-Column
+Column {style="margin-top:30px"}
 -----------------------------------------------------------------------
 
 ### <span style='font-weight:bold; font-size:15px; color:#BF4000;'>Categorical 1</span>
@@ -1782,7 +1782,7 @@ levels_Categorical_Dependent = reactive({
 
 
 
-Column
+Column {style="margin-top:30px"}
 -----------------------------------------------------------------------
 
 ### <span style='font-weight:bold; font-size:15px; color:#781A74;'>Continuous 1</span>
@@ -2997,10 +2997,10 @@ dataset = reactive({
 Sample (*N* = `r reactive(try(if(isTRUE(input$include_Participant_column)){final_N()}, silent = TRUE) %>% gsub("\\Error.*", "", .))`) {#sample style="background-color: #FEFEFE; data-width: 100%; width: 900px; margin: 0 auto;"}
 =======================================================================
 
-Column {style='margin-top:20px'}
+Column {style='margin-top:30px'}
 ---
 
-### <span style='font-size:18px; color:#4D4F54;'> &nbsp; &nbsp; &nbsp; &nbsp; Parameters of the sample</span>
+### <span style='font-size:18px; color:#4D4F54; font-weight:bold;'> &nbsp; &nbsp; &nbsp; &nbsp; Parameters of the sample</span>
 
 <div style = "padding-top: 20px; padding-right: 60px; padding-bottom: 100px; padding-left: 60px; background-color: #FEFEFE; font-size: 16px; line-height: 1.6;">
 
@@ -3045,7 +3045,7 @@ Summary
 =======================================================================
 
 Inputs {.sidebar style='max-width: 600px; overflow: scroll; overflow-y: hidden; height: 100%; width: 250px; position: fixed; z-index: 1; top: 0; left: 0; background-color: #F4FBF4; padding-top: 50px; padding-right: 10px; padding-left: 30px;'}
----
+-----------------------------------------------------------------------
 
 ### {.no-title}
 
@@ -3124,8 +3124,8 @@ numeric_descriptives =
 </div>
 
 
-Summary
----
+Summary {style="margin-top:30px"}
+-----------------------------------------------------------------------
 
 ### {.no-title}
 
@@ -3182,7 +3182,7 @@ renderDT(
 Data set &nbsp;<i class="fas fa-flag-checkered" aria-hidden="true"></i>
 =======================================================================
 
-Column {style="margin-top:20px; position:static; min-width: 580px; max-width: 580px; min-height: 1000px;"}
+Column {style="margin-top:20px; padding-top:10px; position:static; min-width: 580px; max-width: 580px; min-height: 1000px;"}
 -----------------------------------------------------------------------
 
 ### <span style='font-size:18px; color:#4D4F54;'> &nbsp; Parameters to ensure reproducibility of the simulated data </span> {style='max-height: 70px;'}
@@ -3592,7 +3592,7 @@ reactive(cat(parameters()))
 
 
 
-Column {style = 'data-width: 100%; position: static; height: 1000px;'}
+Column {style='margin-top:20px; padding-top:10px; data-width: 100%; position: static; height: 1000px;'}
 -----------------------------------------------------------------------
 
 ### {.no-title}
