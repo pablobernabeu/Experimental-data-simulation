@@ -1399,7 +1399,7 @@ Column {style="padding-left: 50px;"}
 
 <div style = 'padding-left: 40px; padding-right: 40px; padding-top: 20px; padding-bottom: 20px; background-color: #FEFEFE; font-size: 16px; line-height: 1.6;'>
 
-### **Nested factors**
+<h3>More nested factors</h3>
 
 Additional nested factors such as trials can be entered. Their names and length can be adjusted below. These factors add to the general factorial structure, which is relevant to the setting of any variables in the *Dependent* tab.
 
