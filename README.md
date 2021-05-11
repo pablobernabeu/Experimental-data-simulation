@@ -1,5 +1,4 @@
 
-<img align="right" width="30" height="30" src="https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/Royalty-free%20from%20www.needpix.com.png">
 
 # Web application for the simulation of experimental data
 
