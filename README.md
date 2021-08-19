@@ -7,6 +7,7 @@
 
 This open-source, R-based web application is suitable for educational and research purposes in experimental and quantitative sciences. It allows the **creation of varied data sets with specified structures, such as between-group and within-participant variables, that can be categorical or continuous.** These parameters can be set throughout the various tabs (sections) from the top menu. In the last tab, the data set can be downloaded. The benefits of this application include time-saving and flexibility in the control of parameters.
 
+
 ### Guidelines
 
 General guidelines include the following:
@@ -21,7 +22,7 @@ General guidelines include the following:
 
 More specific guidelines are available in each section.
 
-## :globe_with_meridians:&nbsp; The web application can be [launched here](https://pablo-bernabeu.shinyapps.io/experimental-data-simulation/) or [here](https://mybinder.org/v2/gh/pablobernabeu/Experimental-data-simulation/master?urlpath=shiny).
+## The web application can be [launched here](https://pablo-bernabeu.shinyapps.io/experimental-data-simulation/) or [here](https://mybinder.org/v2/gh/pablobernabeu/Experimental-data-simulation/master?urlpath=shiny).
 
 <br>
 
@@ -31,9 +32,11 @@ More specific guidelines are available in each section.
 
 <br>
 
+
 ### Reference
 
 Bernabeu, P., & Lynott, D. (2020). *Web application for the simulation of experimental data* (Version 1.4). [https://github.com/pablobernabeu/Experiment-simulation-app/](https://github.com/pablobernabeu/Experiment-simulation-app/)
+
 
 ### Code
 
@@ -101,15 +104,13 @@ shown below.
 <img style='display: block; margin-left: auto; margin-right: auto;' src="img/interface.png" width='40%'>
 </p>
 
-<br>
 
 ### Acknowledgements
 
 Thank you to RStudio for the free hosting server used by this application, [shinyapps.io](https://www.shinyapps.io/).
 
-### References
 
-<div style = "text-indent:-1.5em; margin-left:1.5em;">
+### References
 
 Chang, W., Cheng, J., Allaire, J., Xie, Y., & McPherson, J. (2020). shiny: Web Application Framework for R. R package version 1.4.0. Available at [http://CRAN.R-project.org/package=shiny](http://CRAN.R-project.org/package=shiny).
 
@@ -125,10 +126,8 @@ Wickham, H., François, R., Henry, L., & Müller, K. (2018). dplyr: A Grammar of
 
 Xie, Y. (2020). DT: A Wrapper of the JavaScript Library "DataTables". R package version 0.14. Available at [https://CRAN.R-project.org/package=DT](https://CRAN.R-project.org/package=DT).
 
-</div>
 
 ### Contact
 
 To submit any questions or feedback, please post [an issue](https://github.com/pablobernabeu/Experimental-data-simulation/issues), or email Pablo Bernabeu at [p.bernabeu@lancaster.ac.uk](mailto:p.bernabeu@lancaster.ac.uk).
 
-<br>
