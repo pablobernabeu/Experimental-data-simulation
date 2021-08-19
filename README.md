@@ -24,13 +24,9 @@ More specific guidelines are available in each section.
 
 ## The web application can be [launched here](https://pablo-bernabeu.shinyapps.io/experimental-data-simulation/) or [here](https://mybinder.org/v2/gh/pablobernabeu/Experimental-data-simulation/master?urlpath=shiny).
 
-<br>
-
 <p style='margin-bottom:90px;' align="center">
 <a href="https://github.com/pablobernabeu/Experimental-data-simulation/raw/master/Screenshot.png"><img style='display: block; margin-left: auto; margin-right: auto;' src="https://github.com/pablobernabeu/Experimental-data-simulation/raw/master/Screenshot.png" width='80%' /></a>
   </p>
-
-<br>
 
 
 ### Reference
