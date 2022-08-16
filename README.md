@@ -125,5 +125,5 @@ Xie, Y. (2020). DT: A Wrapper of the JavaScript Library "DataTables". R package 
 
 ### Contact
 
-To submit any questions or feedback, please post [an issue](https://github.com/pablobernabeu/Experimental-data-simulation/issues), or email Pablo Bernabeu at [p.bernabeu@lancaster.ac.uk](mailto:p.bernabeu@lancaster.ac.uk).
+To submit any questions or feedback, please post [an issue](https://github.com/pablobernabeu/Experimental-data-simulation/issues) or email Pablo Bernabeu at [pcbernabeu@gmail.com](mailto:pcbernabeu@gmail.com).
 
