@@ -47,16 +47,15 @@ This web application was developed in [R](https://www.r-project.org/about.html) 
     ```
     install.packages('devtools')
     library(devtools)
-    install_version('dplyr', '1.0.2', 'http://cran.us.r-project.org')
-    install_version('DT', '0.15', 'http://cran.us.r-project.org')
-    install_version('flexdashboard', '0.5.2', 'http://cran.us.r-project.org')
-    install_version('htmltools', '0.5.0', 'http://cran.us.r-project.org')
-    install_version('knitr', '1.30', 'http://cran.us.r-project.org')
-    install_version('ngram', '3.0.4', 'http://cran.us.r-project.org')
-    install_version('purrr', '0.3.4', 'http://cran.us.r-project.org')
-    install_version('shiny', '1.5.0', 'http://cran.us.r-project.org')
-    install_version('stringr', '1.4.0', 'http://cran.us.r-project.org')
-    install_version('tidyr', '1.1.2', 'http://cran.us.r-project.org')
+    install_version('dplyr', '1.0.2', 'https://cloud.r-project.org')
+    install_version('DT', '0.15', 'https://cloud.r-project.org')
+    install_version('flexdashboard', '0.5.2', 'https://cloud.r-project.org')
+    install_version('htmltools', '0.5.0', 'https://cloud.r-project.org')
+    install_version('knitr', '1.30', 'https://cloud.r-project.org')
+    install_version('purrr', '0.3.4', 'https://cloud.r-project.org')
+    install_version('shiny', '1.5.0', 'https://cloud.r-project.org')
+    install_version('stringr', '1.4.0', 'https://cloud.r-project.org')
+    install_version('tidyr', '1.1.2', 'https://cloud.r-project.org')
     ```
 
 1. Open the [index.Rmd](https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/index.Rmd) script and install any packages suggested.
@@ -67,32 +66,19 @@ This web application was developed in [R](https://www.r-project.org/about.html) 
 
 #### Option B) Using Dockerfile ([@vsoch's pull request](https://github.com/pablobernabeu/Experimental-data-simulation/pull/1))
 
-A [Dockerfile](Dockerfolder/Dockerfile) has been provided. First, build the container:
+A [Dockerfile](Dockerfolder/Dockerfile) has been provided. It builds on the `rocker/verse:4.6.0` image, which provides R 4.6.0 and RStudio Server with a CRAN snapshot fixed on 23 June 2026, and it installs the app's packages at pinned versions. First, build the image from the root folder of this repository:
 
 ```bash
-docker build -t experiment-shiny-app .
+docker build -t experiment-shiny-app Dockerfolder
 ```
 
-And then run the container, selecting a password for the interface and binding to port 8787 on your local machine.
+Then run the container from the same folder, choosing a password for the interface and binding to port 8787 on your local machine.
 
 ```bash
-$ docker run --interactive --rm -e PASSWORD=<MYPASSWORD> -p 8787:8787 --name experiment-shiny-app --volume $(pwd):/home/rstudio experiment-shiny-app
-[s6-init] making user provided files available at /var/run/s6/etc...exited 0.
-[s6-init] ensuring user provided files have correct perms...exited 0.
-[fix-attrs.d] applying ownership & permissions fixes...
-[fix-attrs.d] done.
-[cont-init.d] executing container initialization scripts...
-[cont-init.d] add: executing... 
-Nothing additional to add
-[cont-init.d] add: exited 0.
-[cont-init.d] userconf: executing... 
-[cont-init.d] userconf: exited 0.
-[cont-init.d] done.
-[services.d] starting services
-[services.d] done.
+docker run --interactive --rm -e PASSWORD=<MYPASSWORD> -p 8787:8787 --name experiment-shiny-app --volume "$(pwd)":/home/rstudio experiment-shiny-app
 ```
 
-You can then open [127.0.0.1:8787](127.0.0.1:8787) to see the interface and login with username "rstudio" and
+You can then open [http://127.0.0.1:8787](http://127.0.0.1:8787) to see the interface and login with username "rstudio" and
 your chosen password. You can then select the Rmd file and click "Run Document" to generate the window for the application,
 shown below.
 
